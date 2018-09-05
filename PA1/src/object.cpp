@@ -61,6 +61,7 @@ Object::Object()
   }
 
   angle = 0.0f;
+ 
 
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -76,11 +77,18 @@ Object::~Object()
   Vertices.clear();
   Indices.clear();
 }
-
+ //float x = 0.0f;
 void Object::Update(unsigned int dt)
 {
   angle += dt * M_PI/1000;
-  model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+  //x+=1;
+  //model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, x));
+  //model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
+   
+  // model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
+   model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+   model = glm::translate(model, glm::vec3(0.0, 0.0, 7.0));
+   model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
 }
 
 glm::mat4 Object::GetModel()
