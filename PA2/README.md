@@ -50,17 +50,21 @@ make
 ```
 
 ### Keyboard Input
+```bash
 Key Presses Results
 a           Reverse rotation of cube and it's orbit
 s           Reverse the orbit of the cube
 d           Reverse the rotation of the cube itself
 f           Pause, Pressing a,s,d,f keys or Clicking left,right,or middle on the mouse unpauses the cube
+```
 
 ### Mouse Input
+```bash
 Mouse Clicks Results Results
 Middle Click         Reverse rotation of cube and it's orbit
 Left Click           Reverse the orbit of the cube
 Right Click          Reverse the rotation of the cube itself
+```
 
 ### Extra Credit
 I skipped this for now, I'll ask about what I should do in class. 
