@@ -1,4 +1,4 @@
-# PA1: Spinning Cube with Interaction 
+# PA2: Spinning Cube with Interaction 
 
 # Dependencies, Building, and Running
 
