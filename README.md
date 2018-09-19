@@ -14,3 +14,6 @@ This is a cube that rotates in place on the screen. To run this project ```cd PA
 
 ## PA2: Spinning Cube
 This is a cube that rotates in place on the screen. It has some keyboard and mouse interaction. To run this project ```cd PA2``` then follow the instructions in the README.md
+
+## PA2: Moons
+Contains more objects that rotate and orbit.  To run this project ```cd PA2``` then follow the instructions in the README.md
