@@ -74,8 +74,8 @@ void Engine::Run()
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
 
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
-    ImGui_ImplOpenGL3_Init("version #130");
-
+    ImGui_ImplOpenGL3_Init("version #330");
+    
     // Setup style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
@@ -97,14 +97,23 @@ void Engine::Run()
     }
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL2_NewFrame(window);
+        
         ImGui::NewFrame();
         // Update and render the graphics
+
+{
+ImGui::Begin("Hello, World!");
+ImGui::Text("Some text.");
+ImGui::End();
+}
+     ImGui::Render();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+ 
      m_graphics->Update(m_DT);
      m_graphics->Render();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
- ImGui::Render();
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+ 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
