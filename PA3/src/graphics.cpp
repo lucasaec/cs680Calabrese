@@ -22,7 +22,7 @@ void Graphics::UpdateIndex() {
 
 bool Graphics::Initialize(int width, int height)
 {
- 
+
   // Used for the linux OS
   #if !defined(__APPLE__) && !defined(MACOSX)
     // cout << glewGetString(GLEW_VERSION) << endl;

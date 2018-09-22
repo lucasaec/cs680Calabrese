@@ -2,7 +2,7 @@
 #define GRAPHICS_HEADERS_H
 #define GLM_ENABLE_EXPERIMENTAL
 #include <iostream>
-
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
 
 #if defined(__APPLE__) || defined(MACOSX)

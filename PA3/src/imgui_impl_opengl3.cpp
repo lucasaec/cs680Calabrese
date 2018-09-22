@@ -63,6 +63,8 @@
 #include "TargetConditionals.h"
 #endif
 
+#include <iostream>
+
 // iOS, Android and Emscripten can use GL ES 3
 // Call ImGui_ImplOpenGL3_Init() with "#version 300 es"
 #if (defined(__APPLE__) && TARGET_OS_IOS) || (defined(__ANDROID__)) || (defined(__EMSCRIPTEN__))
@@ -88,6 +90,7 @@
 #endif
 #endif
 
+#include <GL/glew.h>
 // OpenGL Data
 static char         g_GlslVersionString[32] = "";
 static GLuint       g_FontTexture = 0;
@@ -120,8 +123,11 @@ void    ImGui_ImplOpenGL3_Shutdown()
 
 void    ImGui_ImplOpenGL3_NewFrame()
 {
-    if (!g_FontTexture)
+    
+    if (!g_FontTexture) {
+
         ImGui_ImplOpenGL3_CreateDeviceObjects();
+    }
 }
 
 // OpenGL3 Render function.
@@ -482,7 +488,9 @@ bool    ImGui_ImplOpenGL3_CreateDeviceObjects()
     const GLchar* vertex_shader_with_version[2] = { g_GlslVersionString, vertex_shader };
     g_VertHandle = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(g_VertHandle, 2, vertex_shader_with_version, NULL);
+    //std::cout << "AAAAA" << "\n";
     glCompileShader(g_VertHandle);
+   // std::cout << "bbbb" << "\n";
     CheckShader(g_VertHandle, "vertex shader");
 
     const GLchar* fragment_shader_with_version[2] = { g_GlslVersionString, fragment_shader };

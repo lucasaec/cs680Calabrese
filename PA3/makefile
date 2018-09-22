@@ -19,7 +19,7 @@ endif
 CXXFLAGS=-g -Wall -std=c++0x
 
 # .o Compilation
-O_FILES=main.o camera.o engine.o graphics.o object.o shader.o window.o shaderLoader.o imgui.o imgui_widgets.o imgui_demo.o imgui_draw.o imgui_impl_sdl.o imgui_impl_opengl3.o
+O_FILES=imgui.o imgui_widgets.o imgui_demo.o imgui_draw.o imgui_impl_sdl.o imgui_impl_opengl3.o main.o camera.o engine.o graphics.o object.o shader.o window.o shaderLoader.o 
 
 # Point to includes of local directories
 INDLUDES=-I../include
