@@ -64,26 +64,27 @@ To load an object, run the file like this ./Tutorial fileName
 where fileName is the name of the object you want to load.
 If the filename is box2.obj or dragon.obj it will search for a material file to get the proper colors to add.
 
-Example: ./Tutorial dragon.obj
+Example:
+```./Tutorial dragon.obj```
 
 This will run the file and look for a material
 
 To make the objects have random colors add command argument "r" after the filename like this:
-./Tutorial dragon.obj r
+```./Tutorial dragon.obj r```
 
 # Extra Credit
 To load my board for the project with its 2 materials, ensure that box2.obj is in the Obj folder, and box2.mtl is in the mats folder.
 
 then run:
 
-./Tutorial box2.obj
+```./Tutorial box2.obj```
 
 To load the dragon for the project with its 1 material, ensure that dragon.obj is in the Obj folder, and dragon.mtl is in the mats folder.
 
-./Tutorial dragon.obj
+```./Tutorial dragon.obj```
 
 To load the dragon for the project with random colors run the program like this:
 
-./Tutorial dragon.obj r
+```./Tutorial dragon.obj r```
 
 
