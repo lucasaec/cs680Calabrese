@@ -54,3 +54,17 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```bash
 /usr/NX/scripts/vgl/vglrun ./Tutorial
 ```
+# How to load an object
+Place object files in the Obj folder. Place material files in the mats folder. Only box2.obj and dragon.obj will load materials at the moment.
+See Command line arguments to know what to do next.
+
+## Command line
+To load an object, run the file like this ./Tutorial fileName
+where fileName is the name of the object you want to load.
+If the filename is box2.obj or dragon.obj it will search for a material file to get the proper colors to add.
+
+Example: ./Tutorial dragon.obj
+This will run the file and look for a material
+
+To make the objects have random colors add command argument "r" after the filename like this:
+/Tutorial dragon.obj r
