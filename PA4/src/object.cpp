@@ -407,7 +407,10 @@ vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
               file >> temp;
               f2 = f2 + temp;
               file2.open(f2);
-              while(!file2.eof()) {
+              if(!file2.is_open()) {
+                  randColor = true;
+              }
+              while(file2.is_open() && !file2.eof()) {
                   file2 >> header2;
                  // cout << header2 << '\n';
                   if(header2 == "Kd") {
