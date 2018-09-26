@@ -78,7 +78,7 @@ then run:
 
 ./Tutorial box2.obj
 
-To load the dragon for the project with its 2 materials, ensure that dragon.obj is in the Obj folder, and dragon.mtl is in the mats folder.
+To load the dragon for the project with its 1 material, ensure that dragon.obj is in the Obj folder, and dragon.mtl is in the mats folder.
 
 ./Tutorial dragon.obj
 
