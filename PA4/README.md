@@ -55,7 +55,7 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 /usr/NX/scripts/vgl/vglrun ./Tutorial
 ```
 # How to load an object
-Place object files in the Obj folder. Place material files in the mats folder. Only box2.obj and dragon.obj will load materials at the moment. Please download my dragon and box2 files that are within mats in this repository. They should download when the repository is cloned.
+Place object files in the Obj folder. Place material files in the mats folder. Only box2.obj and dragon.obj will have materials loaded for them at the moment. Please download my dragon and box2 files that are within the mats folder that is in this repository. They should download when the repository is cloned.
 See Command line arguments to know what to do next.
 
 ## Command line
