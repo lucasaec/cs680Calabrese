@@ -102,6 +102,6 @@ The program will then ask you to enter 0 or 1. If you want a random color enter 
 
 Would you like the input to be random? Enter 1 for yes 0 for no
 
-```0 ``
+```0 ```
 
 
