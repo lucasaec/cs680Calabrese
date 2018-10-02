@@ -70,12 +70,12 @@ Example:
 ```./Tutorial```
 
 The program will then ask you to give it a file name. Enter the file name of the object you want to load. For example:
-```Please enter a file name```
-box2.obj
+```Please enter a file name
+box2.obj```
 
 The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0.
 ```Would you like the input to be random? Enter 1 for yes 0 for no```
-0
+0```
 
 `
 
