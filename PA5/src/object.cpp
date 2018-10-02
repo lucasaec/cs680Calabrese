@@ -4,80 +4,76 @@
 #include <assimp/postprocess.h> //includes the postprocessing variables for the importer
 #include <assimp/color4.h> //includes the aiColor4 object, which is used to handle the colors from the mesh objects
 #include <assimp/material.h> 
+#include <stdlib.h> 
 Object::Object()
 {  
-
+unsigned int random = 0;
 Assimp::Importer importer;
 std::string input;
+std::cout << "Please enter a file name" << '\n';
 std::cin >> input;
 input = "../objects/" + input;
+std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
+std::cin >> random;
+
+
+
+
 const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
-//std::cout << scene->mMeshes[0];
+
 aiMesh *mesh = scene->mMeshes[0];
 
-//unsigned int* mIndices = face->mIndices;
 
 aiMaterial* mat = scene->mMaterials[1];
 aiColor4D color (0.f,0.f,0.f,0.f);
-
 aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
-std::cout << color.r << '\n';
-std::cout << color.g << '\n';
-std::cout << color.b << '\n';
 
-
-std::cout << mesh->HasVertexColors(0) << '\n';
-  angle = 0.0f;
-
+angle = 0.0f;
+float q,w,e;
+q= color.r;
+w= color.g;
+e= color.b;
+float x,y,z;
 for(int i = 0; i < mesh->mNumVertices; i++) {
-//std::cout << mesh->mVertices[i].x  << ' ';
-//std::cout << mesh->mVertices[i].y << ' ';
-//std::cout << mesh->mVertices[i].z << '\n';
-   Vertex vzq = {glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z),glm::vec3(color.r, color.g, color.b)};
+              x = mesh->mVertices[i].x;
+              y = mesh->mVertices[i].y;
+              z = mesh->mVertices[i].z;
+          if(random == 1) {
+            
+              float xq=1, xw=1, xe=1;
+              if(rand() % 4 == 0) {
+                  xq*= -1;
+              }
+              if(rand() % 4 == 0) {
+                  xw*= -1;
+              }
+              if(rand() % 4 == 0) {
+                  xe*= -1;
+              }
+           
+
+              q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+              w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+              e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+          }
+       
+   Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
    Vertices.push_back(vzq);
 }
-aiMesh *mesh2 = scene->mMeshes[0];
-for(int i = 0; i < mesh->mNumVertices; i++) {
-std::cout << mesh2->mVertices[i].x  << ' ';
-std::cout << mesh2->mVertices[i].y << ' ';
-std::cout << mesh2->mVertices[i].z << '\n';
-  // Vertex vzq = {glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z),glm::vec3(color.r, color.g, color.b)};
-  // Vertices.push_back(vzq);
-}
+
 
 for(int i = 0; i < mesh->mNumFaces; i++) {
-aiFace face = mesh->mFaces[i];
-unsigned int* mIndices = face.mIndices;
-//std::cout << face.mIndices[0] << ' ';
-//std::cout << face.mIndices[1] << ' ';
-//std::cout << face.mIndices[2] << '\n';
-Indices.push_back(mIndices[0]);
-Indices.push_back(mIndices[1]);
-Indices.push_back(mIndices[2]);
+    aiFace face = mesh->mFaces[i];
+    unsigned int* mIndices = face.mIndices;
+    Indices.push_back(mIndices[0]);
+    Indices.push_back(mIndices[1]);
+    Indices.push_back(mIndices[2]);
 }
-//aiColor3D color (0.f,0.f,0.f);
-//aiMaterial* mat = aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
 
-for(int i = 0; i < mesh->mNumFaces; i++) {
-aiFace face = mesh2->mFaces[i];
-unsigned int* mIndices = face.mIndices;
-std::cout << face.mIndices[0] << ' ';
-std::cout << face.mIndices[1] << ' ';
-std::cout << face.mIndices[2] << '\n';
-//Indices.push_back(mIndices[0]);
-//Indices.push_back(mIndices[1]);
-//Indices.push_back(mIndices[2]);
-}
+
 for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
     aiString mtlName =  scene->mMeshes[i]->mName;
-   // std::cout << mtlName.data << '\n';
 }
-
-std::cout << mesh->GetNumColorChannels() << '\n';
-
-std::cout << mesh->mColors[0] << '\n';
-
-std::cout << scene->HasMaterials() << '\n'; 
 
 
   angle = 0.0f;
