@@ -89,7 +89,7 @@ After following the build instructions run the code like this:
 Example:
 ```./Tutorial```
 
-You will be prompted for the file name. Type dragon.obj or box2.obj to enter a file name.
+You will be prompted for the file name. In the terminal, Type dragon.obj or box2.obj and press enter to enter a file name.
 
 Example:
 
@@ -98,7 +98,7 @@ Please enter a file name
 ```box2.obj```
 
 
-The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0. Enter 0 to load the object's material.
+The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0. Enter 0 and then press enter in the terminal to load the object's material.
 
 Would you like the input to be random? Enter 1 for yes 0 for no
 
