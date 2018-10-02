@@ -61,10 +61,10 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 /usr/NX/scripts/vgl/vglrun ./Tutorial
 ```
 # How to load an object
-Place object files in the Obj folder. Place material files in the object folder. They should download when the repository is cloned.
-See Command line arguments to know what to do next.
+Place object files in the objects folder. Place material files in the objects folder. They should be download when the repository is cloned.
+See "Text Input" to know what to do next.
 
-## Input
+## Text Input
 Run the code like this:
 Example:
 ```./Tutorial```
@@ -72,6 +72,7 @@ Example:
 The program will then ask you to give it a file name. Enter the file name of the object you want to load. For example:
 ```Please enter a file name```
 box2.obj
+
 The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0.
 ```Would you like the input to be random? Enter 1 for yes 0 for no```
 0
