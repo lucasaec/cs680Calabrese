@@ -72,28 +72,36 @@ Example:
 The program will then ask you to give it a file name. Enter the file name of the object you want to load. For example:
 
 Please enter a file name
+
 ```box2.obj```
 
 The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0.
 
 Would you like the input to be random? Enter 1 for yes 0 for no
-```0 ```
+
+```1 ```
 
 
 
 # Extra Credit
-To load my board for the project with its 2 materials, ensure that box2.obj is in the Obj folder, and box2.mtl is in the mats folder.
+To load materials place materials in the objects folder. 
+After following the build instructions run the code like this:
+Example:
+```./Tutorial```
 
-then run:
+You will be prompted for the file name. Type dragon.obj or box2.obj to enter a file name.
 
-```./Tutorial box2.obj```
+Example:
 
-To load the dragon for the project with its 1 material, ensure that dragon.obj is in the Obj folder, and dragon.mtl is in the mats folder.
+Please enter a file name
 
-```./Tutorial dragon.obj```
+```box2.obj```
 
-To load the dragon for the project with random colors run the program like this:
 
-```./Tutorial dragon.obj r```
+The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0. Enter 0 to load the object's material.
+
+Would you like the input to be random? Enter 1 for yes 0 for no
+
+```0 ``
 
 
