@@ -94,4 +94,7 @@ Would you like the input to be random? Enter 1 for yes 0 for no
 
 ```0 ```
 
-
+### Group Members
+Andrew Flangas
+Christina Symon
+Lucas Calabrese
