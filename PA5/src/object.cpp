@@ -10,7 +10,7 @@ Object::Object()
 unsigned int random = 0;
 Assimp::Importer importer;
 std::string input;
-std::cout << "Please enter a file name" << '\n';
+std::cout << "Please enter a file name. (dragon.obj or box2.obj)" << '\n';
 std::cin >> input;
 input = "../objects/" + input;
 std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
