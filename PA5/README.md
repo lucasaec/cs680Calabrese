@@ -21,7 +21,7 @@ This project uses Assimp
 ### Mac OSX
 Installation of brew is suggested to easily install the libs. Ensure that the latest version of the Developer Tools is installed.
 ```bash
-brew install glew glm sdl2
+brew install assimp
 ```
 
 ## Building and Running
