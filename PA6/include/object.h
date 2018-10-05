@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "graphics_headers.h"
-
+#include <Magick++.h>
 class Object
 {
   public:
@@ -13,6 +13,12 @@ class Object
     void Render();
 
     glm::mat4 GetModel();
+    Magick::Image* image;
+    Magick::Blob m_blob;
+    GLuint texture;
+//GL_TEXTURE_2D target;
+    GLenum target;
+
 
   private:
     glm::mat4 model;

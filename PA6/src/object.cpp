@@ -5,6 +5,7 @@
 #include <assimp/color4.h> //includes the aiColor4 object, which is used to handle the colors from the mesh objects
 #include <assimp/material.h> 
 #include <stdlib.h> 
+#include <iostream> 
 
 
 Object::Object()
@@ -12,6 +13,19 @@ Object::Object()
 unsigned int random = 0;
 Assimp::Importer importer;
 std::string input;
+
+
+
+image = new Magick::Image("../objects/granite.jpg");
+image->write(&m_blob, "RGBA");
+
+glGenTextures(1, &texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->columns(), image->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
+//glBindTexture(target, 0);
+
 std::cout << "Please enter a file name. (dragon.obj or box2.obj)" << '\n';
 std::cin >> input;
 input = "../objects/" + input;
@@ -31,35 +45,28 @@ aiColor4D color (0.f,0.f,0.f,0.f);
 aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
 
 angle = 0.0f;
-float q,w,e;
-q= color.r;
-w= color.g;
-e= color.b;
+float q,w;
+q=0;
+w=0;
 float x,y,z;
 for(int i = 0; i < mesh->mNumVertices; i++) {
               x = mesh->mVertices[i].x;
               y = mesh->mVertices[i].y;
               z = mesh->mVertices[i].z;
-          if(random == 1) {
+         
             
-              float xq=1, xw=1, xe=1;
-              if(rand() % 4 == 0) {
-                  xq*= -1;
-              }
-              if(rand() % 4 == 0) {
-                  xw*= -1;
-              }
-              if(rand() % 4 == 0) {
-                  xe*= -1;
-              }
+     
            
+  if(mesh->HasTextureCoords(0) ) {   
+      const aiVector3D* texcoords = &(mesh->mTextureCoords[0][i]);
+      q = texcoords->x;
+      w = texcoords->y;
+      //std::cout << q;
+  }
 
-              q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-              w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-              e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-          }
-       
-   Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
+   Vertex vzq = {glm::vec3(x,y,z),glm::vec2(q,w)};
+   q = 0; 
+   w = 0;
    Vertices.push_back(vzq);
 }
 
@@ -70,6 +77,8 @@ for(int i = 0; i < mesh->mNumFaces; i++) {
     Indices.push_back(mIndices[0]);
     Indices.push_back(mIndices[1]);
     Indices.push_back(mIndices[2]);
+
+   
 }
 
 
@@ -88,6 +97,7 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
   glGenBuffers(1, &IB);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
+delete image;
 }
 
 Object::~Object()
@@ -115,9 +125,12 @@ void Object::Render()
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture);
 
   glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
 
