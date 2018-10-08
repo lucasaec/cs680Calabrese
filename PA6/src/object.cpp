@@ -7,6 +7,8 @@
 #include <stdlib.h> 
 #include <iostream> 
 
+unsigned int size1[2];
+unsigned int size2[2];
 
 Object::Object()
 {  
@@ -26,12 +28,18 @@ glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
 //glBindTexture(target, 0);
 
-std::cout << "Please enter a file name. (dragon.obj or box2.obj)" << '\n';
-std::cin >> input;
-input = "../objects/" + input;
-std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
-std::cin >> random;
+//std::cout << "Please enter a file name. (dragon.obj or box2.obj)" << '\n';
+//std::cin >> input;
+input = "../objects/buddha.obj";
 
+image1 = new Magick::Image("../objects/checker.jpg");
+image1->write(&m_blob1, "RGBA");
+
+glGenTextures(1, &texture1);
+glBindTexture(GL_TEXTURE_2D,texture1);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1->columns(), image1->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob1.data());
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
 
 
 
@@ -49,55 +57,70 @@ float q,w;
 q=0;
 w=0;
 float x,y,z;
-for(int i = 0; i < mesh->mNumVertices; i++) {
-              x = mesh->mVertices[i].x;
-              y = mesh->mVertices[i].y;
-              z = mesh->mVertices[i].z;
-         
-            
-     
-           
-  if(mesh->HasTextureCoords(0) ) {   
-      const aiVector3D* texcoords = &(mesh->mTextureCoords[0][i]);
-      q = texcoords->x;
-      w = texcoords->y;
-      //std::cout << q;
-  }
+//std::cout << scene->mNumMeshes;
+for(int j = 0; j < scene->mNumMeshes; j++) {
+    mesh = scene->mMeshes[j];
+    aiString mtlName =  mesh->mName;
+    std::cout << mtlName.C_Str() << '\n';
 
-   Vertex vzq = {glm::vec3(x,y,z),glm::vec2(q,w)};
-   q = 0; 
-   w = 0;
-   Vertices.push_back(vzq);
-}
+    if(mtlName.C_Str() == "granite.jpg") {
+
+    }
 
 
-for(int i = 0; i < mesh->mNumFaces; i++) {
-    aiFace face = mesh->mFaces[i];
-    unsigned int* mIndices = face.mIndices;
-    Indices.push_back(mIndices[0]);
-    Indices.push_back(mIndices[1]);
-    Indices.push_back(mIndices[2]);
 
-   
-}
+    
+    
+	for(int i = 0; i < mesh->mNumVertices; i++) {
+		      x = mesh->mVertices[i].x;
+		      y = mesh->mVertices[i].y;
+		      z = mesh->mVertices[i].z;
+//std::cout << x << '\n';
+	  if(mesh->HasTextureCoords(0) ) {   
+	      const aiVector3D* texcoords = &(mesh->mTextureCoords[0][i+1]);
+	      q = texcoords->x;
+	      w = texcoords->y;
+	     // std::cout << q << '\n';
+	  }
+    
 
 
-for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
-    aiString mtlName =  scene->mMeshes[i]->mName;
-}
+	   Vertex vzq = {glm::vec3(x,y,z),glm::vec2(q,w)};
+	   q = 0; 
+	   w = 0;
+	   Vertices.push_back(vzq);
+	}
 
 
-  angle = 0.0f;
+	for(int i = 0; i < mesh->mNumFaces; i++) {
+	    aiFace face = mesh->mFaces[i];
+	    unsigned int* mIndices = face.mIndices;
+	    Indices.push_back(mIndices[0]);
+	    Indices.push_back(mIndices[1]);
+	    Indices.push_back(mIndices[2]);   
+	}
+ angle = 0.0f;
  
 
-  glGenBuffers(1, &VB);
-  glBindBuffer(GL_ARRAY_BUFFER, VB);
+  glGenBuffers(1, &VB[j]);
+  glBindBuffer(GL_ARRAY_BUFFER, VB[j]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
 
-  glGenBuffers(1, &IB);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+  glGenBuffers(1, &IB[j]);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB[j]);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
+size1[j] = Vertices.size();
+size2[j] = Indices.size();
+Indices.clear();
+Vertices.clear();
+}
+
+
+
+
+ 
 delete image;
+delete image1;
 }
 
 Object::~Object()
@@ -110,7 +133,7 @@ void Object::Update(unsigned int dt)
 {
   angle += dt * M_PI/1000;
   model = glm::mat4(1.0f); 
- model = glm::rotate(model,  (angle), glm::vec3(.5, 0, 0.0));
+ model = glm::rotate(model,  (angle)/5, glm::vec3(0, 1, 0.0));
 }
 
 glm::mat4 Object::GetModel()
@@ -123,16 +146,35 @@ void Object::Render()
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
 
-  glBindBuffer(GL_ARRAY_BUFFER, VB);
+  glBindBuffer(GL_ARRAY_BUFFER, VB[0]);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
 
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB[0]);
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, texture);
 
-  glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, size2[0], GL_UNSIGNED_INT, 0);
+
+  glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(1);
+
+
+
+  glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(1);
+
+  glBindBuffer(GL_ARRAY_BUFFER, VB[1]);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB[1]);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture1);
+
+  glDrawElements(GL_TRIANGLES, size2[1], GL_UNSIGNED_INT, 0);
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);

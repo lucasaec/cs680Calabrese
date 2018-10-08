@@ -16,6 +16,12 @@ class Object
     Magick::Image* image;
     Magick::Blob m_blob;
     GLuint texture;
+
+    
+    Magick::Image* image1;
+    Magick::Blob m_blob1;
+    GLuint texture1;
+
 //GL_TEXTURE_2D target;
     GLenum target;
 
@@ -24,8 +30,8 @@ class Object
     glm::mat4 model;
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
-    GLuint VB;
-    GLuint IB;
+    GLuint VB[2];
+    GLuint IB[2];
 
     float angle;
 };
