@@ -59,10 +59,11 @@ bool Engine::Initialize()
 bool reverse = false;
  int typeReverse = 1;
 
-
+static bool disableClick=true;
 void Engine::Run()
 {
   m_running = true;
+
 /////////////////////////////// 
     SDL_Window* window = m_window->GetWindow();
     SDL_GLContext gl_context = m_window->GetgContext();
@@ -106,6 +107,76 @@ bool boolean = true;
 {
 ImGui::Begin("Hello, World!");
 ImGui::Text("Some text.");
+{
+                 static int speedChange=1;
+                static bool reverseOrbit=false;
+                static bool reverseSpin=false;
+                static bool affectAll=false;
+                
+                ImGui::SliderInt("Speed", &speedChange,0 , 10);
+                ImGui::Checkbox("Reverse Orbit", &reverseOrbit);
+                ImGui::Checkbox("Reverse Spin", &reverseSpin);
+                ImGui::Checkbox("Affect All", &affectAll);
+                ImGui::Checkbox("Disable Clicks", &disableClick);
+  if (ImGui::BeginMenu("Zoom In"))
+            {
+            int choice;
+            if(ImGui::Button("Sun")) {
+                 choice = 0;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Mercury")) {
+                 choice = 1;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Venus")) {
+                 choice = 2;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Earth")) {
+                 choice = 3;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Mars")) {
+                 choice = 4;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Jupiter")) {
+                 choice = 5;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Saturn")) {
+                 choice = 6;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Uranus")) {
+                 choice = 7;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Neptune")) {
+                 choice = 8;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Pluto")) {
+                 choice = 9;
+                 ImGui::NextColumn();
+            }
+//insert code to select planet
+       
+ 
+
+                ImGui::EndMenu();
+            }
+       if(ImGui::Button("Undo Changes")) {
+                 //Add code to revert back to normal settings
+                 ImGui::NextColumn();
+       }
+       if(ImGui::Button("Reset View")) {
+                 //Add code to reset view
+                 ImGui::NextColumn();
+       }
+      
+}
 ImGui::End();
 }
   
@@ -167,7 +238,7 @@ void Engine::Keyboard()
        m_running = false;
     }
   }
-  else if(m_event.type == SDL_MOUSEBUTTONDOWN)
+  else if(m_event.type == SDL_MOUSEBUTTONDOWN && !disableClick)
   {   
       if(m_event.button.button == SDL_BUTTON_LEFT) {
           typeReverse =  2;
