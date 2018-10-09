@@ -43,7 +43,7 @@ glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 
 
-const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
+const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);
 
 aiMesh *mesh = scene->mMeshes[0];
 
@@ -61,7 +61,7 @@ float x,y,z;
 for(int j = 0; j < scene->mNumMeshes; j++) {
     mesh = scene->mMeshes[j];
     aiString mtlName =  mesh->mName;
-    std::cout << mtlName.C_Str() << '\n';
+ 
 
     if(mtlName.C_Str() == "granite.jpg") {
 
@@ -77,9 +77,10 @@ for(int j = 0; j < scene->mNumMeshes; j++) {
 		      z = mesh->mVertices[i].z;
 //std::cout << x << '\n';
 	  if(mesh->HasTextureCoords(0) ) {   
-	      const aiVector3D* texcoords = &(mesh->mTextureCoords[0][i+1]);
-	      q = texcoords->x;
-	      w = texcoords->y;
+	      const aiVector3D& texcoords = (mesh->mTextureCoords[0][i]);
+	      q = texcoords.x;
+	      w = texcoords.y;
+
 	     // std::cout << q << '\n';
 	  }
     
@@ -148,7 +149,7 @@ void Object::Render()
 
   glBindBuffer(GL_ARRAY_BUFFER, VB[0]);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB[0]);
 
@@ -167,7 +168,7 @@ void Object::Render()
 
   glBindBuffer(GL_ARRAY_BUFFER, VB[1]);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB[1]);
 
