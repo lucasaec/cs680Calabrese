@@ -6,7 +6,7 @@
 
    int lookAtIndex = -1; 
 extern std::vector<Object*> list;
-int speedChange=1;
+float speedChange=1;
 Engine::Engine(string name, int width, int height)
 {
   m_WINDOW_NAME = name;
@@ -113,7 +113,7 @@ ImGui::Begin("Menu");
                  
                 static bool affectAll=false;
                 
-                ImGui::SliderInt("Speed", &speedChange,0 , 10);
+                ImGui::SliderFloat("Speed", &speedChange,0 , 20);
               
             
                 ImGui::Checkbox("Affect All", &affectAll);

@@ -1,6 +1,6 @@
 #include "object.h"
 #include <math.h> 
-extern int speedChange;
+extern float speedChange;
 
 Object::Object()
 {  
