@@ -13,13 +13,15 @@ sudo apt-get install libglew-dev libglm-dev libsdl2-dev
 
 ```
 This Project uses imagemagick
+### Ubuntu/Linux
+```
 I followed this tutorial: (https://linuxconfig.org/how-to-install-imagemagick-7-on-ubuntu-18-04-linux)  to do this.
 I also used: 
 sudo apt-get install libmagick++-dev
 It works on the ECC ubuntu machine since they already have it downloaded.
 
 Also, the cmake file is the one that was posted on canvas
-### Ubuntu/Linux
+```
 
 This project uses Assimp
 
