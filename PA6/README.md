@@ -1,4 +1,4 @@
-# PA5: Loading Objects with Assimp
+# PA6: Loading Objects with Assimp
 
 # Dependencies, Building, and Running
 
@@ -10,7 +10,17 @@ This project uses OpenGL 3.3. Some computers, such as virtual machines in the EC
 ### Ubuntu/Linux
 ```bash
 sudo apt-get install libglew-dev libglm-dev libsdl2-dev
+
 ```
+This Project uses imagemacick
+I followed I used: (https://linuxconfig.org/how-to-install-imagemagick-7-on-ubuntu-18-04-linux)  to do this.
+I also used: 
+sudo apt-get install libmagick++-dev
+It works on the ECC ubuntu machine since they already have it downloaded.
+
+Also, the cmake file is the one that was posted on canvas
+### Ubuntu/Linux
+
 This project uses Assimp
 
 ### Ubuntu/Linux
