@@ -1,4 +1,4 @@
-# PA6: Loading Objects with Assimp
+# PA6:Assimp Texture Loading
 
 # Dependencies, Building, and Running
 
