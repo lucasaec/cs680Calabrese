@@ -44,7 +44,6 @@ The second option is to use the provided Makefile which is used as usual.
 Running the make in a separate directory will allow easy cleanup of the build data, and an easy way to prevent unnecessary data to be added to the git repository.  
 
 ### CMake Instructions
-Please don't use cmake. please just use the makefile
 ```bash
 mkdir build
 cd build
