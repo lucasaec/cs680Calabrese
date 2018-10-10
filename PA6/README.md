@@ -12,7 +12,7 @@ This project uses OpenGL 3.3. Some computers, such as virtual machines in the EC
 sudo apt-get install libglew-dev libglm-dev libsdl2-dev
 
 ```
-This Project uses imagemacick
+This Project uses imagemagick
 I followed I used: (https://linuxconfig.org/how-to-install-imagemagick-7-on-ubuntu-18-04-linux)  to do this.
 I also used: 
 sudo apt-get install libmagick++-dev
