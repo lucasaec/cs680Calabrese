@@ -1,4 +1,4 @@
-# PA5: Loading Objects with Assimp
+# PA6:Assimp Texture Loading
 
 # Dependencies, Building, and Running
 
@@ -10,7 +10,20 @@ This project uses OpenGL 3.3. Some computers, such as virtual machines in the EC
 ### Ubuntu/Linux
 ```bash
 sudo apt-get install libglew-dev libglm-dev libsdl2-dev
+
 ```
+This Project uses imagemagick
+### Ubuntu/Linux
+```
+I followed this tutorial: https://linuxconfig.org/how-to-install-imagemagick-7-on-ubuntu-18-04-linux  to do this.
+I also used: 
+sudo apt-get install libmagick++-dev
+It works on the ECC ubuntu machine since they already have it downloaded.
+
+Also, the cmake file is the one that was posted on canvas
+```
+Link to tutorial:  (https://linuxconfig.org/how-to-install-imagemagick-7-on-ubuntu-18-04-linux)  
+
 This project uses Assimp
 
 ### Ubuntu/Linux
@@ -31,68 +44,29 @@ The second option is to use the provided Makefile which is used as usual.
 Running the make in a separate directory will allow easy cleanup of the build data, and an easy way to prevent unnecessary data to be added to the git repository.  
 
 ### CMake Instructions
-Please don't use cmake. please just use the makefile
-
-
-### Makefile Instructions 
-The makefile works as expected and must be updated with new files added in. ./Tutorial without command line arguments will not load any objects. Please see below in this Readme file to know how to use the command line arguments and load objects.
-
 ```bash
 mkdir build
 cd build
-cp ../makefile .
+cmake ..
 make
-./Tutorial
+./Buddha
 ```
+
+### Makefile Instructions 
+Please use cmake
+
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
 ```bash
-/usr/NX/scripts/vgl/vglrun ./Tutorial
+/usr/NX/scripts/vgl/vglrun ./Buddha
 ```
 # How to load an object
-Place object files in the objects folder. Place material files in the objects folder. They should be download when the repository is cloned.
-See "Text Input" to know what to do next.
-
-## Text Input
-Run the code like this:
-Example:
-```./Tutorial```
-
-The program will then ask you to give it a file name. Enter the file name of the object you want to load. For example:
-
-Please enter a file name
-
-```box2.obj```
-
-The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0.
-
-Would you like the input to be random? Enter 1 for yes 0 for no
-
-```1 ```
-
-
+Make sure that  the objects folder has the following files: buddha.obj, buddha.mtl, checker.jpg, and granite.jpg.
+Then run the program
 
 # Extra Credit
-To load materials place materials in the objects folder. 
-After following the build instructions run the code like this:
-Example:
-```./Tutorial```
-
-You will be prompted for the file name. In the terminal, Type dragon.obj or box2.obj and press enter to enter a file name.
-
-Example:
-
-Please enter a file name
-
-```box2.obj```
-
-
-The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0. Enter 0 and then press enter in the terminal to load the object's material.
-
-Would you like the input to be random? Enter 1 for yes 0 for no
-
-```0 ```
+There was no extra credit for this assignment
 
 ### Group Members
 Andrew Flangas
