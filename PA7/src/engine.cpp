@@ -4,6 +4,9 @@
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 
+   int lookAtIndex = -1; 
+extern std::vector<Object*> list;
+int speedChange=1;
 Engine::Engine(string name, int width, int height)
 {
   m_WINDOW_NAME = name;
@@ -105,22 +108,21 @@ void Engine::Run()
 bool boolean = true;
 
 {
-ImGui::Begin("Hello, World!");
-ImGui::Text("Some text.");
+ImGui::Begin("Menu");
 {
-                 static int speedChange=1;
-                static bool reverseOrbit=false;
-                static bool reverseSpin=false;
+                 
                 static bool affectAll=false;
                 
                 ImGui::SliderInt("Speed", &speedChange,0 , 10);
-                ImGui::Checkbox("Reverse Orbit", &reverseOrbit);
-                ImGui::Checkbox("Reverse Spin", &reverseSpin);
+              
+            
                 ImGui::Checkbox("Affect All", &affectAll);
                 ImGui::Checkbox("Disable Clicks", &disableClick);
+
+
   if (ImGui::BeginMenu("Zoom In"))
             {
-            int choice;
+            int choice = -1;
             if(ImGui::Button("Sun")) {
                  choice = 0;
                  ImGui::NextColumn();
@@ -162,17 +164,29 @@ ImGui::Text("Some text.");
                  ImGui::NextColumn();
             }
 //insert code to select planet
-       
- 
+            if(choice > -1 && choice < list.size()) {
+                lookAtIndex = choice;
+            }
 
                 ImGui::EndMenu();
             }
+          if(ImGui::Button("Reverse Orbit")) {
+	       reverse = true;
+	       typeReverse = 2; 
+  
+	  }
+	  else if(ImGui::Button("Reverse Spin")) { 
+	       reverse = true;
+	       typeReverse = 3; 
+	      
+	  }
        if(ImGui::Button("Undo Changes")) {
                  //Add code to revert back to normal settings
                  ImGui::NextColumn();
        }
        if(ImGui::Button("Reset View")) {
                  //Add code to reset view
+                 m_graphics->Recenter();
                  ImGui::NextColumn();
        }
       

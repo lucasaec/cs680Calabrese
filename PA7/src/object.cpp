@@ -1,5 +1,7 @@
 #include "object.h"
 #include <math.h> 
+extern int speedChange;
+
 Object::Object()
 {  
   Vertices = {
@@ -123,11 +125,11 @@ float angle2;
 
 void Object::Update(unsigned int dt)
 {
-   angle +=  dt * M_PI/1000* direction * pause * speed; 
+   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange; 
    if(direction != direction2) {
-       angle2 +=  dt * M_PI/1000* direction2 * pause * speed;
+       angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange;
    }
-   angle2 +=  dt * M_PI/1000* direction2 * pause * speed2;
+   angle2 +=  dt * M_PI/1000* direction2 * pause * speed2 * speedChange;
 
    if(parent == NULL) {
        model =  glm::mat4(1.0f);

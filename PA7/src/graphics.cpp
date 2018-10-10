@@ -4,7 +4,7 @@ Graphics::Graphics()
 {
     index = -1;
 }
-
+extern int lookAtIndex;
 Graphics::~Graphics()
 {
 
@@ -145,7 +145,7 @@ void Graphics::Recenter() {
      m_camera->view = glm::lookAt( glm::vec3(0.0, 8.0, -16.0), //Eye Position
                       glm::vec3(0.0, 0.0, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
-    index = -1;
+    lookAtIndex= -1;
 }
 /**
 * Call this to reverse stuff
@@ -186,13 +186,13 @@ void Graphics::IterativeRender(Object* obj) {
 void Graphics::Render()
 {
 int indix = 2;
-if(index > -1) {
-    indix = index;
-glm::mat4 a = list.at(indix)->GetModel();
+if(lookAtIndex  > -1) {
+    indix = lookAtIndex;
+
 glm::mat4 c = list.at(indix)->model2;
- glm::vec4 b = a * glm::vec4(1.0, 1.0, 1.0, 1.0);
+
 glm::vec4 d = c * glm::vec4(1.0, 1.0, 1.0, 1.0);
- std::cout << indix << '\n';
+ 
 
  m_camera->view = glm::lookAt( glm::vec3(d[0], 0, d[2]-10*(list.at(indix)->sc)), //Eye Position
                       glm::vec3(d[0]-1, 0, d[2]), //Focus point
