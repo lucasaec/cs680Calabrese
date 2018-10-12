@@ -9,7 +9,7 @@ Graphics::~Graphics()
 {
 
 }
-std::vector<Object*> list;
+std::vector<Object*> list1;
 
 /**
  * Allows you to update the index of the planet you are currently on
@@ -17,7 +17,7 @@ std::vector<Object*> list;
  */
 void Graphics::UpdateIndex() {
      index++;
-     if(index >= (int) list.size() ) {
+     if(index >= (int) list1.size() ) {
          index = -1;
      }
 }
@@ -58,19 +58,19 @@ bool Graphics::Initialize(int width, int height)
 */
 
    m_cube = new Object(0,.1,.1,1,1,1,1,1.3);
-   list.push_back(m_cube);
+   list1.push_back(m_cube);
 
  
    m_cube->children.push_back(new Object(10,1.0f,1.0f,1,1,1,3,.7f) ); 
    m_cube->children.at(0)->parent = m_cube;
    m_cube->children.at(0)->level =1;
-   list.push_back(m_cube->children.at(0));
+   list1.push_back(m_cube->children.at(0));
 
   m_cube->children.at(0)->children.push_back(new Object(15,3,3,1,1,1,3,.4) ); 
   
   m_cube->children.at(0)->children.at(0)->parent= m_cube->children.at(0);
   m_cube->children.at(0)->children.at(0)->level =2;
-  list.push_back(m_cube->children.at(0)->children.at(0));
+  list1.push_back(m_cube->children.at(0)->children.at(0));
  
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -137,8 +137,8 @@ bool Graphics::Initialize(int width, int height)
 void Graphics::Update(unsigned int dt)
 {
  
-  for(unsigned int x = 0; x < list.size(); x++) {
-      list.at(x)->Update(dt);
+  for(unsigned int x = 0; x < list1.size(); x++) {
+      list1.at(x)->Update(dt);
   }
 }
 void Graphics::Recenter() {
@@ -156,7 +156,7 @@ void Graphics::Reverse(int x) {
         IterativeReverse(x);
     }
     else {
-        list.at(index)->Reverse(x);
+        list1.at(index)->Reverse(x);
     }
 }
 
@@ -165,8 +165,8 @@ void Graphics::Reverse(int x) {
  */
 void Graphics::IterativeReverse(int mode) {
    
-   for(unsigned int x = 0; x < list.size(); x++) {        
-       list.at(x)->Reverse(mode);         
+   for(unsigned int x = 0; x < list1.size(); x++) {        
+       list1.at(x)->Reverse(mode);         
    }
 }
 
@@ -174,9 +174,9 @@ void Graphics::IterativeReverse(int mode) {
  * Call this to render all objects in the list.
  */
 void Graphics::IterativeRender(Object* obj) {
-      for(unsigned int x = 0; x < list.size(); x++) {
-          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
-          list.at(x)->Render();   
+      for(unsigned int x = 0; x < list1.size(); x++) {
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
+          list1.at(x)->Render();   
       }
 }
 
@@ -189,13 +189,13 @@ int indix = 2;
 if(lookAtIndex  > -1) {
     indix = lookAtIndex;
 
-glm::mat4 c = list.at(indix)->model2;
+glm::mat4 c = list1.at(indix)->model2;
 
-glm::vec4 d = c * glm::vec4(1.0, 1.0, 1.0, 1.0);
+glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
  
 
- m_camera->view = glm::lookAt( glm::vec3(d[0], 0, d[2]-10*(list.at(indix)->sc)), //Eye Position
-                      glm::vec3(d[0]-1, 0, d[2]), //Focus point
+ m_camera->view = glm::lookAt( glm::vec3(d[0], 0, d[2]-10*(list1.at(indix)->sc)), //Eye Position
+                      glm::vec3(d.x, 3*(list1.at(indix)->sc), d.z), //Focus point
                       glm::vec3(0.0, 1, 0));
 
 } else {

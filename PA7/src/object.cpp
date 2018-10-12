@@ -1,40 +1,70 @@
 #include "object.h"
 #include <math.h> 
+#include <assimp/Importer.hpp> //includes the importer, which is used to read our obj file
+#include <assimp/scene.h> //includes the aiScene object
+#include <assimp/postprocess.h> //includes the postprocessing variables for the importer
+#include <assimp/color4.h> //includes the aiColor4 object, which is used to handle the colors from the mesh objects
+#include <assimp/material.h> 
 extern float speedChange;
 
 Object::Object()
 {  
-  Vertices = {
-    {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 0.0f}},
-    {{1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-    {{-1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-    {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-    {{1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-    {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}},
-    {{-1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}},
-    {{-1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 1.0f}}
-  };
+Assimp::Importer importer;
+const aiScene *scene = importer.ReadFile("../objects/sphere.obj", aiProcess_Triangulate);
+float q,w;
+q=0;
+w=0;
+float x,y,z;
 
-  Indices = {
-    2, 3, 4,
-    8, 7, 6,
-    1, 5, 6,
-    2, 6, 7,
-    7, 8, 4,
-    1, 4, 8,
-    1, 2, 4,
-    5, 8, 6,
-    2, 1, 6,
-    3, 2, 7,
-    3, 7, 4,
-    5, 1, 8
-  };
+image = new Magick::Image("../objects/sun.jpg");
+image->write(&m_blob, "RGBA");
 
-  // The index works at a 0th index
-  for(unsigned int i = 0; i < Indices.size(); i++)
-  {
-    Indices[i] = Indices[i] - 1;
-  }
+glGenTextures(1, &texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->columns(), image->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
+
+aiMesh *mesh = scene->mMeshes[0];
+   
+ 
+
+
+
+
+    
+    
+	for(int i = 0; i < mesh->mNumVertices; i++) {
+		      x = mesh->mVertices[i].x;
+		      y = mesh->mVertices[i].y;
+		      z = mesh->mVertices[i].z;
+//std::cout << x << '\n';
+	  if(mesh->HasTextureCoords(0) ) {   
+	      const aiVector3D& texcoords = (mesh->mTextureCoords[0][i]);
+	      q = texcoords.x;
+	      w = texcoords.y;
+
+	     // std::cout << q << '\n';
+	  }
+    
+
+
+	   Vertex vzq = {glm::vec3(x,y,z),glm::vec2(1,1)};
+	   q = 0; 
+	   w = 0;
+	   Vertices.push_back(vzq);
+	}
+
+
+	for(int i = 0; i < mesh->mNumFaces; i++) {
+	    aiFace face = mesh->mFaces[i];
+	    unsigned int* mIndices = face.mIndices;
+	    Indices.push_back(mIndices[0]);
+	    Indices.push_back(mIndices[1]);
+	    Indices.push_back(mIndices[2]);   
+	}
+
+
   
   angle = 0.0f;
   direction = 1;
@@ -61,38 +91,59 @@ Object::Object(float distance1, float speed1, float speed21,  signed int directi
 {  
   level = 0;
 
-  Vertices = {
-    {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 0.0f}},
-    {{1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-    {{-1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-    {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-    {{1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-    {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}},
-    {{-1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}},
-    {{-1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 1.0f}}
-  };
+ Assimp::Importer importer;
+const aiScene *scene = importer.ReadFile("../objects/smoothSphere.obj", aiProcess_Triangulate);
+float q,w;
+q=0;
+w=0;
+float x,y,z;
+aiMesh *mesh = scene->mMeshes[0];
+   
+ 
+image = new Magick::Image("../objects/earth.jpg");
+image->write(&m_blob, "RGBA");
 
-  Indices = {
-    2, 3, 4,
-    8, 7, 6,
-    1, 5, 6,
-    2, 6, 7,
-    7, 8, 4,
-    1, 4, 8,
-    1, 2, 4,
-    5, 8, 6,
-    2, 1, 6,
-    3, 2, 7,
-    3, 7, 4,
-    5, 1, 8
-  };
+glGenTextures(1, &texture);
+glBindTexture(GL_TEXTURE_2D,texture);
+glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->columns(), image->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
 
+
+
+    
+    
+	for(int i = 0; i < mesh->mNumVertices; i++) {
+		      x = mesh->mVertices[i].x;
+		      y = mesh->mVertices[i].y;
+		      z = mesh->mVertices[i].z;
+//std::cout << x << '\n';
+	  if(mesh->HasTextureCoords(0) ) {   
+	      const aiVector3D& texcoords = (mesh->mTextureCoords[0][i]);
+	      q = texcoords.x;
+	      w = texcoords.y;
+
+	     // std::cout << q << '\n';
+	  }
+    
+
+
+	   Vertex vzq = {glm::vec3(x,y,z),glm::vec2(q,w)};
+	   q = 0; 
+	   w = 0;
+	   Vertices.push_back(vzq);
+	}
+
+
+	for(int i = 0; i < mesh->mNumFaces; i++) {
+	    aiFace face = mesh->mFaces[i];
+	    unsigned int* mIndices = face.mIndices;
+	    Indices.push_back(mIndices[0]);
+	    Indices.push_back(mIndices[1]);
+	    Indices.push_back(mIndices[2]);   
+	}
   // The index works at a 0th index
-  for(unsigned int i = 0; i < Indices.size(); i++)
-  {
-    Indices[i] = Indices[i] - 1;
-  }
-  
+ 
   
   direction = direction1;
   direction2 = direction21;
@@ -125,11 +176,11 @@ float angle2;
 
 void Object::Update(unsigned int dt)
 {
-   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange; 
+   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange; //speed is orbit speed
    if(direction != direction2) {
-       angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange;
+       angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange * 2;
    }
-   angle2 +=  dt * M_PI/1000* direction2 * pause * speed2 * speedChange;
+   angle2 +=  dt * M_PI/1000* direction2 * pause * speed2 * speedChange; //speed2 is spin speed
 
    if(parent == NULL) {
        model =  glm::mat4(1.0f);
@@ -188,7 +239,10 @@ void Object::Render()
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
+
+glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture);
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
 

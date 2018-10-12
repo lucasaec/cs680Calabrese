@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "graphics_headers.h"
-
+#include <Magick++.h>
 class Object
 {
   public:
@@ -22,6 +22,11 @@ class Object
     float sc;
     glm::mat4 GetModel();
     glm::mat4 model2;
+
+    
+    Magick::Image* image;
+    Magick::Blob m_blob;
+    GLuint texture;
 
   private:
     glm::mat4 model;

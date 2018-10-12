@@ -5,7 +5,7 @@
 #include "imgui_impl_opengl3.h"
 
    int lookAtIndex = -1; 
-extern std::vector<Object*> list;
+extern std::vector<Object*> list1;
 float speedChange=1;
 Engine::Engine(string name, int width, int height)
 {
@@ -59,7 +59,7 @@ bool Engine::Initialize()
   // No errors
   return true;
 }
-bool reverse = false;
+bool reverse1 = false;
  int typeReverse = 1;
 
 static bool disableClick=true;
@@ -96,9 +96,9 @@ void Engine::Run()
       ImGui_ImplSDL2_ProcessEvent(&m_event);
       Keyboard();
     }
-    if(reverse) {
+    if(reverse1) {
         m_graphics->Reverse(typeReverse);
-        reverse = false;
+        reverse1 = false;
     }
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL2_NewFrame(window);
@@ -164,19 +164,19 @@ ImGui::Begin("Menu");
                  ImGui::NextColumn();
             }
 //insert code to select planet
-            if(choice > -1 && choice < list.size()) {
+            if(choice > -1 && choice < list1.size()) {
                 lookAtIndex = choice;
             }
 
                 ImGui::EndMenu();
             }
           if(ImGui::Button("Reverse Orbit")) {
-	       reverse = true;
+	       reverse1 = true;
 	       typeReverse = 2; 
   
 	  }
 	  else if(ImGui::Button("Reverse Spin")) { 
-	       reverse = true;
+	       reverse1 = true;
 	       typeReverse = 3; 
 	      
 	  }
@@ -227,19 +227,19 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_a)
     {
       typeReverse = 1; //all
-      reverse = true;
+      reverse1 = true;
       
     }
     else if(m_event.key.keysym.sym == SDLK_s) {
-       reverse = true;
+       reverse1 = true;
        typeReverse =  2; //orbit
     }
     else if(m_event.key.keysym.sym == SDLK_d) {
-       reverse = true;
+       reverse1 = true;
        typeReverse =  3; //cube
     }
     else if(m_event.key.keysym.sym == SDLK_f) {
-       reverse = true;
+       reverse1 = true;
        typeReverse = 4; //pause
     }
     else if(m_event.key.keysym.sym == SDLK_c) {
@@ -256,15 +256,15 @@ void Engine::Keyboard()
   {   
       if(m_event.button.button == SDL_BUTTON_LEFT) {
           typeReverse =  2;
-          reverse = true;   
+          reverse1 = true;   
       }
       else if(m_event.button.button == SDL_BUTTON_RIGHT) {
           typeReverse =  3;
-          reverse = true;   
+          reverse1 = true;   
       } 
       else if(m_event.button.button == SDL_BUTTON_MIDDLE) {
           typeReverse =  1;
-          reverse = true;   
+          reverse1 = true;   
       } 
  
   }
