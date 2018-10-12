@@ -1,0 +1,322 @@
+{
+    "id": "Planets",
+    "name": "Solar System",
+    "description": "Planets of our solar system in order",
+    "aliases": [
+        "solar",
+        "planet",
+        "planets",
+        "solarsystem",
+        "sun",
+        "earth",
+        "mercury",
+        "mars",
+        "jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+        "pluto"
+    ],
+    "template_type": "reference",
+    "section_order": [
+        "Sun",
+        "Mercury",
+        "Venus",
+        "Earth",
+        "Moon",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "Uranus",
+        "Neptune",
+        "Pluto"
+    ],
+    "sections": {
+        "Sun": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "0"
+            }
+        ],
+        "Mercury": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "1"
+            }
+        ],
+        "Venus": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "2"
+            }
+        ],
+        "Earth": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "3"
+            }
+        ],
+        "Moon": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "3"
+            }
+        ],
+        "Mars": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "4"
+            }
+        ],
+        "Jupiter": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "5"
+            }
+        ],
+        "Saturn": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "6"
+            }
+        ],
+        "Uranus": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "7"
+            }
+        ],
+        "Neptune": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "8"
+            }
+        ],
+        "Pluto": [
+            {
+                "key": "Texture",
+                "val": "FileName"
+            },
+            {
+                "key": "OrbitSpeed",
+                "val": "Whatever value you wish the speed to be"
+            },
+            {
+                "key": "SpinSpeed",
+                "val": "whatever value you wish the spin to be"
+            },
+            {
+                "key": "SpinDir",
+                "val": "whatever value you wish the direction to be"
+            },
+            {
+                "key": "Scale",
+                "val": "scale relative to Earth"
+            },
+            {
+                "key": "distance from sun",
+                "val": "9"
+            }
+        ]
+    }
+}
