@@ -3,7 +3,7 @@
     
         "Sun": 
             {
-                "Texture" : "sun.jpeg",
+                "Texture" : "sun.jpg",
                  
                  "object": "smoothSphere.obj",
 
@@ -24,7 +24,7 @@
 
         "Mercury": 
             {
-                "Texture": "mercury.jpeg",
+                "Texture": "mercury.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -46,7 +46,7 @@
         ,
         "Venus": 
             {
-                "Texture": "venus.jpeg",
+                "Texture": "venus.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -68,7 +68,7 @@
         ,
         "Earth": 
             {
-                "Texture": "earth.jpeg",
+                "Texture": "earth.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -90,7 +90,7 @@
         ,
         "Moon": 
             {
-                "Texture": "moon.jpeg",
+                "Texture": "moon.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -112,7 +112,7 @@
         ,
         "Mars": 
             {
-                "Texture": "mars.jpeg",
+                "Texture": "mars.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -134,7 +134,7 @@
         ,
         "Jupiter": 
             {
-                "Texture": "jupiter.jpeg",
+                "Texture": "jupiter.jpg",
 
 
                 "object": "smoothSphere.obj",
@@ -157,7 +157,7 @@
         ,
         "Saturn": 
             {
-                "Texture": "saturn.jpeg",
+                "Texture": "saturn.jpg",
 
 
                 "object": "smoothSphere.obj",
@@ -179,7 +179,7 @@
             },
         "Uranus": 
             {
-                "Texture": "uranus.jpeg",
+                "Texture": "uranus.jpg",
 
                 "object": "smoothSphere.obj",
             
@@ -201,7 +201,7 @@
 
         "Neptune": 
             {
-                "Texture": "neptune.jpeg",
+                "Texture": "neptune.jpg",
 
 
                 "object": "smoothSphere.obj",
@@ -224,7 +224,7 @@
 
         "Pluto": 
             {
-                "Texture": "pluto.jpeg",
+                "Texture": "pluto.jpg",
 
 
                 "object": "smoothSphere.obj",
