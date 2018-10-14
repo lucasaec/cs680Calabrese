@@ -55,7 +55,7 @@
                 "val": "109"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "0"
             }
         ],
@@ -81,7 +81,7 @@
                 "val": "0.4"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "1"
             }
         ],
@@ -107,7 +107,7 @@
                 "val": "0.9"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "2"
             }
         ],
@@ -133,7 +133,7 @@
                 "val": "1"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "3"
             }
         ],
@@ -159,7 +159,7 @@
                 "val": "0.27"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "3"
             }
         ],
@@ -185,7 +185,7 @@
                 "val": "0.5"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "4"
             }
         ],
@@ -211,7 +211,7 @@
                 "val": "11.2"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "5"
             }
         ],
@@ -237,7 +237,7 @@
                 "val": "9.4"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "6"
             }
         ],
@@ -263,7 +263,7 @@
                 "val": "4"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "7"
             }
         ],
@@ -289,7 +289,7 @@
                 "val": "3.9"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "8"
             }
         ],
@@ -315,7 +315,7 @@
                 "val": "0.18"
             },
             {
-                "key": "distance from sun",
+                "key": "distance",
                 "val": "9"
             }
         ]
