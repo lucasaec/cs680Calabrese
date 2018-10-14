@@ -36,7 +36,7 @@
         "Sun": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "sun.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -44,7 +44,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "63.91"
             },
             {
                 "key": "SpinDir",
@@ -52,7 +52,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "109"
             },
             {
                 "key": "distance from sun",
@@ -62,7 +62,7 @@
         "Mercury": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "mercury.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -70,7 +70,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "0.0065"
             },
             {
                 "key": "SpinDir",
@@ -78,7 +78,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "0.4"
             },
             {
                 "key": "distance from sun",
@@ -88,15 +88,15 @@
         "Venus": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "venus.jpeg"
             },
             {
                 "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
+                "val": ""
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "0.0039"
             },
             {
                 "key": "SpinDir",
@@ -104,7 +104,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "0.9"
             },
             {
                 "key": "distance from sun",
@@ -114,15 +114,15 @@
         "Earth": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "earth.jpeg"
             },
             {
                 "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
+                "val": ""
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "1"
             },
             {
                 "key": "SpinDir",
@@ -130,7 +130,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "1"
             },
             {
                 "key": "distance from sun",
@@ -140,7 +140,7 @@
         "Moon": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "moon.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -148,7 +148,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "0.01"
             },
             {
                 "key": "SpinDir",
@@ -156,7 +156,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "0.27"
             },
             {
                 "key": "distance from sun",
@@ -166,7 +166,7 @@
         "Mars": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "mars.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -174,7 +174,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "0.517"
             },
             {
                 "key": "SpinDir",
@@ -182,7 +182,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "0.5"
             },
             {
                 "key": "distance from sun",
@@ -192,7 +192,7 @@
         "Jupiter": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "jupiter.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -200,7 +200,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "27.23"
             },
             {
                 "key": "SpinDir",
@@ -208,7 +208,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "11.2"
             },
             {
                 "key": "distance from sun",
@@ -218,7 +218,7 @@
         "Saturn": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "saturn.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -226,7 +226,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "22"
             },
             {
                 "key": "SpinDir",
@@ -234,7 +234,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "9.4"
             },
             {
                 "key": "distance from sun",
@@ -244,7 +244,7 @@
         "Uranus": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "uranus.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -252,7 +252,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "8.84"
             },
             {
                 "key": "SpinDir",
@@ -260,7 +260,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "4"
             },
             {
                 "key": "distance from sun",
@@ -270,7 +270,7 @@
         "Neptune": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "neptune.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -278,7 +278,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "5.18"
             },
             {
                 "key": "SpinDir",
@@ -286,7 +286,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "3.9"
             },
             {
                 "key": "distance from sun",
@@ -296,7 +296,7 @@
         "Pluto": [
             {
                 "key": "Texture",
-                "val": "FileName"
+                "val": "pluto.jpeg"
             },
             {
                 "key": "OrbitSpeed",
@@ -304,7 +304,7 @@
             },
             {
                 "key": "SpinSpeed",
-                "val": "whatever value you wish the spin to be"
+                "val": "0.073"
             },
             {
                 "key": "SpinDir",
@@ -312,7 +312,7 @@
             },
             {
                 "key": "Scale",
-                "val": "scale relative to Earth"
+                "val": "0.18"
             },
             {
                 "key": "distance from sun",
