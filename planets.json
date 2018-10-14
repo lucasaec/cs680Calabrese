@@ -1,323 +1,252 @@
 {
-    "id": "Planets",
-    "name": "Solar System",
-    "description": "Planets of our solar system in order",
-    "aliases": [
-        "solar",
-        "planet",
-        "planets",
-        "solarsystem",
-        "sun",
-        "earth",
-        "Moon",
-        "mercury",
-        "mars",
-        "jupiter",
-        "saturn",
-        "uranus",
-        "neptune",
-        "pluto"
-    ],
-    "template_type": "reference",
-    "section_order": [
-        "Sun",
-        "Mercury",
-        "Venus",
-        "Earth",
-        "Moon",
-        "Mars",
-        "Jupiter",
-        "Saturn",
-        "Uranus",
-        "Neptune",
-        "Pluto"
-    ],
-    "sections": {
-        "Sun": [
+   
+    
+        "Sun": 
             {
-                "key": "Texture",
-                "val": "sun.jpeg"
+                "Texture" : "sun.jpeg",
+                 
+                 "object": "smoothSphere.obj",
+
+                "OrbitSpeed" : 0,
+            
+            
+                "SpinSpeed" : 4.1,
+            
+            
+                "SpinDir" : "whatever value you wish the direction to be",
+            
+            
+                "Scale": 109,
+            
+            
+                "distance": 0
             },
+
+        "Mercury": 
             {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "4.1"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "109"
-            },
-            {
-                "key": "distance",
-                "val": "0"
+                "Texture": "mercury.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 1.6075,
+            
+            
+                "SpinSpeed": 0.0065,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.4,
+            
+            
+                "distance": 1
             }
-        ],
-        "Mercury": [
+        ,
+        "Venus": 
             {
-                "key": "Texture",
-                "val": "mercury.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "0.0065"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "0.4"
-            },
-            {
-                "key": "distance",
-                "val": "1"
+                "Texture": "venus.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed" : 1.1758,
+            
+            
+                "SpinSpeed": 0.0039,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.9,
+            
+            
+                "distance": 2
             }
-        ],
-        "Venus": [
+        ,
+        "Earth": 
             {
-                "key": "Texture",
-                "val": "venus.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": ""
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "0.0039"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "0.9"
-            },
-            {
-                "key": "distance",
-                "val": "2"
+                "Texture": "earth.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 1,
+            
+            
+                "SpinSpeed": 1,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 1,
+            
+            
+                "distance": 3
             }
-        ],
-        "Earth": [
+        ,
+        "Moon": 
             {
-                "key": "Texture",
-                "val": "earth.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": ""
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "1"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "1"
-            },
-            {
-                "key": "distance",
-                "val": "3"
+                "Texture": "moon.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.035,
+            
+            
+                "SpinSpeed": 0.01,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+        
+                "Scale": 0.27,
+            
+            
+                "distance": 3
             }
-        ],
-        "Moon": [
+        ,
+        "Mars": 
             {
-                "key": "Texture",
-                "val": "moon.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "0.01"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "0.27"
-            },
-            {
-                "key": "distance",
-                "val": "3"
+                "Texture": "mars.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.81,
+            
+            
+                "SpinSpeed": 0.517,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.5,
+            
+        
+                "distance": 4
             }
-        ],
-        "Mars": [
+        ,
+        "Jupiter": 
             {
-                "key": "Texture",
-                "val": "mars.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "0.517"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "0.5"
-            },
-            {
-                "key": "distance",
-                "val": "4"
+                "Texture": "jupiter.jpeg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.438,
+            
+            
+                "SpinSpeed": 27.23,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 11.2,
+            
+            
+                "distance": 5
             }
-        ],
-        "Jupiter": [
+        ,
+        "Saturn": 
             {
-                "key": "Texture",
-                "val": "jupiter.jpeg"
+                "Texture": "saturn.jpeg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.324,
+            
+            
+                "SpinSpeed": 22,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 9.4,
+            
+            
+                "distance": 6
             },
+        "Uranus": 
             {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
+                "Texture": "uranus.jpeg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.229,
+            
+            
+                "SpinSpeed": 8.84,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 4,
+            
+            
+                "distance": 7
             },
+
+        "Neptune": 
             {
-                "key": "SpinSpeed",
-                "val": "27.23"
+                "Texture": "neptune.jpeg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.1823,
+            
+            
+                "SpinSpeed": 5.18,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 3.9,
+            
+            
+                "distance": 8
             },
+
+        "Pluto": 
             {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "11.2"
-            },
-            {
-                "key": "distance",
-                "val": "5"
+                "Texture": "pluto.jpeg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.16,
+            
+            
+                "SpinSpeed": 0.073,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.18,
+            
+            
+                "distance": 9
             }
-        ],
-        "Saturn": [
-            {
-                "key": "Texture",
-                "val": "saturn.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "22"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "9.4"
-            },
-            {
-                "key": "distance",
-                "val": "6"
-            }
-        ],
-        "Uranus": [
-            {
-                "key": "Texture",
-                "val": "uranus.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "8.84"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "4"
-            },
-            {
-                "key": "distance",
-                "val": "7"
-            }
-        ],
-        "Neptune": [
-            {
-                "key": "Texture",
-                "val": "neptune.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "5.18"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "3.9"
-            },
-            {
-                "key": "distance",
-                "val": "8"
-            }
-        ],
-        "Pluto": [
-            {
-                "key": "Texture",
-                "val": "pluto.jpeg"
-            },
-            {
-                "key": "OrbitSpeed",
-                "val": "Whatever value you wish the speed to be"
-            },
-            {
-                "key": "SpinSpeed",
-                "val": "0.073"
-            },
-            {
-                "key": "SpinDir",
-                "val": "whatever value you wish the direction to be"
-            },
-            {
-                "key": "Scale",
-                "val": "0.18"
-            },
-            {
-                "key": "distance",
-                "val": "9"
-            }
-        ]
-    }
+
 }
+
+
+        
+    
