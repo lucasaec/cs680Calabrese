@@ -87,12 +87,12 @@ aiMesh *mesh = scene->mMeshes[0];
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 }
  
-Object::Object(float distance1, float speed1, float speed21,  signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1)
+Object::Object(float distance1, float speed1, float speed21,  signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1, std::string objName)
 {  
   level = 0;
-
+ 
  Assimp::Importer importer;
-const aiScene *scene = importer.ReadFile("../objects/smoothSphere.obj", aiProcess_Triangulate);
+const aiScene *scene = importer.ReadFile("../objects/" + objName, aiProcess_Triangulate);
 float q,w;
 q=0;
 w=0;
@@ -176,9 +176,14 @@ float angle2;
 
 void Object::Update(unsigned int dt)
 {
-   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange; //speed is orbit speed
+float divideBy = distance;
+if( divideBy == 0) {
+    divideBy = 1;
+}
+
+   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange /divideBy; //speed is orbit speed
    if(direction != direction2) {
-       angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange * 2;
+       angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange * 2 /divideBy;
    }
    angle2 +=  dt * M_PI/1000* direction2 * pause * speed2 * speedChange; //speed2 is spin speed
 

@@ -1,0 +1,254 @@
+{
+   
+    
+        "Sun": 
+            {
+                "Texture" : "sun.jpg",
+                 
+                 "object": "smoothSphere.obj",
+
+                "OrbitSpeed" : 0,
+            
+            
+                "SpinSpeed" : 4.1,
+            
+            
+                "SpinDir" : "whatever value you wish the direction to be",
+            
+            
+                "Scale": 109,
+            
+            
+                "distance": 0
+            },
+
+        "Mercury": 
+            {
+                "Texture": "mercury.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 1.6075,
+            
+            
+                "SpinSpeed": 0.0065,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.4,
+            
+            
+                "distance": 1
+            }
+        ,
+        "Venus": 
+            {
+                "Texture": "venus.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed" : 1.1758,
+            
+            
+                "SpinSpeed": 0.0039,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.9,
+            
+            
+                "distance": 2
+            }
+        ,
+        "Earth": 
+            {
+                "Texture": "earth.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 1,
+            
+            
+                "SpinSpeed": 1,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 1,
+            
+            
+                "distance": 3
+            }
+        ,
+        "Moon": 
+            {
+                "Texture": "moon.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.035,
+            
+            
+                "SpinSpeed": 0.01,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+        
+                "Scale": 0.27,
+            
+            
+                "distance": 3,
+
+                "parent" : "earth"
+            }
+        ,
+        "Mars": 
+            {
+                "Texture": "mars.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.81,
+            
+            
+                "SpinSpeed": 0.517,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.5,
+            
+        
+                "distance": 4
+            }
+        ,
+        "Jupiter": 
+            {
+                "Texture": "jupiter.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.438,
+            
+            
+                "SpinSpeed": 27.23,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 11.2,
+            
+            
+                "distance": 5
+            }
+        ,
+        "Saturn": 
+            {
+                "Texture": "saturn.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.324,
+            
+            
+                "SpinSpeed": 22,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 9.4,
+            
+            
+                "distance": 6
+            },
+        "Uranus": 
+            {
+                "Texture": "uranus.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.229,
+            
+            
+                "SpinSpeed": 8.84,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 4,
+            
+            
+                "distance": 7
+            },
+
+        "Neptune": 
+            {
+                "Texture": "neptune.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.1823,
+            
+            
+                "SpinSpeed": 5.18,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 3.9,
+            
+            
+                "distance": 8
+            },
+
+        "Pluto": 
+            {
+                "Texture": "pluto.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.16,
+            
+            
+                "SpinSpeed": 0.073,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.18,
+            
+            
+                "distance": 9
+            }
+
+}
+
+
+        
+    

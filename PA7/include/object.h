@@ -8,7 +8,7 @@ class Object
 {
   public:
     Object();
-    Object(float distance, float speed1, float speed21, signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1);
+    Object(float distance, float speed1, float speed21, signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1, std::string);
     ~Object();
     void Update(unsigned int dt);
     void Render();

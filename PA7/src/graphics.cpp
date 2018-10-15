@@ -1,5 +1,8 @@
 #include "graphics.h"
 #include <vector>
+#include <json.hpp>
+#include <fstream>
+using namespace nlohmann;
 Graphics::Graphics()
 {
     index = -1;
@@ -25,6 +28,13 @@ void Graphics::UpdateIndex() {
 
 bool Graphics::Initialize(int width, int height)
 {
+    json j;
+    std::ifstream i("../objects/planets.json");
+    i >> j;
+    float awesome = j["Sun"]["SpinSpeed"];
+    std::cout << sizeof(j);
+  
+
     glewExperimental = GL_TRUE;
     auto status = glewInit();
     glGetError();
@@ -56,22 +66,52 @@ bool Graphics::Initialize(int width, int height)
 *
 *
 */
+   std::string objectName = "smoothSphere.obj";
+   float dist = 0;
+   float orbit = 0;
+   float spin = 0;
+   float scale = 0;
+   std::string objName = "";
+   
+  dist = j["Sun"]["distance"];
+  orbit = j["Sun"]["OrbitSpeed"];
+  spin = j["Sun"]["SpinSpeed"];
+  scale = j["Sun"]["Scale"];
+  objName = j["Sun"]["object"];
 
-   m_cube = new Object(0,.1,.1,1,1,1,1,1.3);
+   m_cube = new Object(dist,orbit,spin,scale,1,1,1,scale*.005,objName);
    list1.push_back(m_cube);
 
+  dist = j["Earth"]["distance"];
+  orbit = j["Earth"]["OrbitSpeed"];
+  spin = j["Earth"]["SpinSpeed"];
+  scale = j["Earth"]["Scale"];
+  objName = j["Earth"]["object"];
  
-   m_cube->children.push_back(new Object(10,1.0f,1.0f,1,1,1,3,.7f) ); 
+   m_cube->children.push_back(new Object(dist,orbit,spin,scale,1,1,1,scale*.005,objName) ); 
    m_cube->children.at(0)->parent = m_cube;
    m_cube->children.at(0)->level =1;
    list1.push_back(m_cube->children.at(0));
 
-  m_cube->children.at(0)->children.push_back(new Object(15,3,3,1,1,1,3,.4) ); 
+
+
+  m_cube->children.at(0)->children.push_back(new Object(1,1,1,1,1,1,3,.05*.005, objectName) ); 
   
   m_cube->children.at(0)->children.at(0)->parent= m_cube->children.at(0);
   m_cube->children.at(0)->children.at(0)->level =2;
   list1.push_back(m_cube->children.at(0)->children.at(0));
- 
+
+
+   m_cube->children.push_back(new Object(10,1.0f,1.0f,1,1,1,3,.2f*.005, objectName) ); 
+   m_cube->children.at(1)->parent = m_cube;
+   m_cube->children.at(1)->level = 1;
+   list1.push_back(m_cube->children.at(1));
+
+ m_cube->children.push_back(new Object(15,1.6f,1.0f,1,1,1,3,.2f*.005, objectName) ); 
+   m_cube->children.at(2)->parent = m_cube;
+   m_cube->children.at(2)->level = 1;
+   list1.push_back(m_cube->children.at(2));
+   i.close();
   m_shader = new Shader();
   if(!m_shader->Initialize())
   {
