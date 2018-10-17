@@ -10,7 +10,7 @@
                 "OrbitSpeed" : 0,
             
             
-                "SpinSpeed" : 0.12,
+                "SpinSpeed" : 0.0001,
             
             
                 "SpinDir" : "whatever value you wish the direction to be",
