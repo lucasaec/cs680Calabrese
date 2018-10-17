@@ -38,7 +38,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.38,
+                "Scale": 10,
             
             
                 "distance": 35.980000
@@ -60,7 +60,7 @@
                 "SpinDir": -1,
             
             
-                "Scale": 0.815,
+                "Scale": 12,
             
             
                 "distance": 67.240000
@@ -82,7 +82,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 1,
+                "Scale": 14,
             
             
                 "distance": 92.960000
@@ -104,7 +104,7 @@
                 "SpinDir": 1,
             
         
-                "Scale": 0.27,
+                "Scale": 8,
             
             
                 "distance": 2.38900
@@ -126,7 +126,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.57,
+                "Scale": 11,
             
         
                 "distance": 141.600000
@@ -148,7 +148,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.00177,
+                "Scale": 5,
             
         
                 "distance": 5.826
@@ -193,7 +193,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 11,
+                "Scale": 17,
             
             
                 "distance": 483.800000
@@ -216,7 +216,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.245,
+                "Scale": 8,
             
             
                 "distance": 4.14000
@@ -239,7 +239,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 9.5,
+                "Scale": 16,
             
             
                 "distance": 890.700000
@@ -283,7 +283,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.404,
+                "Scale": 9.5,
             
             
                 "distance": 7.59220
@@ -304,7 +304,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 4,
+                "Scale": 15,
             
             
                 "distance": 1784.000000
@@ -325,7 +325,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.091,
+                "Scale": 5,
             
             
                 "distance": 1.90000
@@ -348,7 +348,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 3.9,
+                "Scale": 14.8,
             
             
                 "distance": 2793.000000
@@ -370,7 +370,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.212,
+                "Scale": 7,
             
             
                 "distance": 2.20438
@@ -393,7 +393,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.187,
+                "Scale": 4,
             
             
                 "distance": 3670.0000
@@ -415,7 +415,7 @@
                 "SpinDir": 1,
             
             
-                "Scale": 0.0952,
+                "Scale": 2,
             
             
                 "distance": 1.2200
