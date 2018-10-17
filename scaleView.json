@@ -1,0 +1,428 @@
+{
+   
+    
+        "Sun": 
+            {
+                "Texture" : "sun.jpg",
+                 
+                 "object": "smoothSphere.obj",
+
+                "OrbitSpeed" : 0,
+            
+            
+                "SpinSpeed" : 13.33,
+            
+            
+                "SpinDir" : 1,
+            
+            
+                "Scale": 109,
+            
+            
+                "distance": 0
+            },
+
+        "Mercury": 
+            {
+                "Texture": "mercury.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 4.1,
+            
+            
+                "SpinSpeed": 6.124,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.38,
+            
+            
+                "distance": 1
+            }
+        ,
+        "Venus": 
+            {
+                "Texture": "venus.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed" : 1.626,
+            
+            
+                "SpinSpeed": 1.477,
+            
+            
+                "SpinDir": -1,
+            
+            
+                "Scale": 0.815,
+            
+            
+                "distance": 2
+            }
+        ,
+        "Earth": 
+            {
+                "Texture": "earth.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 1,
+            
+            
+                "SpinSpeed": 361,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 1,
+            
+            
+                "distance": 3
+            }
+        ,
+        "Moon": 
+            {
+                "Texture": "moon.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 13.52,
+            
+            
+                "SpinSpeed": 13.33,
+            
+            
+                "SpinDir": 1,
+            
+        
+                "Scale": 0.27,
+            
+            
+                "distance": 3
+            }
+        ,
+        "Mars": 
+            {
+                "Texture": "mars.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.524,
+            
+            
+                "SpinSpeed": 351.22,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.57,
+            
+        
+                "distance": 4
+            }
+        ,
+        "Phobos": 
+            {
+                "Texture": "phobos.jpg",
+
+                "object": "phobos.obj",
+            
+            
+                "OrbitSpeed": 1168,
+            
+            
+                "SpinSpeed": 117.07,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.00177,
+            
+        
+                "distance": 4
+            }
+        ,
+        "Deimos": 
+            {
+                "Texture": "deimos.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 289.68,
+            
+            
+                "SpinSpeed": 285.16,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 4,
+            
+        
+                "distance": 4
+            }
+        ,
+        "Jupiter": 
+            {
+                "Texture": "jupiter.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.0843,
+            
+            
+                "SpinSpeed": 870.61,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 11,
+            
+            
+                "distance": 5
+            }
+        ,
+        "Europa": 
+            {
+                "Texture": "europa.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 103.107,
+            
+            
+                "SpinSpeed": 102.86,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.245,
+            
+            
+                "distance": 5
+            }
+        ,
+        "Saturn": 
+            {
+                "Texture": "saturn.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.034,
+            
+            
+                "SpinSpeed": 810.81,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 9.5,
+            
+            
+                "distance": 6
+            },
+        "Ring": 
+            {
+                "Texture": "ring.jpg",
+
+
+                "object": "ring.obj",
+            
+            
+                "OrbitSpeed": 0.034,
+            
+            
+                "SpinSpeed": 2.252,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 36184,
+            
+            
+                "distance": 6
+            },
+    	"Titan": 
+            {
+                "Texture": "titan.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 22.89,
+            
+            
+                "SpinSpeed": 22.5,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.404,
+            
+            
+                "distance": 6
+            },
+        "Uranus": 
+            {
+                "Texture": "uranus.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.0119,
+            
+            
+                "SpinSpeed": 501.4,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 4,
+            
+            
+                "distance": 7
+            },
+      	"Ariel": 
+            {
+                "Texture": "ariel.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 144.84,
+            
+            
+                "SpinSpeed": 142.86,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.091,
+            
+            
+                "distance": 7
+            },
+
+        "Neptune": 
+            {
+                "Texture": "neptune.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.0061,
+            
+            
+                "SpinSpeed": 536.31,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 3.9,
+            
+            
+                "distance": 8
+            },
+		"Triton": 
+            {
+                "Texture": "triton.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 62.11,
+            
+            
+                "SpinSpeed": 61.256,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.212,
+            
+            
+                "distance": 8
+            },
+
+        "Pluto": 
+            {
+                "Texture": "pluto.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.004,
+            
+            
+                "SpinSpeed": 56.21,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.187,
+            
+            
+                "distance": 9
+            },
+      	"Charon": 
+            {
+                "Texture": "charon.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 57.21,
+            
+            
+                "SpinSpeed": 56.43,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 0.0952,
+            
+            
+                "distance": 9
+            }
+
+}
+
+
+        
+    
