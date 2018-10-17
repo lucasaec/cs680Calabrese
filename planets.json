@@ -132,6 +132,50 @@
                 "distance": 141600000
             }
         ,
+        "Phobos": 
+            {
+                "Texture": "phobos.jpg",
+
+                "object": "phobos.obj",
+            
+            
+                "OrbitSpeed": 1168,
+            
+            
+                "SpinSpeed": 117.07,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 7,
+            
+        
+                "distance": 141600000
+            }
+        ,
+        "Deimos": 
+            {
+                "Texture": "deimos.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 289.68,
+            
+            
+                "SpinSpeed": 285.16,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 4,
+            
+        
+                "distance": 141600000
+            }
+        ,
         "Jupiter": 
             {
                 "Texture": "jupiter.jpg",
@@ -150,6 +194,29 @@
             
             
                 "Scale": 43441,
+            
+            
+                "distance": 483800000
+            }
+        ,
+        "Europa": 
+            {
+                "Texture": "europa.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 103.107,
+            
+            
+                "SpinSpeed": 102.86,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 969.8,
             
             
                 "distance": 483800000
@@ -199,6 +266,28 @@
             
                 "distance": 890700000
             },
+    	"Titan": 
+            {
+                "Texture": "titan.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 22.89,
+            
+            
+                "SpinSpeed": 22.5,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 1600,
+            
+            
+                "distance": 890700000
+            },
         "Uranus": 
             {
                 "Texture": "uranus.jpg",
@@ -216,6 +305,27 @@
             
             
                 "Scale": 15759,
+            
+            
+                "distance": 1784000000
+            },
+      	"Ariel": 
+            {
+                "Texture": "ariel.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 144.84,
+            
+            
+                "SpinSpeed": 142.86,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 360,
             
             
                 "distance": 1784000000
@@ -243,6 +353,28 @@
             
                 "distance": 2793000000
             },
+		"Triton": 
+            {
+                "Texture": "triton.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 62.11,
+            
+            
+                "SpinSpeed": 61.256,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 841,
+            
+            
+                "distance": 2793000000
+            },
 
         "Pluto": 
             {
@@ -262,6 +394,28 @@
             
             
                 "Scale": 738.4,
+            
+            
+                "distance": 36700000
+            },
+      	"Charon": 
+            {
+                "Texture": "charon.jpg",
+
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 57.21,
+            
+            
+                "SpinSpeed": 56.43,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 376.55,
             
             
                 "distance": 36700000
