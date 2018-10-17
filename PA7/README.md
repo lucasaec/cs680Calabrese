@@ -25,6 +25,8 @@ Installation of brew is suggested to easily install the libs. Ensure that the la
 brew install glew glm sdl2
 ```
 
+All dependencies for this project should be on the ECC computers.
+
 ## Building and Running
 To build this project there are two options. One is to use CMake which makes including new libraries easier, and handles new files added automatically to the src and include directory. CMake is a small new learning curve but makes things easier in the future.
 The second option is to use the provided Makefile which is used as usual.
@@ -44,6 +46,18 @@ cmake ..
 make
 ./Tutorial
 ```
+
+### Menu Input
+The zoom in function allows you to zoom in on a planet.
+the zoom slider lets you zoom out when you are zoomed in on a planet. (it only works when you are click a planet to zoom in on in the menu)
+Affect all does nothing
+Disable clicks is to stop the planets from reversing when you click the menu
+Undo changes does nothing
+Reset view lets you reset to the default view. It undoes any zooming also.
+Scaled View Please don't press this.
+
+
+
 
 ### Keyboard Input
 - a:          Reverse rotation of cube and it's orbit
