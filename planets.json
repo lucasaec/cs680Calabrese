@@ -29,10 +29,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 4.15,
+                "OrbitSpeed": 4.1,
             
             
-                "SpinSpeed": 0.0169,
+                "SpinSpeed": 6.124,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -54,7 +54,7 @@
                 "OrbitSpeed" : 1.626,
             
             
-                "SpinSpeed": 0.0041,
+                "SpinSpeed": 1.477,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -76,7 +76,7 @@
                 "OrbitSpeed": 1,
             
             
-                "SpinSpeed": 1,
+                "SpinSpeed": 361,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -117,10 +117,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.532,
+                "OrbitSpeed": 0.524,
             
             
-                "SpinSpeed": 1,
+                "SpinSpeed": 0.98,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -143,7 +143,7 @@
                 "OrbitSpeed": 0.0843,
             
             
-                "SpinSpeed": 2.38,
+                "SpinSpeed": 870.61,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -161,6 +161,28 @@
 
 
                 "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.034,
+            
+            
+                "SpinSpeed": 810.81,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 36184,
+            
+            
+                "distance": 890700000
+            },
+        "Ring": 
+            {
+                "Texture": "ring.jpg",
+
+
+                "object": "ring.obj",
             
             
                 "OrbitSpeed": 0.034,
@@ -187,7 +209,7 @@
                 "OrbitSpeed": 0.0119,
             
             
-                "SpinSpeed": 1.41,
+                "SpinSpeed": 501.4,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -210,7 +232,7 @@
                 "OrbitSpeed": 0.0061,
             
             
-                "SpinSpeed": 1.499,
+                "SpinSpeed": 536.31,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -233,7 +255,7 @@
                 "OrbitSpeed": 0.004,
             
             
-                "SpinSpeed": 0.156,
+                "SpinSpeed": 56.21,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
