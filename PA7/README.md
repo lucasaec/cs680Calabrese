@@ -50,7 +50,7 @@ make
 - s:          Reverse the orbit of the cube
 - d:          Reverse the rotation of the cube itself
 - f:          Pause, Pressing a,s,d,f keys or Clicking left,right,or middle on the mouse unpauses the cube
-- z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons. If you press z, you will affect one of the moons. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
+- z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons and planets and pluto. If you press z, you will affect one of the moons or planet or pluto. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
 - Arrow Up:   Zooms out the planet
 - Arrow down: Zooms in the planet
 
@@ -68,9 +68,9 @@ Slider Menu for zoom in and out
 Configuration file
 
 ## Note
-It may take a while for eberything to load. to 
+It may take a while for everything to load when starting the program.
 
-Disable Clicks on the menu disables the left and right clicks of the mouse.
+Disable Clicks on the menu disables the left and right clicks of the mouse that is used for reversing directions. You can still click on the menu when this is pressed.
 
 The "Scaled View" and "Undo Changes" do not perform any functions or changes.
 
