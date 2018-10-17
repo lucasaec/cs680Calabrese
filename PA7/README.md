@@ -65,8 +65,9 @@ Scaled View Please don't press this.
 - d:          Reverse the rotation of the cube itself
 - f:          Pause, Pressing a,s,d,f keys or Clicking left,right,or middle on the mouse unpauses the cube
 - z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons and planets and pluto. If you press z, you will affect one of the moons or planet or pluto. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
-- Arrow Up:   Zooms out the planet
-- Arrow down: Zooms in the planet
+- Arrow Up:   Zooms out the planet 
+- Arrow down: Zooms in the planet (will move camera past the planet if you zoom too much)
+- Right Arrow stops the zooming.
 
 ### Mouse Input
 - Middle Click:         Reverse rotation of cube and it's orbit
