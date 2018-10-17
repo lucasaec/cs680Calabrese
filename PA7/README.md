@@ -1,4 +1,4 @@
-# PA2: Spinning Cube with Interaction 
+# PA7 : SOLAR SYSTEM
 
 # Dependencies, Building, and Running
 
