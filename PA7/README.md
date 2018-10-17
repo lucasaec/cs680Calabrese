@@ -56,6 +56,7 @@ make
 ./Tutorial
 ```
 
+
 ### Keyboard Input
 - a:          Reverse rotation of cube and it's orbit
 - s:          Reverse the orbit of the cube
@@ -72,7 +73,12 @@ make
 
 
 ### Extra Credit
-Skipped
+Slider Menu for speed
+Slider Menu for zoom in and out
+Configuration file
+
+## Note
+The Output may take few seconds to display on the window.
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
