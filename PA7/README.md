@@ -1,5 +1,10 @@
 # PA7 : SOLAR SYSTEM
 
+## Group Members
+Andrew Flangas
+Christina Symon
+Lucas Calabrese
+
 # Dependencies, Building, and Running
 
 ## Dependency Instructions
