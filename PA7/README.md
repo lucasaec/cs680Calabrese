@@ -48,13 +48,13 @@ make
 ```
 
 ### Menu Input
-The zoom in function allows you to zoom in on a planet.
-the zoom slider lets you zoom out when you are zoomed in on a planet. (it only works when you are click a planet to zoom in on in the menu)
-Affect all does nothing
-Disable clicks is to stop the planets from reversing when you click the menu
-Undo changes does nothing
-Reset view lets you reset to the default view. It undoes any zooming also.
-Scaled View Please don't press this.
+-The zoom in function allows you to zoom in on a planet.
+-the zoom slider lets you zoom out when you are zoomed in on a planet. (it only works when you are click a planet to zoom in on in the menu)
+-Affect all does nothing
+-Disable clicks is to stop the planets from reversing when you click the menu
+-Undo changes does nothing
+-Reset view lets you reset to the default view. It undoes any zooming also.
+-Scaled View Please don't press this.
 
 
 
