@@ -10,7 +10,7 @@
                 "OrbitSpeed" : 0,
             
             
-                "SpinSpeed" : 0.0001,
+                "SpinSpeed" : 0.037,
             
             
                 "SpinDir" : "whatever value you wish the direction to be",
@@ -29,10 +29,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.01137,
+                "OrbitSpeed": 4.15,
             
             
-                "SpinSpeed": 4.1,
+                "SpinSpeed": 0.0169,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -51,10 +51,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed" : 0.00446,
+                "OrbitSpeed" : 1.626,
             
             
-                "SpinSpeed": 1.62,
+                "SpinSpeed": 0.0041,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -73,10 +73,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0027,
+                "OrbitSpeed": 1,
             
             
-                "SpinSpeed": 0.98,
+                "SpinSpeed": 1,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -95,10 +95,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0027,
+                "OrbitSpeed": 1,
             
             
-                "SpinSpeed": 13.3,
+                "SpinSpeed": 0.037,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -117,10 +117,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.00146,
+                "OrbitSpeed": 0.532,
             
             
-                "SpinSpeed": 0.524,
+                "SpinSpeed": 1,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -132,50 +132,6 @@
                 "distance": 141600000
             }
         ,
-        "MarsMoon1": 
-            {
-                "Texture": "mars.jpg",
-
-                "object": "smoothSphere.obj",
-            
-            
-                "OrbitSpeed": 0.532,
-            
-            
-                "SpinSpeed": 1,
-            
-            
-                "SpinDir": "whatever value you wish the direction to be",
-            
-            
-                "Scale": 0.5,
-            
-        
-                "distance": 4
-            }
-        ,
-        "MarsMoon2": 
-            {
-                "Texture": "mars.jpg",
-
-                "object": "smoothSphere.obj",
-            
-            
-                "OrbitSpeed": 0.532,
-            
-            
-                "SpinSpeed": 1,
-            
-            
-                "SpinDir": "whatever value you wish the direction to be",
-            
-            
-                "Scale": 0.5,
-            
-        
-                "distance": 4
-            }
-        ,
         "Jupiter": 
             {
                 "Texture": "jupiter.jpg",
@@ -184,10 +140,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.00023,
+                "OrbitSpeed": 0.0843,
             
             
-                "SpinSpeed": 0.082,
+                "SpinSpeed": 2.38,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -207,28 +163,6 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.000093,
-            
-            
-                "SpinSpeed": 0.034,
-            
-            
-                "SpinDir": "whatever value you wish the direction to be",
-            
-            
-                "Scale": 36184,
-            
-            
-                "distance": 890700000
-            },
-        "Ring": 
-            {
-                "Texture": "ring.jpg",
-
-
-                "object": "ring.obj",
-            
-            
                 "OrbitSpeed": 0.034,
             
             
@@ -241,7 +175,7 @@
                 "Scale": 36184,
             
             
-                "distance": 6
+                "distance": 890700000
             },
         "Uranus": 
             {
@@ -250,10 +184,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0000326,
+                "OrbitSpeed": 0.0119,
             
             
-                "SpinSpeed": 0.01174,
+                "SpinSpeed": 1.41,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -273,10 +207,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0000167,
+                "OrbitSpeed": 0.0061,
             
             
-                "SpinSpeed": 0.006,
+                "SpinSpeed": 1.499,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -296,10 +230,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.000011,
+                "OrbitSpeed": 0.004,
             
             
-                "SpinSpeed": 0.004,
+                "SpinSpeed": 0.156,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
