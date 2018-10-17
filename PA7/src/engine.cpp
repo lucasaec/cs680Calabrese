@@ -160,7 +160,7 @@ ImGui::Begin("Menu");
                  ImGui::NextColumn();
             }
             if(ImGui::Button("Pluto")) {
-                 choice = 9;
+                 choice = 10;
                  ImGui::NextColumn();
             }
 //insert code to select planet

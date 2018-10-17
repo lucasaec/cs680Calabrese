@@ -72,45 +72,142 @@ bool Graphics::Initialize(int width, int height)
    float spin = 0;
    float scale = 0;
    std::string objName = "";
-   
+   std::string texName = "";
+
+  float dsScale = .00001;   
+
   dist = j["Sun"]["distance"];
   orbit = j["Sun"]["OrbitSpeed"];
   spin = j["Sun"]["SpinSpeed"];
   scale = j["Sun"]["Scale"];
   objName = j["Sun"]["object"];
+  texName = j["Sun"]["Texture"];
 
-   m_cube = new Object(dist,orbit,spin,scale,1,1,1,scale*.005,objName);
+   m_cube = new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName );
    list1.push_back(m_cube);
+
+dist = j["Mercury"]["distance"];
+  orbit = j["Mercury"]["OrbitSpeed"];
+  spin = j["Mercury"]["SpinSpeed"];
+  scale = j["Mercury"]["Scale"];
+  objName = j["Mercury"]["object"];
+ texName = j["Mercury"]["Texture"];
+ 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(0)->parent = m_cube;
+   m_cube->children.at(0)->level =1;
+   list1.push_back(m_cube->children.at(0));
+
+dist = j["Venus"]["distance"];
+  orbit = j["Venus"]["OrbitSpeed"];
+  spin = j["Venus"]["SpinSpeed"];
+  scale = j["Venus"]["Scale"];
+  objName = j["Venus"]["object"];
+ texName = j["Venus"]["Texture"];
+ 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(1)->parent = m_cube;
+   m_cube->children.at(1)->level =1;
+   list1.push_back(m_cube->children.at(1));
+
 
   dist = j["Earth"]["distance"];
   orbit = j["Earth"]["OrbitSpeed"];
   spin = j["Earth"]["SpinSpeed"];
   scale = j["Earth"]["Scale"];
   objName = j["Earth"]["object"];
+ texName = j["Earth"]["Texture"];
  
-   m_cube->children.push_back(new Object(dist,orbit,spin,scale,1,1,1,scale*.005,objName) ); 
-   m_cube->children.at(0)->parent = m_cube;
-   m_cube->children.at(0)->level =1;
-   list1.push_back(m_cube->children.at(0));
-
-
-
-  m_cube->children.at(0)->children.push_back(new Object(1,1,1,1,1,1,3,.05*.005, objectName) ); 
-  
-  m_cube->children.at(0)->children.at(0)->parent= m_cube->children.at(0);
-  m_cube->children.at(0)->children.at(0)->level =2;
-  list1.push_back(m_cube->children.at(0)->children.at(0));
-
-
-   m_cube->children.push_back(new Object(10,1.0f,1.0f,1,1,1,3,.2f*.005, objectName) ); 
-   m_cube->children.at(1)->parent = m_cube;
-   m_cube->children.at(1)->level = 1;
-   list1.push_back(m_cube->children.at(1));
-
- m_cube->children.push_back(new Object(15,1.6f,1.0f,1,1,1,3,.2f*.005, objectName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(2)->parent = m_cube;
-   m_cube->children.at(2)->level = 1;
+   m_cube->children.at(2)->level =1;
    list1.push_back(m_cube->children.at(2));
+
+
+  dist = j["Mars"]["distance"];
+  orbit = j["Mars"]["OrbitSpeed"];
+  spin = j["Mars"]["SpinSpeed"];
+  scale = j["Mars"]["Scale"];
+  objName = j["Mars"]["object"];
+ texName = j["Mars"]["Texture"];
+ 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(3)->parent = m_cube;
+   m_cube->children.at(3)->level =1;
+   list1.push_back(m_cube->children.at(3));
+
+
+ dist = j["Jupiter"]["distance"];
+  orbit = j["Jupiter"]["OrbitSpeed"];
+  spin = j["Jupiter"]["SpinSpeed"];
+  scale = j["Jupiter"]["Scale"];
+  objName = j["Jupiter"]["object"];
+ texName = j["Jupiter"]["Texture"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(4)->parent = m_cube;
+   m_cube->children.at(4)->level =1;
+   list1.push_back(m_cube->children.at(4));
+
+dist = j["Saturn"]["distance"];
+  orbit = j["Saturn"]["OrbitSpeed"]; //https://www.deviantart.com/bob3studios/art/Pluto-Texture-Map-Fixed-Blur-762286905
+  spin = j["Saturn"]["SpinSpeed"];
+  scale = j["Saturn"]["Scale"];
+  objName = j["Saturn"]["object"];
+ texName = j["Saturn"]["Texture"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(5)->parent = m_cube;
+   m_cube->children.at(5)->level =1;
+   list1.push_back(m_cube->children.at(5));
+
+dist = j["Uranus"]["distance"];
+  orbit = j["Uranus"]["OrbitSpeed"];
+  spin = j["Uranus"]["SpinSpeed"];
+  scale = j["Uranus"]["Scale"];
+  objName = j["Uranus"]["object"];
+ texName = j["Uranus"]["Texture"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(6)->parent = m_cube;
+   m_cube->children.at(6)->level =1;
+   list1.push_back(m_cube->children.at(6));
+
+dist = j["Neptune"]["distance"];
+  orbit = j["Neptune"]["OrbitSpeed"];
+  spin = j["Neptune"]["SpinSpeed"];
+  scale = j["Neptune"]["Scale"];
+  objName = j["Neptune"]["object"];
+ texName = j["Neptune"]["Texture"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(7)->parent = m_cube;
+   m_cube->children.at(7)->level =1;
+   list1.push_back(m_cube->children.at(7));
+  
+dist = j["Pluto"]["distance"];
+  orbit = j["Pluto"]["OrbitSpeed"];
+  spin = j["Pluto"]["SpinSpeed"];
+  scale = j["Pluto"]["Scale"];
+  objName = j["Pluto"]["object"];
+ texName = j["Pluto"]["Texture"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.at(8)->parent = m_cube;
+   m_cube->children.at(8)->level =1;
+   list1.push_back(m_cube->children.at(8));
+
+ scale = j["Saturn"]["Scale"];
+ texName = "ring.jpg";
+ objName = "ring.obj";
+   
+   
+   list1.push_back( new Object(0,0,0,1,1,1,1,scale*.001,objName, texName) );
+
+   //list1.at(9)->parent = list1.at(5);
+    std::cout << list1.at(9)->objName << '\n';
+
+
    i.close();
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -166,6 +263,9 @@ bool Graphics::Initialize(int width, int height)
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
+
+ // glEnable(GL_CULL_FACE);
+  //glCullFace(GL_BACK);
 
   return true;
 }
@@ -234,9 +334,12 @@ glm::mat4 c = list1.at(indix)->model2;
 glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
  
 
- m_camera->view = glm::lookAt( glm::vec3(d[0], 0, d[2]-10*(list1.at(indix)->sc)), //Eye Position
-                      glm::vec3(d.x, 3*(list1.at(indix)->sc), d.z), //Focus point
+ m_camera->view = glm::lookAt( glm::vec3(d.x + 3*list1.at(indix)->sc, d.y, d.z), //Eye Position
+                      glm::vec3(d.x, d.y, d.z), //Focus point
                       glm::vec3(0.0, 1, 0));
+
+//focus point should be position of planet
+// eye position should be focus point + some direction + zoom
 
 } else {
      Recenter();

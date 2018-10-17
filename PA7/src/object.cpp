@@ -87,7 +87,9 @@ aiMesh *mesh = scene->mMeshes[0];
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 }
  
-Object::Object(float distance1, float speed1, float speed21,  signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1, std::string objName)
+
+
+Object::Object(float distance1, float speed1, float speed21,  signed int direction1, signed int direction21, unsigned int pause1, float double21,  float scale1, std::string objName, std::string textName)
 {  
   level = 0;
  
@@ -100,7 +102,7 @@ float x,y,z;
 aiMesh *mesh = scene->mMeshes[0];
    
  
-image = new Magick::Image("../objects/earth.jpg");
+image = new Magick::Image("../objects/" + textName);
 image->write(&m_blob, "RGBA");
 
 glGenTextures(1, &texture);
@@ -176,25 +178,27 @@ float angle2;
 
 void Object::Update(unsigned int dt)
 {
-float divideBy = distance;
+float divideBy = 1;
 if( divideBy == 0) {
     divideBy = 1;
 }
 
-   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange /divideBy; //speed is orbit speed
+   angle +=  dt * M_PI/1000* direction * pause * speed * speedChange; //speed is orbit speed
    if(direction != direction2) {
        angle2 +=  dt * M_PI/1000* direction2 * pause * speed * speedChange * 2 /divideBy;
    }
    angle2 +=  dt * M_PI/1000* direction2 * pause * speed2 * speedChange; //speed2 is spin speed
-
+   float lower = 0;
    if(parent == NULL) {
        model =  glm::mat4(1.0f);
+       
    }
    else {
+      // lower = 2.0f;
        model = glm::mat4(1.0f) * parent->model2;
    }
 
-   model = glm::translate(model, glm::vec3(distance*sin(angle), 0.0, distance*cos(angle)));
+   model = glm::translate(model, glm::vec3(distance*sin(angle), lower, distance*cos(angle)));
    model2 = glm::mat4(1.0f) * model;
    model = glm::rotate(model,  (angle), glm::vec3(0.0, 1.0, 0.0));
    model = glm::rotate(model,  (angle2), glm::vec3(0.0, 1.0, 0.0));
