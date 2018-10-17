@@ -74,7 +74,9 @@ make
 
 ### Extra Credit
 Slider Menu for speed
+
 Slider Menu for zoom in and out
+
 Configuration file
 
 ## Note
