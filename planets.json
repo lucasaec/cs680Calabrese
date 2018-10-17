@@ -16,7 +16,7 @@
                 "SpinDir" : "whatever value you wish the direction to be",
             
             
-                "Scale": 109,
+                "Scale": 432169,
             
             
                 "distance": 0
@@ -38,10 +38,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 0.4,
+                "Scale": 1516,
             
             
-                "distance": 1
+                "distance": 35980000
             }
         ,
         "Venus": 
@@ -60,10 +60,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 0.9,
+                "Scale": 3760,
             
             
-                "distance": 2
+                "distance": 67240000
             }
         ,
         "Earth": 
@@ -82,10 +82,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 1,
+                "Scale": 3959,
             
             
-                "distance": 3
+                "distance": 92960000
             }
         ,
         "Moon": 
@@ -104,13 +104,57 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
         
-                "Scale": 0.27,
+                "Scale": 1079,
             
             
-                "distance": 3
+                "distance": 92960000
             }
         ,
         "Mars": 
+            {
+                "Texture": "mars.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.532,
+            
+            
+                "SpinSpeed": 1,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 2106,
+            
+        
+                "distance": 141600000
+            }
+        ,
+        "MarsMoon1": 
+            {
+                "Texture": "mars.jpg",
+
+                "object": "smoothSphere.obj",
+            
+            
+                "OrbitSpeed": 0.532,
+            
+            
+                "SpinSpeed": 1,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 0.5,
+            
+        
+                "distance": 4
+            }
+        ,
+        "MarsMoon2": 
             {
                 "Texture": "mars.jpg",
 
@@ -149,10 +193,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 11.2,
+                "Scale": 43441,
             
             
-                "distance": 5
+                "distance": 483800000
             }
         ,
         "Saturn": 
@@ -172,7 +216,29 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 9.4,
+                "Scale": 36184,
+            
+            
+                "distance": 890700000
+            },
+        "Ring": 
+            {
+                "Texture": "ring.jpg",
+
+
+                "object": "ring.obj",
+            
+            
+                "OrbitSpeed": 0.034,
+            
+            
+                "SpinSpeed": 2.252,
+            
+            
+                "SpinDir": "whatever value you wish the direction to be",
+            
+            
+                "Scale": 36184,
             
             
                 "distance": 6
@@ -193,10 +259,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 4,
+                "Scale": 15759,
             
             
-                "distance": 7
+                "distance": 1784000000
             },
 
         "Neptune": 
@@ -216,10 +282,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 3.9,
+                "Scale": 15299,
             
             
-                "distance": 8
+                "distance": 2793000000
             },
 
         "Pluto": 
@@ -239,10 +305,10 @@
                 "SpinDir": "whatever value you wish the direction to be",
             
             
-                "Scale": 0.18,
+                "Scale": 738.4,
             
             
-                "distance": 9
+                "distance": 36700000
             }
 
 }
