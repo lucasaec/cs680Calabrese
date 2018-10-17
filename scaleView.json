@@ -41,7 +41,7 @@
                 "Scale": 10,
             
             
-                "distance": 35.980000
+                "distance": 10
             }
         ,
         "Venus": 
@@ -63,7 +63,7 @@
                 "Scale": 12,
             
             
-                "distance": 67.240000
+                "distance": 12
             }
         ,
         "Earth": 
@@ -85,7 +85,7 @@
                 "Scale": 14,
             
             
-                "distance": 92.960000
+                "distance": 14
             }
         ,
         "Moon": 
@@ -107,7 +107,7 @@
                 "Scale": 8,
             
             
-                "distance": 2.38900
+                "distance": 0.5
             }
         ,
         "Mars": 
@@ -129,7 +129,7 @@
                 "Scale": 11,
             
         
-                "distance": 141.600000
+                "distance": 16
             }
         ,
         "Phobos": 
@@ -151,7 +151,7 @@
                 "Scale": 5,
             
         
-                "distance": 5.826
+                "distance": 0.5
             }
         ,
         "Deimos": 
@@ -196,7 +196,7 @@
                 "Scale": 17,
             
             
-                "distance": 483.800000
+                "distance": 18
             }
         ,
         "Europa": 
@@ -219,7 +219,7 @@
                 "Scale": 8,
             
             
-                "distance": 4.14000
+                "distance": 0.5
             }
         ,
         "Saturn": 
@@ -242,7 +242,7 @@
                 "Scale": 16,
             
             
-                "distance": 890.700000
+                "distance": 20
             },
         "Ring": 
             {
@@ -286,7 +286,7 @@
                 "Scale": 9.5,
             
             
-                "distance": 7.59220
+                "distance": 0.5
             },
         "Uranus": 
             {
@@ -307,7 +307,7 @@
                 "Scale": 15,
             
             
-                "distance": 1784.000000
+                "distance": 22
             },
       	"Ariel": 
             {
@@ -328,7 +328,7 @@
                 "Scale": 5,
             
             
-                "distance": 1.90000
+                "distance": 0.5
             },
 
         "Neptune": 
@@ -351,7 +351,7 @@
                 "Scale": 14.8,
             
             
-                "distance": 2793.000000
+                "distance": 24
             },
 		"Triton": 
             {
@@ -373,7 +373,7 @@
                 "Scale": 7,
             
             
-                "distance": 2.20438
+                "distance": 0.5
             },
 
         "Pluto": 
@@ -396,7 +396,7 @@
                 "Scale": 4,
             
             
-                "distance": 3670.0000
+                "distance": 26
             },
       	"Charon": 
             {
@@ -418,7 +418,7 @@
                 "Scale": 2,
             
             
-                "distance": 1.2200
+                "distance": 28
             }
 
 }
