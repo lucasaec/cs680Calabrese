@@ -82,6 +82,10 @@ Configuration file
 ## Note
 The Output may take few seconds to display on the window.
 
+Disable Clicks on the menu disables the left and right clicks of the mouse.
+
+The "Scaled View" and "Reset" doesnot perform any functions or changes.
+
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
 ```bash
