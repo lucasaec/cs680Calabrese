@@ -45,18 +45,6 @@ make
 ./Tutorial
 ```
 
-### Makefile Instructions 
-The makefile works as expected and must be updated with new files added in.
-
-```bash
-mkdir build
-cd build
-cp ../makefile .
-make
-./Tutorial
-```
-
-
 ### Keyboard Input
 - a:          Reverse rotation of cube and it's orbit
 - s:          Reverse the orbit of the cube
