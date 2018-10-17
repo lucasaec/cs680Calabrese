@@ -107,7 +107,7 @@
                 "Scale": 1079,
             
             
-                "distance": 92960000
+                "distance": 238900
             }
         ,
         "Mars": 
@@ -151,7 +151,7 @@
                 "Scale": 7,
             
         
-                "distance": 141600000
+                "distance": 5826
             }
         ,
         "Deimos": 
@@ -219,7 +219,7 @@
                 "Scale": 969.8,
             
             
-                "distance": 483800000
+                "distance": 414000
             }
         ,
         "Saturn": 
@@ -286,7 +286,7 @@
                 "Scale": 1600,
             
             
-                "distance": 890700000
+                "distance": 759220
             },
         "Uranus": 
             {
@@ -328,7 +328,7 @@
                 "Scale": 360,
             
             
-                "distance": 1784000000
+                "distance": 190000
             },
 
         "Neptune": 
@@ -373,7 +373,7 @@
                 "Scale": 841,
             
             
-                "distance": 2793000000
+                "distance": 220438
             },
 
         "Pluto": 
@@ -418,7 +418,7 @@
                 "Scale": 376.55,
             
             
-                "distance": 36700000
+                "distance": 12200
             }
 
 }
