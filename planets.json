@@ -73,7 +73,7 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 365,
+                "OrbitSpeed": 1,
             
             
                 "SpinSpeed": 361,
