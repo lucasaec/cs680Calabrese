@@ -68,11 +68,11 @@ Slider Menu for zoom in and out
 Configuration file
 
 ## Note
-The Output may take few seconds to display on the window.
+It may take a while for eberything to load. to 
 
 Disable Clicks on the menu disables the left and right clicks of the mouse.
 
-The "Scaled View" and "Reset" doesnot perform any functions or changes.
+The "Scaled View" and "Undo Changes" do not perform any functions or changes.
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
