@@ -10,7 +10,7 @@
                 "OrbitSpeed" : 0,
             
             
-                "SpinSpeed" : 0.037,
+                "SpinSpeed" : 0.0000000001,
             
             
                 "SpinDir" : "whatever value you wish the direction to be",
@@ -29,10 +29,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 4.15,
+                "OrbitSpeed": 0.01137,
             
             
-                "SpinSpeed": 0.0169,
+                "SpinSpeed": 4.1,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -51,10 +51,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed" : 1.626,
+                "OrbitSpeed" : 0.00446,
             
             
-                "SpinSpeed": 0.0041,
+                "SpinSpeed": 1.62,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -73,10 +73,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 1,
+                "OrbitSpeed": 0.0027,
             
             
-                "SpinSpeed": 1,
+                "SpinSpeed": 0.98,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -95,10 +95,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 1,
+                "OrbitSpeed": 0.0027,
             
             
-                "SpinSpeed": 0.037,
+                "SpinSpeed": 13.3,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -117,10 +117,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.532,
+                "OrbitSpeed": 0.00146,
             
             
-                "SpinSpeed": 1,
+                "SpinSpeed": 0.524,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -184,10 +184,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0843,
+                "OrbitSpeed": 0.00023,
             
             
-                "SpinSpeed": 2.38,
+                "SpinSpeed": 0.082,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -207,10 +207,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.034,
+                "OrbitSpeed": 0.000093,
             
             
-                "SpinSpeed": 2.252,
+                "SpinSpeed": 0.034,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -250,10 +250,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0119,
+                "OrbitSpeed": 0.0000326,
             
             
-                "SpinSpeed": 1.41,
+                "SpinSpeed": 0.01174,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -273,10 +273,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.0061,
+                "OrbitSpeed": 0.0000167,
             
             
-                "SpinSpeed": 1.499,
+                "SpinSpeed": 0.006,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
@@ -296,10 +296,10 @@
                 "object": "smoothSphere.obj",
             
             
-                "OrbitSpeed": 0.004,
+                "OrbitSpeed": 0.000011,
             
             
-                "SpinSpeed": 0.156,
+                "SpinSpeed": 0.004,
             
             
                 "SpinDir": "whatever value you wish the direction to be",
