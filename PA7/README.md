@@ -2,7 +2,9 @@
 
 ## Group Members
 Andrew Flangas
+
 Christina Symon
+
 Lucas Calabrese
 
 # Dependencies, Building, and Running
