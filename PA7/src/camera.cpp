@@ -18,7 +18,7 @@ bool Camera::Initialize(int w, int h)
   //  for this project having them static will be fine
 
 
-  view = glm::lookAt( glm::vec3(0.0, 8.0, -16.0), //Eye Position
+  view = glm::lookAt( glm::vec3(0.0 + 10, 8.0, -16.0), //Eye Position
                       glm::vec3(0.0, 0.0, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
 

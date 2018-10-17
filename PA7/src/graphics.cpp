@@ -2,7 +2,10 @@
 #include <vector>
 #include <json.hpp>
 #include <fstream>
+#include <math.h> 
 using namespace nlohmann;
+float speed=2.0;
+float rotated=0.0;
 Graphics::Graphics()
 {
     index = -1;
@@ -13,7 +16,8 @@ Graphics::~Graphics()
 
 }
 std::vector<Object*> list1;
-
+std::vector<Object*> oGlist;
+std::vector<Object*> scaledList;
 /**
  * Allows you to update the index of the planet you are currently on
  *
@@ -31,8 +35,8 @@ bool Graphics::Initialize(int width, int height)
     json j;
     std::ifstream i("../objects/planets.json");
     i >> j;
-    float awesome = j["Sun"]["SpinSpeed"];
-    std::cout << sizeof(j);
+   
+   
   
 
     glewExperimental = GL_TRUE;
@@ -66,15 +70,18 @@ bool Graphics::Initialize(int width, int height)
 *
 *
 */
+  scaledView = false;
    std::string objectName = "smoothSphere.obj";
    float dist = 0;
    float orbit = 0;
    float spin = 0;
    float scale = 0;
+   float year = 365;
+   int spinDir = 1;
    std::string objName = "";
    std::string texName = "";
 
-  float dsScale = .00001;   
+  float dsScale =  .00001;    
 
   dist = j["Sun"]["distance"];
   orbit = j["Sun"]["OrbitSpeed"];
@@ -82,9 +89,12 @@ bool Graphics::Initialize(int width, int height)
   scale = j["Sun"]["Scale"];
   objName = j["Sun"]["object"];
   texName = j["Sun"]["Texture"];
-
-   m_cube = new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName );
+//  spinDir = j["Sun"]["SpinDir"];
+   m_cube = new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName );
    list1.push_back(m_cube);
+   
+   scaledList.push_back(new Object(0,1,1,1,1,1,1,1,objName, texName ) );
+
 
 dist = j["Mercury"]["distance"];
   orbit = j["Mercury"]["OrbitSpeed"];
@@ -92,11 +102,14 @@ dist = j["Mercury"]["distance"];
   scale = j["Mercury"]["Scale"];
   objName = j["Mercury"]["object"];
  texName = j["Mercury"]["Texture"];
- 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+  // spinDir = j["Mecury"]["SpinDir"];
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(0)->parent = m_cube;
    m_cube->children.at(0)->level =1;
    list1.push_back(m_cube->children.at(0));
+   scaledList.push_back(new Object(2,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(1)->parent = scaledList.at(0);
 
 dist = j["Venus"]["distance"];
   orbit = j["Venus"]["OrbitSpeed"];
@@ -104,12 +117,14 @@ dist = j["Venus"]["distance"];
   scale = j["Venus"]["Scale"];
   objName = j["Venus"]["object"];
  texName = j["Venus"]["Texture"];
+ //spinDir = j["Venus"]["SpinDir"];
  
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(1)->parent = m_cube;
    m_cube->children.at(1)->level =1;
    list1.push_back(m_cube->children.at(1));
-
+   scaledList.push_back(new Object(4,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(2)->parent = scaledList.at(0);
 
   dist = j["Earth"]["distance"];
   orbit = j["Earth"]["OrbitSpeed"];
@@ -117,12 +132,14 @@ dist = j["Venus"]["distance"];
   scale = j["Earth"]["Scale"];
   objName = j["Earth"]["object"];
  texName = j["Earth"]["Texture"];
+//spinDir = j["Earth"]["SpinDir"];
  
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(2)->parent = m_cube;
    m_cube->children.at(2)->level =1;
    list1.push_back(m_cube->children.at(2));
-
+   scaledList.push_back(new Object(6,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(3)->parent = scaledList.at(0);
 
   dist = j["Mars"]["distance"];
   orbit = j["Mars"]["OrbitSpeed"];
@@ -130,11 +147,14 @@ dist = j["Venus"]["distance"];
   scale = j["Mars"]["Scale"];
   objName = j["Mars"]["object"];
  texName = j["Mars"]["Texture"];
+//spinDir = j["Mars"]["SpinDir"];
  
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(3)->parent = m_cube;
    m_cube->children.at(3)->level =1;
    list1.push_back(m_cube->children.at(3));
+ scaledList.push_back(new Object(8,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(4)->parent = scaledList.at(0);
 
 
  dist = j["Jupiter"]["distance"];
@@ -143,23 +163,30 @@ dist = j["Venus"]["distance"];
   scale = j["Jupiter"]["Scale"];
   objName = j["Jupiter"]["object"];
  texName = j["Jupiter"]["Texture"];
+//spinDir = j["Jupiter"]["SpinDir"];
 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(4)->parent = m_cube;
    m_cube->children.at(4)->level =1;
    list1.push_back(m_cube->children.at(4));
+ scaledList.push_back(new Object(10,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(5)->parent = scaledList.at(0);
 
 dist = j["Saturn"]["distance"];
-  orbit = j["Saturn"]["OrbitSpeed"]; //https://www.deviantart.com/bob3studios/art/Pluto-Texture-Map-Fixed-Blur-762286905
+  orbit = j["Saturn"]["OrbitSpeed"];
   spin = j["Saturn"]["SpinSpeed"];
   scale = j["Saturn"]["Scale"];
   objName = j["Saturn"]["object"];
  texName = j["Saturn"]["Texture"];
+//spinDir = j["Saturn"]["SpinDir"];
 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(5)->parent = m_cube;
    m_cube->children.at(5)->level =1;
    list1.push_back(m_cube->children.at(5));
+    scaledList.push_back(new Object(12,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(6)->parent = scaledList.at(0);
 
 dist = j["Uranus"]["distance"];
   orbit = j["Uranus"]["OrbitSpeed"];
@@ -167,11 +194,14 @@ dist = j["Uranus"]["distance"];
   scale = j["Uranus"]["Scale"];
   objName = j["Uranus"]["object"];
  texName = j["Uranus"]["Texture"];
+//spinDir = j["Uranus"]["SpinDir"];
 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(6)->parent = m_cube;
    m_cube->children.at(6)->level =1;
    list1.push_back(m_cube->children.at(6));
+   scaledList.push_back(new Object(14,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(7)->parent = scaledList.at(0);
 
 dist = j["Neptune"]["distance"];
   orbit = j["Neptune"]["OrbitSpeed"];
@@ -179,11 +209,14 @@ dist = j["Neptune"]["distance"];
   scale = j["Neptune"]["Scale"];
   objName = j["Neptune"]["object"];
  texName = j["Neptune"]["Texture"];
+//spinDir = j["Neptune"]["SpinDir"];
 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(7)->parent = m_cube;
    m_cube->children.at(7)->level =1;
    list1.push_back(m_cube->children.at(7));
+   scaledList.push_back(new Object(16,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(8)->parent = scaledList.at(0);
   
 dist = j["Pluto"]["distance"];
   orbit = j["Pluto"]["OrbitSpeed"];
@@ -191,21 +224,99 @@ dist = j["Pluto"]["distance"];
   scale = j["Pluto"]["Scale"];
   objName = j["Pluto"]["object"];
  texName = j["Pluto"]["Texture"];
+//spinDir = j["Pluto"]["SpinDir"];
 
-   m_cube->children.push_back(new Object(dist*dsScale,orbit,spin,1,1,1,1,scale*dsScale,objName, texName) ); 
+   m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(8)->parent = m_cube;
    m_cube->children.at(8)->level =1;
    list1.push_back(m_cube->children.at(8));
+   scaledList.push_back(new Object(18,1,1,1,1,1,1,1,objName, texName ) );
+   scaledList.at(9)->parent = scaledList.at(0);
 
  scale = j["Saturn"]["Scale"];
- texName = "ring.jpg";
- objName = "ring.obj";
+objName = j["Ring"]["object"];
+ texName = j["Ring"]["Texture"];
+ spin = j["Ring"]["SpinSpeed"];
+//spinDir = j["Ring"]["SpinDir"];
    
-   
-   list1.push_back( new Object(0,0,0,1,1,1,1,scale*.001,objName, texName) );
+   list1.push_back( new Object(0,0,spin/year,1,spinDir,1,1,scale*dsScale*.7,objName, texName) );
+list1.at(10)->parent = list1.at(6);
 
-   //list1.at(9)->parent = list1.at(5);
-    std::cout << list1.at(9)->objName << '\n';
+dist = j["Moon"]["distance"];
+  orbit = j["Moon"]["OrbitSpeed"];
+  spin = j["Moon"]["SpinSpeed"];
+  scale = j["Moon"]["Scale"];
+  objName = j["Moon"]["object"];
+ texName = j["Moon"]["Texture"];
+//spinDir = j["Moon"]["SpinDir"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName));
+    list1.at(11)->parent = list1.at(3);
+
+dist = j["Phobos"]["distance"];
+  orbit = j["Phobos"]["OrbitSpeed"];
+  spin = j["Phobos"]["SpinSpeed"];
+  scale = j["Phobos"]["Scale"];
+  objName = j["Phobos"]["object"];
+ texName = j["Phobos"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*100,objName, texName));
+    list1.at(12)->parent = list1.at(4);
+
+dist = j["Europa"]["distance"];
+  orbit = j["Europa"]["OrbitSpeed"];
+  spin = j["Europa"]["SpinSpeed"];
+  scale = j["Europa"]["Scale"];
+  objName = j["Europa"]["object"];
+ texName = j["Europa"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+    list1.at(13)->parent = list1.at(5);
+
+dist = j["Titan"]["distance"];
+  orbit = j["Titan"]["OrbitSpeed"];
+  spin = j["Titan"]["SpinSpeed"];
+  scale = j["Titan"]["Scale"];
+  objName = j["Titan"]["object"];
+ texName = j["Titan"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+    list1.at(14)->parent = list1.at(6);
+
+
+
+dist = j["Ariel"]["distance"];
+  orbit = j["Ariel"]["OrbitSpeed"];
+  spin = j["Ariel"]["SpinSpeed"];
+  scale = j["Ariel"]["Scale"];
+  objName = j["Ariel"]["object"];
+ texName = j["Ariel"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+    list1.at(15)->parent = list1.at(7);
+
+dist = j["Triton"]["distance"];
+  orbit = j["Triton"]["OrbitSpeed"];
+  spin = j["Triton"]["SpinSpeed"];
+  scale = j["Triton"]["Scale"];
+  objName = j["Triton"]["object"];
+ texName = j["Triton"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+    list1.at(16)->parent = list1.at(8);
+
+
+
+dist = j["Charon"]["distance"];
+  orbit = j["Charon"]["OrbitSpeed"];
+  spin = j["Charon"]["SpinSpeed"];
+  scale = j["Charon"]["Scale"];
+  objName = j["Charon"]["object"];
+ texName = j["Charon"]["Texture"];
+
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+    list1.at(17)->parent = list1.at(9);
+
 
 
    i.close();
@@ -264,8 +375,8 @@ dist = j["Pluto"]["distance"];
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
 
- // glEnable(GL_CULL_FACE);
-  //glCullFace(GL_BACK);
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
 
   return true;
 }
@@ -276,16 +387,24 @@ dist = j["Pluto"]["distance"];
  */
 void Graphics::Update(unsigned int dt)
 {
- 
+ if(!scaledView) {
   for(unsigned int x = 0; x < list1.size(); x++) {
       list1.at(x)->Update(dt);
   }
+}
+else {
+ for(unsigned int x = 0; x < scaledList.size(); x++) {
+     scaledList.at(x)->Update(dt);
+  }
+}
 }
 void Graphics::Recenter() {
      m_camera->view = glm::lookAt( glm::vec3(0.0, 8.0, -16.0), //Eye Position
                       glm::vec3(0.0, 0.0, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
     lookAtIndex= -1;
+      speed=0.0;
+      rotated=0.0;
 }
 /**
 * Call this to reverse stuff
@@ -309,32 +428,64 @@ void Graphics::IterativeReverse(int mode) {
        list1.at(x)->Reverse(mode);         
    }
 }
+void Graphics::camerachange(int p){
+p1=p;
+}
 
 /**
  * Call this to render all objects in the list.
  */
 void Graphics::IterativeRender(Object* obj) {
+if(!scaledView) {
       for(unsigned int x = 0; x < list1.size(); x++) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
           list1.at(x)->Render();   
       }
 }
+else {
+       for(unsigned int x = 0; x < scaledList.size(); x++) {
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(scaledList.at(x)->GetModel()));
+          scaledList.at(x)->Render();   
+      }
+}
+
+}
 
 /**
  * Renders stuff
  */
+
 void Graphics::Render()
 {
 int indix = 2;
+if(p1==1)
+{
+speed+=0.009;
+
+//std::cout<<speed<<"\n";
+}
+else if(p1==2)
+{
+speed-=0.009;
+
+}
+else if (p1==3)
+{
+//rotated+=0.1;
+}
+else if(p1 == 4)
+{
+//rotated-=0.1;
+}
 if(lookAtIndex  > -1) {
     indix = lookAtIndex;
 
 glm::mat4 c = list1.at(indix)->model2;
+float angle7 = rotated*M_PI;
 
 glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
- 
 
- m_camera->view = glm::lookAt( glm::vec3(d.x + 3*list1.at(indix)->sc, d.y, d.z), //Eye Position
+ m_camera->view = glm::lookAt( glm::vec3(d.x + 3*list1.at(indix)->sc + speed, d.y, d.z), //Eye Position
                       glm::vec3(d.x, d.y, d.z), //Focus point
                       glm::vec3(0.0, 1, 0));
 

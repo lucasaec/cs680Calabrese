@@ -22,7 +22,9 @@ class Graphics
     int index;
     void UpdateIndex();
     void Recenter();
-
+    bool scaledView;
+    void camerachange(int);
+    int p1;
   private:
     std::string ErrorString(GLenum error);
 

@@ -7,6 +7,8 @@
    int lookAtIndex = -1; 
 extern std::vector<Object*> list1;
 float speedChange=1;
+extern float speed; 
+
 Engine::Engine(string name, int width, int height)
 {
   m_WINDOW_NAME = name;
@@ -114,7 +116,7 @@ ImGui::Begin("Menu");
                 static bool affectAll=false;
                 
                 ImGui::SliderFloat("Speed", &speedChange,0 , 20);
-              
+                 ImGui::SliderFloat("Zoom", &speed,0 , 5);
             
                 ImGui::Checkbox("Affect All", &affectAll);
                 ImGui::Checkbox("Disable Clicks", &disableClick);
@@ -137,30 +139,59 @@ ImGui::Begin("Menu");
             }
             if(ImGui::Button("Earth")) {
                  choice = 3;
+
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Moon")) {
+                 choice = 11;
                  ImGui::NextColumn();
             }
             if(ImGui::Button("Mars")) {
                  choice = 4;
                  ImGui::NextColumn();
             }
+            if(ImGui::Button("Phobos")) {
+                 choice = 12;
+                 ImGui::NextColumn();
+            }
             if(ImGui::Button("Jupiter")) {
                  choice = 5;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Europa")) {
+                 choice = 13;
                  ImGui::NextColumn();
             }
             if(ImGui::Button("Saturn")) {
                  choice = 6;
                  ImGui::NextColumn();
             }
+            if(ImGui::Button("Titan")) {
+                 choice = 14;
+                 ImGui::NextColumn();
+            }
             if(ImGui::Button("Uranus")) {
                  choice = 7;
+                 ImGui::NextColumn();
+            }
+            if(ImGui::Button("Ariel")) {
+                 choice = 15;
                  ImGui::NextColumn();
             }
             if(ImGui::Button("Neptune")) {
                  choice = 8;
                  ImGui::NextColumn();
             }
+            if(ImGui::Button("Tritan")) {
+                 choice = 16;
+                 ImGui::NextColumn();
+            }
             if(ImGui::Button("Pluto")) {
-                 choice = 10;
+                 choice = 9;
+                 ImGui::NextColumn();
+            }
+	    if(ImGui::Button("Charon")) {
+                 choice = 17;
                  ImGui::NextColumn();
             }
 //insert code to select planet
@@ -180,6 +211,9 @@ ImGui::Begin("Menu");
 	       typeReverse = 3; 
 	      
 	  }
+          else if(ImGui::Button("Scaled View")) {
+              m_graphics->scaledView = !m_graphics->scaledView;
+          }
        if(ImGui::Button("Undo Changes")) {
                  //Add code to revert back to normal settings
                  ImGui::NextColumn();
@@ -189,6 +223,7 @@ ImGui::Begin("Menu");
                  m_graphics->Recenter();
                  ImGui::NextColumn();
        }
+
       
 }
 ImGui::End();
@@ -251,6 +286,24 @@ void Engine::Keyboard()
     else if(m_event.key.keysym.sym == SDLK_ESCAPE) {
        m_running = false;
     }
+   if( m_event.key.keysym.sym == SDLK_UP)
+   { 
+        m_graphics -> camerachange(1);
+   }
+   else if( m_event.key.keysym.sym == SDLK_DOWN)
+   { 
+       m_graphics -> camerachange(2);
+   } 
+   else if( m_event.key.keysym.sym == SDLK_LEFT)
+   {
+       m_graphics -> camerachange(3);
+   } 
+   else if( m_event.key.keysym.sym == SDLK_RIGHT)
+  { 
+      m_graphics -> camerachange(4);
+  } 
+  
+
   }
   else if(m_event.type == SDL_MOUSEBUTTONDOWN && !disableClick)
   {   
