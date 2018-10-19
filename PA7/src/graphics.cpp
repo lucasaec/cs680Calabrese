@@ -36,8 +36,11 @@ bool Graphics::Initialize(int width, int height)
     std::ifstream i("../objects/planets.json");
     i >> j;
    
+    json j2;
+    std::ifstream i2("../objects/scaleView.json");
+    i2 >> j2;
    
-  
+    
 
     glewExperimental = GL_TRUE;
     auto status = glewInit();
@@ -93,7 +96,13 @@ bool Graphics::Initialize(int width, int height)
    m_cube = new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName );
    list1.push_back(m_cube);
    
-   scaledList.push_back(new Object(0,1,1,1,1,1,1,1,objName, texName ) );
+   dist = j2["Sun"]["distance"];
+  orbit = j2["Sun"]["OrbitSpeed"];
+  spin = j2["Sun"]["SpinSpeed"];
+  scale = j2["Sun"]["Scale"];
+  objName = j2["Sun"]["object"];
+  texName = j2["Sun"]["Texture"];
+   scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
 
 
 dist = j["Mercury"]["distance"];
@@ -104,11 +113,22 @@ dist = j["Mercury"]["distance"];
  texName = j["Mercury"]["Texture"];
   // spinDir = j["Mecury"]["SpinDir"];
 
+  
+
    m_cube->children.push_back(new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale,objName, texName) ); 
    m_cube->children.at(0)->parent = m_cube;
    m_cube->children.at(0)->level =1;
    list1.push_back(m_cube->children.at(0));
-   scaledList.push_back(new Object(2,1,1,1,1,1,1,1,objName, texName ) );
+  
+   
+
+ dist = j2["Mercury"]["distance"];
+  orbit = j2["Mercury"]["OrbitSpeed"];
+  spin = j2["Mercury"]["SpinSpeed"];
+  scale = j2["Mercury"]["Scale"];
+  objName = j2["Mercury"]["object"];
+ texName = j2["Mercury"]["Texture"];
+   scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
    scaledList.at(1)->parent = scaledList.at(0);
 
 dist = j["Venus"]["distance"];
@@ -123,8 +143,18 @@ dist = j["Venus"]["distance"];
    m_cube->children.at(1)->parent = m_cube;
    m_cube->children.at(1)->level =1;
    list1.push_back(m_cube->children.at(1));
-   scaledList.push_back(new Object(4,1,1,1,1,1,1,1,objName, texName ) );
-   scaledList.at(2)->parent = scaledList.at(0);
+ 
+
+dist = j2["Venus"]["distance"];
+  orbit = j2["Venus"]["OrbitSpeed"];
+  spin = j2["Venus"]["SpinSpeed"];
+  scale = j2["Venus"]["Scale"];
+  objName = j2["Venus"]["object"];
+ texName = j2["Venus"]["Texture"];
+ //spinDir = j["Venus"]["SpinDir"];
+ scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
+ scaledList.at(2)->parent = scaledList.at(0);
+
 
   dist = j["Earth"]["distance"];
   orbit = j["Earth"]["OrbitSpeed"];
@@ -138,8 +168,17 @@ dist = j["Venus"]["distance"];
    m_cube->children.at(2)->parent = m_cube;
    m_cube->children.at(2)->level =1;
    list1.push_back(m_cube->children.at(2));
-   scaledList.push_back(new Object(6,1,1,1,1,1,1,1,objName, texName ) );
+   
+
+dist = j2["Earth"]["distance"];
+  orbit = j2["Earth"]["OrbitSpeed"];
+  spin = j2["Earth"]["SpinSpeed"];
+  scale = j2["Earth"]["Scale"];
+  objName = j2["Earth"]["object"];
+ texName = j2["Earth"]["Texture"];
+scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
    scaledList.at(3)->parent = scaledList.at(0);
+
 
   dist = j["Mars"]["distance"];
   orbit = j["Mars"]["OrbitSpeed"];
@@ -153,9 +192,17 @@ dist = j["Venus"]["distance"];
    m_cube->children.at(3)->parent = m_cube;
    m_cube->children.at(3)->level =1;
    list1.push_back(m_cube->children.at(3));
- scaledList.push_back(new Object(8,1,1,1,1,1,1,1,objName, texName ) );
-   scaledList.at(4)->parent = scaledList.at(0);
 
+
+  dist = j2["Mars"]["distance"];
+  orbit = j2["Mars"]["OrbitSpeed"];
+  spin = j2["Mars"]["SpinSpeed"];
+  scale = j2["Mars"]["Scale"];
+  objName = j2["Mars"]["object"];
+ texName = j2["Mars"]["Texture"];
+//spinDir = j["Mars"]["SpinDir"];
+scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
+   scaledList.at(4)->parent = scaledList.at(0);
 
  dist = j["Jupiter"]["distance"];
   orbit = j["Jupiter"]["OrbitSpeed"];
@@ -169,8 +216,18 @@ dist = j["Venus"]["distance"];
    m_cube->children.at(4)->parent = m_cube;
    m_cube->children.at(4)->level =1;
    list1.push_back(m_cube->children.at(4));
- scaledList.push_back(new Object(10,1,1,1,1,1,1,1,objName, texName ) );
+
+
+ dist = j2["Jupiter"]["distance"];
+  orbit = j2["Jupiter"]["OrbitSpeed"];
+  spin = j2["Jupiter"]["SpinSpeed"];
+  scale = j2["Jupiter"]["Scale"];
+  objName = j2["Jupiter"]["object"];
+ texName = j2["Jupiter"]["Texture"];
+scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
    scaledList.at(5)->parent = scaledList.at(0);
+
+
 
 dist = j["Saturn"]["distance"];
   orbit = j["Saturn"]["OrbitSpeed"];
@@ -185,7 +242,15 @@ dist = j["Saturn"]["distance"];
    m_cube->children.at(5)->parent = m_cube;
    m_cube->children.at(5)->level =1;
    list1.push_back(m_cube->children.at(5));
-    scaledList.push_back(new Object(12,1,1,1,1,1,1,1,objName, texName ) );
+
+
+dist = j2["Saturn"]["distance"];
+  orbit = j2["Saturn"]["OrbitSpeed"];
+  spin = j2["Saturn"]["SpinSpeed"];
+  scale = j2["Saturn"]["Scale"];
+  objName = j2["Saturn"]["object"];
+ texName = j2["Saturn"]["Texture"];
+ scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
    scaledList.at(6)->parent = scaledList.at(0);
 
 dist = j["Uranus"]["distance"];
@@ -200,8 +265,18 @@ dist = j["Uranus"]["distance"];
    m_cube->children.at(6)->parent = m_cube;
    m_cube->children.at(6)->level =1;
    list1.push_back(m_cube->children.at(6));
-   scaledList.push_back(new Object(14,1,1,1,1,1,1,1,objName, texName ) );
-   scaledList.at(7)->parent = scaledList.at(0);
+
+  
+
+
+dist = j2["Uranus"]["distance"];
+  orbit = j2["Uranus"]["OrbitSpeed"];
+  spin = j2["Uranus"]["SpinSpeed"];
+  scale = j2["Uranus"]["Scale"];
+  objName = j2["Uranus"]["object"];
+ texName = j2["Uranus"]["Texture"];
+ scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
+    scaledList.at(7)->parent = scaledList.at(0);
 
 dist = j["Neptune"]["distance"];
   orbit = j["Neptune"]["OrbitSpeed"];
@@ -215,9 +290,18 @@ dist = j["Neptune"]["distance"];
    m_cube->children.at(7)->parent = m_cube;
    m_cube->children.at(7)->level =1;
    list1.push_back(m_cube->children.at(7));
-   scaledList.push_back(new Object(16,1,1,1,1,1,1,1,objName, texName ) );
-   scaledList.at(8)->parent = scaledList.at(0);
+   
   
+dist = j2["Neptune"]["distance"];
+  orbit = j2["Neptune"]["OrbitSpeed"];
+  spin = j2["Neptune"]["SpinSpeed"];
+  scale = j2["Neptune"]["Scale"];
+  objName = j2["Neptune"]["object"];
+ texName = j2["Neptune"]["Texture"];
+//spinDir = j["Neptune"]["SpinDir"];
+scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
+   scaledList.at(8)->parent = scaledList.at(0);
+
 dist = j["Pluto"]["distance"];
   orbit = j["Pluto"]["OrbitSpeed"];
   spin = j["Pluto"]["SpinSpeed"];
@@ -230,7 +314,16 @@ dist = j["Pluto"]["distance"];
    m_cube->children.at(8)->parent = m_cube;
    m_cube->children.at(8)->level =1;
    list1.push_back(m_cube->children.at(8));
-   scaledList.push_back(new Object(18,1,1,1,1,1,1,1,objName, texName ) );
+
+
+dist = j2["Pluto"]["distance"];
+  orbit = j2["Pluto"]["OrbitSpeed"];
+  spin = j2["Pluto"]["SpinSpeed"];
+  scale = j2["Pluto"]["Scale"];
+  objName = j2["Pluto"]["object"];
+ texName = j2["Pluto"]["Texture"];
+//spinDir = j["Neptune"]["SpinDir"];
+scaledList.push_back(new Object(dist,orbit,spin,1,spinDir,1,1,scale,objName, texName) );
    scaledList.at(9)->parent = scaledList.at(0);
 
  scale = j["Saturn"]["Scale"];
@@ -319,7 +412,7 @@ list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scal
 
 
 
-   i.close();
+   i2.close();
   m_shader = new Shader();
   if(!m_shader->Initialize())
   {
