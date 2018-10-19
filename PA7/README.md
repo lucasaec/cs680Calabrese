@@ -48,19 +48,15 @@ make
 ```
 
 ### Menu Input
--The zoom in function allows you to zoom in on a planet.
+-The zoom in function allows you to zoom in on a planet or moon by clicking a name of a planet or moon
 
 -the zoom slider lets you zoom out when you are zoomed in on a planet. (it only works when you are click a planet to zoom in on in the menu)
 
--Affect all does nothing
-
 -Disable clicks is to stop the planets from reversing when you click the menu
-
--Undo changes does nothing
 
 -Reset view lets you reset to the default view. It undoes any zooming also.
 
--Scaled View Please don't press this.
+-Scaled View changes to a scaled view. This is just so we can see planets and moons near each other. pressing it a second time lets you view hte default view again
 
 
 
@@ -71,9 +67,10 @@ make
 - d:          Reverse the rotation of the cube itself
 - f:          Pause, Pressing a,s,d,f keys or Clicking left,right,or middle on the mouse unpauses the cube
 - z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons and planets and pluto. If you press z, you will affect one of the moons or planet or pluto. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
-- Arrow Up:   Zooms out the planet 
-- Arrow down: Zooms in the planet (will move camera past the planet if you zoom too much)
-- Right Arrow stops the zooming.
+- Arrow Up:   Zooms out the planet (hold down)
+- Arrow down: Zooms in the planet  (hold down)
+- Right Arrow  rotates camera 
+- left arrow rotates camera the opposite direction riht arrow moves it
 
 ### Mouse Input
 - Middle Click:         Reverse rotation of cube and it's orbit
@@ -88,12 +85,12 @@ Slider Menu for zoom in and out
 
 Configuration file
 
-## Note
+## Notes
 It may take a while for everything to load when starting the program.
 
 Disable Clicks on the menu disables the left and right clicks of the mouse that is used for reversing directions. You can still click on the menu when this is pressed.
 
-The "Scaled View" and "Undo Changes" do not perform any functions or changes.
+To view planets in the the default view, you need to use the menu to zoom in on specific moons or planets
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
