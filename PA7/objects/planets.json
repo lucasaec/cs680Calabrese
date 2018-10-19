@@ -246,10 +246,10 @@
             },
         "Ring": 
             {
-                "Texture": "ring.jpg",
+                "Texture": "SaturnRingTexture.png",
 
 
-                "object": "ring.obj",
+                "object": "Rings.obj",
             
             
                 "OrbitSpeed": 0.034,

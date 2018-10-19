@@ -116,9 +116,9 @@ ImGui::Begin("Menu");
                 static bool affectAll=false;
                 
                 ImGui::SliderFloat("Speed", &speedChange,0 , 20);
-                 ImGui::SliderFloat("Zoom", &speed,.75 , 5);
+                 ImGui::SliderFloat("Zoom", &speed,.75 , 20);
             
-                ImGui::Checkbox("Affect All", &affectAll);
+           //     ImGui::Checkbox("Affect All", &affectAll);
                 ImGui::Checkbox("Disable Clicks", &disableClick);
 
 
@@ -128,6 +128,9 @@ ImGui::Begin("Menu");
             if(ImGui::Button("Sun")) {
                  choice = 0;
                  ImGui::NextColumn();
+                 if(m_graphics->scaledView && speed > .75) {
+                      speed = .75;
+                 }
             }
             if(ImGui::Button("Mercury")) {
                  choice = 1;
@@ -153,6 +156,9 @@ ImGui::Begin("Menu");
             if(ImGui::Button("Phobos")) {
                  choice = 12;
                  ImGui::NextColumn();
+              if(m_graphics->scaledView && speed > -3) {
+                      speed = -3;
+                 }
             }
             if(ImGui::Button("Jupiter")) {
                  choice = 5;
@@ -214,10 +220,10 @@ ImGui::Begin("Menu");
           else if(ImGui::Button("Scaled View")) {
               m_graphics->scaledView = !m_graphics->scaledView;
           }
-       if(ImGui::Button("Undo Changes")) {
+  /*     if(ImGui::Button("Undo Changes")) {
                  //Add code to revert back to normal settings
                  ImGui::NextColumn();
-       }
+       }*/
        if(ImGui::Button("Reset View")) {
                  //Add code to reset view
                  m_graphics->Recenter();
