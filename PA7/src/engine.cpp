@@ -128,77 +128,174 @@ ImGui::Begin("Menu");
             if(ImGui::Button("Sun")) {
                  choice = 0;
                  ImGui::NextColumn();
-                 if(m_graphics->scaledView && speed > .75) {
-                      speed = .75;
+                 if(m_graphics->scaledView) {
+                      speed = .246;
+                 }
+                  if(!m_graphics->scaledView) {
+                      speed = 1.2;
                  }
             }
             if(ImGui::Button("Mercury")) {
                  choice = 1;
                  ImGui::NextColumn();
+                  if(m_graphics->scaledView) {
+                      speed = .75;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Venus")) {
                  choice = 2;
                  ImGui::NextColumn();
+                   if(m_graphics->scaledView) {
+                      speed = .462;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Earth")) {
                  choice = 3;
 
                  ImGui::NextColumn();
+ if(m_graphics->scaledView) {
+                      speed = .57;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Moon")) {
                  choice = 11;
                  ImGui::NextColumn();
+ if(m_graphics->scaledView) {
+                      speed = .57;
+                 }
+	if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Mars")) {
                  choice = 4;
                  ImGui::NextColumn();
-            }
+ if(m_graphics->scaledView) {
+                      speed = .850;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }            
+	}
             if(ImGui::Button("Phobos")) {
                  choice = 12;
                  ImGui::NextColumn();
-              if(m_graphics->scaledView && speed > -3) {
+              if(m_graphics->scaledView) {
                       speed = -3;
                  }
-            }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }  
+          }
             if(ImGui::Button("Jupiter")) {
                  choice = 5;
                  ImGui::NextColumn();
+ if(m_graphics->scaledView) {
+                      speed = .075;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Europa")) {
                  choice = 13;
                  ImGui::NextColumn();
+ if(m_graphics->scaledView) {
+                      speed = .219;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Saturn")) {
                  choice = 6;
                  ImGui::NextColumn();
+ if(m_graphics->scaledView) {
+                      speed = .12;
+                 }
+
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Titan")) {
                  choice = 14;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = .12;
+                 }
+		if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Uranus")) {
                  choice = 7;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = .165;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Ariel")) {
                  choice = 15;
                  ImGui::NextColumn();
-            }
+if(m_graphics->scaledView) {
+                      speed = .165;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }        
+    }
             if(ImGui::Button("Neptune")) {
                  choice = 8;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = .165;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Tritan")) {
                  choice = 16;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = .084;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
             if(ImGui::Button("Pluto")) {
                  choice = 9;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
 	    if(ImGui::Button("Charon")) {
                  choice = 17;
                  ImGui::NextColumn();
+if(m_graphics->scaledView) {
+                      speed = .642;
+                 }
+if(!m_graphics->scaledView) {
+                      speed = 1.2;
+                 }
             }
 //insert code to select planet
             if(choice > -1 && choice < list1.size()) {
@@ -219,6 +316,8 @@ ImGui::Begin("Menu");
 	  }
           else if(ImGui::Button("Scaled View")) {
               m_graphics->scaledView = !m_graphics->scaledView;
+lookAtIndex = -1;
+		m_graphics -> Recenter();
           }
   /*     if(ImGui::Button("Undo Changes")) {
                  //Add code to revert back to normal settings

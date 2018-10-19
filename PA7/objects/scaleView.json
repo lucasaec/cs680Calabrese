@@ -199,7 +199,30 @@
                 "distance": 35
             }
         ,
-        "Europa": 
+	
+	"Ring3": 
+            {
+                "Texture":"ring_saturn.jpg",
+
+
+                "object": "Rings.obj",
+            
+            
+                "OrbitSpeed": 0.0,
+            
+            
+                "SpinSpeed": 2.252,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 36184,
+            
+            
+                "distance": 0.0
+            },     
+   "Europa": 
             {
                 "Texture": "europa.jpg",
 
@@ -219,7 +242,7 @@
                 "Scale": 0.2,
             
             
-                "distance": 1.5
+                "distance": 3
             }
         ,
         "Saturn": 
@@ -309,6 +332,28 @@
             
                 "distance": 45
             },
+	"Ring2": 
+            {
+                "Texture": "UranusRingTexture.jpg",
+
+
+                "object": "Rings.obj",
+            
+            
+                "OrbitSpeed": 0.0,
+            
+            
+                "SpinSpeed": 2.252,
+            
+            
+                "SpinDir": 1,
+            
+            
+                "Scale": 36184,
+            
+            
+                "distance": 0
+            },
       	"Ariel": 
             {
                 "Texture": "ariel.jpg",
@@ -328,7 +373,7 @@
                 "Scale": 0.2,
             
             
-                "distance": 1.5
+                "distance": 3
             },
 
         "Neptune": 
