@@ -41,7 +41,7 @@
                 "Scale": 10,
             
             
-                "distance": 10
+                "distance": 5
             }
         ,
         "Venus": 
@@ -63,7 +63,7 @@
                 "Scale": 12,
             
             
-                "distance": 12
+                "distance": 7
             }
         ,
         "Earth": 
@@ -85,7 +85,7 @@
                 "Scale": 14,
             
             
-                "distance": 14
+                "distance": 9
             }
         ,
         "Moon": 
@@ -129,7 +129,7 @@
                 "Scale": 11,
             
         
-                "distance": 16
+                "distance": 11
             }
         ,
         "Phobos": 
@@ -196,7 +196,7 @@
                 "Scale": 17,
             
             
-                "distance": 18
+                "distance": 13
             }
         ,
         "Europa": 
@@ -242,7 +242,7 @@
                 "Scale": 16,
             
             
-                "distance": 20
+                "distance": 15
             },
         "Ring": 
             {
@@ -307,7 +307,7 @@
                 "Scale": 15,
             
             
-                "distance": 22
+                "distance": 17
             },
       	"Ariel": 
             {
@@ -351,7 +351,7 @@
                 "Scale": 14.8,
             
             
-                "distance": 24
+                "distance": 19
             },
 		"Triton": 
             {
@@ -396,7 +396,7 @@
                 "Scale": 4,
             
             
-                "distance": 26
+                "distance": 21
             },
       	"Charon": 
             {
@@ -418,7 +418,7 @@
                 "Scale": 2,
             
             
-                "distance": 28
+                "distance": 4
             }
 
 }
