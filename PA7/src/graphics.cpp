@@ -260,7 +260,7 @@ dist = j["Phobos"]["distance"];
   objName = j["Phobos"]["object"];
  texName = j["Phobos"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*100,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*40,objName, texName));
     list1.at(12)->parent = list1.at(4);
 
 dist = j["Europa"]["distance"];
@@ -270,7 +270,7 @@ dist = j["Europa"]["distance"];
   objName = j["Europa"]["object"];
  texName = j["Europa"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*4,objName, texName));
     list1.at(13)->parent = list1.at(5);
 
 dist = j["Titan"]["distance"];
@@ -280,7 +280,7 @@ dist = j["Titan"]["distance"];
   objName = j["Titan"]["object"];
  texName = j["Titan"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*4,objName, texName));
     list1.at(14)->parent = list1.at(6);
 
 
@@ -292,7 +292,7 @@ dist = j["Ariel"]["distance"];
   objName = j["Ariel"]["object"];
  texName = j["Ariel"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*15,objName, texName));
     list1.at(15)->parent = list1.at(7);
 
 dist = j["Triton"]["distance"];
@@ -302,7 +302,7 @@ dist = j["Triton"]["distance"];
   objName = j["Triton"]["object"];
  texName = j["Triton"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*10,objName, texName));
     list1.at(16)->parent = list1.at(8);
 
 
@@ -314,7 +314,7 @@ dist = j["Charon"]["distance"];
   objName = j["Charon"]["object"];
  texName = j["Charon"]["Texture"];
 
-list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*1000,objName, texName));
+list1.push_back( new Object(dist*dsScale,orbit/year,spin/year,1,spinDir,1,1,scale*dsScale*3,objName, texName));
     list1.at(17)->parent = list1.at(9);
 
 
@@ -403,8 +403,8 @@ void Graphics::Recenter() {
                       glm::vec3(0.0, 0.0, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
     lookAtIndex= -1;
-      speed=0.0;
-      rotated=0.0;
+      speed=0.75;
+      rotated=0;
 }
 /**
 * Call this to reverse stuff
@@ -471,11 +471,11 @@ speed-=0.009;
 }
 else if (p1==3)
 {
-//rotated+=0.1;
+rotated+=0.1;
 }
 else if(p1 == 4)
 {
-//rotated-=0.1;
+rotated-=0.1;
 }
 if(lookAtIndex  > -1) {
     indix = lookAtIndex;
@@ -484,8 +484,12 @@ glm::mat4 c = list1.at(indix)->model2;
 float angle7 = rotated*M_PI;
 
 glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
-
- m_camera->view = glm::lookAt( glm::vec3(d.x + 3*list1.at(indix)->sc + speed, d.y, d.z), //Eye Position
+float angle = rotated;
+glm::vec3 eye = glm::vec3(cos(angle),0,sin(angle));
+//eye +=  glm::vec3(d.x + 3*list1.at(indix)->sc + speed, d.y, d.z);
+eye =  3*list1.at(indix)->sc*speed*eye;
+eye +=  glm::vec3(d.x, d.y, d.z);
+ m_camera->view = glm::lookAt(eye, //Eye Position
                       glm::vec3(d.x, d.y, d.z), //Focus point
                       glm::vec3(0.0, 1, 0));
 
@@ -493,7 +497,14 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 // eye position should be focus point + some direction + zoom
 
 } else {
-     Recenter();
+ float angle = rotated;
+   glm::vec3 eye2 = glm::vec3(cos(angle),0,sin(angle));
+  eye2 =  10*speed*eye2;
+eye2 +=  glm::vec3(0.0, 0, 0);
+ 
+    m_camera->view = glm::lookAt(eye2, //Eye Position
+                      glm::vec3(0.0, 0.0, 0.0), //Focus point
+                      glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
 }
 
 

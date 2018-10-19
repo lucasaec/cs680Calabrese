@@ -116,7 +116,7 @@ ImGui::Begin("Menu");
                 static bool affectAll=false;
                 
                 ImGui::SliderFloat("Speed", &speedChange,0 , 20);
-                 ImGui::SliderFloat("Zoom", &speed,0 , 5);
+                 ImGui::SliderFloat("Zoom", &speed,.75 , 5);
             
                 ImGui::Checkbox("Affect All", &affectAll);
                 ImGui::Checkbox("Disable Clicks", &disableClick);
@@ -256,6 +256,9 @@ void Engine::Keyboard()
   {
     m_running = false;
   }
+  else if (m_event.type == SDL_KEYUP) {
+      m_graphics->camerachange(0);
+  }
   else if (m_event.type == SDL_KEYDOWN)
   {
     // handle key down events here
@@ -286,6 +289,7 @@ void Engine::Keyboard()
     else if(m_event.key.keysym.sym == SDLK_ESCAPE) {
        m_running = false;
     }
+
    if( m_event.key.keysym.sym == SDLK_UP)
    { 
         m_graphics -> camerachange(1);
@@ -301,6 +305,10 @@ void Engine::Keyboard()
    else if( m_event.key.keysym.sym == SDLK_RIGHT)
   { 
       m_graphics -> camerachange(4);
+  } 
+  else if( m_event.key.keysym.sym == SDLK_z)
+  { 
+      m_graphics -> camerachange(5);
   } 
   
 
