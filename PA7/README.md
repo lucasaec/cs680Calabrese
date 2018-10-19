@@ -25,6 +25,8 @@ Installation of brew is suggested to easily install the libs. Ensure that the la
 brew install glew glm sdl2
 ```
 
+All dependencies for this project should be on the ECC computers.
+
 ## Building and Running
 To build this project there are two options. One is to use CMake which makes including new libraries easier, and handles new files added automatically to the src and include directory. CMake is a small new learning curve but makes things easier in the future.
 The second option is to use the provided Makefile which is used as usual.
@@ -45,25 +47,33 @@ make
 ./Tutorial
 ```
 
-### Makefile Instructions 
-The makefile works as expected and must be updated with new files added in.
+### Menu Input
+-The zoom in function allows you to zoom in on a planet.
 
-```bash
-mkdir build
-cd build
-cp ../makefile .
-make
-./Tutorial
-```
+-the zoom slider lets you zoom out when you are zoomed in on a planet. (it only works when you are click a planet to zoom in on in the menu)
+
+-Affect all does nothing
+
+-Disable clicks is to stop the planets from reversing when you click the menu
+
+-Undo changes does nothing
+
+-Reset view lets you reset to the default view. It undoes any zooming also.
+
+-Scaled View Please don't press this.
+
+
+
 
 ### Keyboard Input
 - a:          Reverse rotation of cube and it's orbit
 - s:          Reverse the orbit of the cube
 - d:          Reverse the rotation of the cube itself
 - f:          Pause, Pressing a,s,d,f keys or Clicking left,right,or middle on the mouse unpauses the cube
-- z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons. If you press z, you will affect one of the moons. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
-- Arrow Up:   Zooms out the planet
-- Arrow down: Zooms in the planet
+- z: changes what you will affect when pressing a,s,d f, middle click, left click, and right click. Before pressing z you will be able your interactions will affect all moons and planets and pluto. If you press z, you will affect one of the moons or planet or pluto. You can press z any to interact with any of the moons. After you iterate through all of them, you will be able to affect all moons again, and be able to iterate through planets again.
+- Arrow Up:   Zooms out the planet 
+- Arrow down: Zooms in the planet (will move camera past the planet if you zoom too much)
+- Right Arrow stops the zooming.
 
 ### Mouse Input
 - Middle Click:         Reverse rotation of cube and it's orbit
@@ -72,7 +82,18 @@ make
 
 
 ### Extra Credit
-Skipped
+Slider Menu for speed
+
+Slider Menu for zoom in and out
+
+Configuration file
+
+## Note
+It may take a while for everything to load when starting the program.
+
+Disable Clicks on the menu disables the left and right clicks of the mouse that is used for reversing directions. You can still click on the menu when this is pressed.
+
+The "Scaled View" and "Undo Changes" do not perform any functions or changes.
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
