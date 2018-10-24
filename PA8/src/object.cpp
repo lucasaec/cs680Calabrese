@@ -1,0 +1,203 @@
+#include "object.h"
+#include <assimp/Importer.hpp> //includes the importer, which is used to read our obj file
+#include <assimp/scene.h> //includes the aiScene object
+#include <assimp/postprocess.h> //includes the postprocessing variables for the importer
+#include <assimp/color4.h> //includes the aiColor4 object, which is used to handle the colors from the mesh objects
+#include <assimp/material.h> 
+#include <stdlib.h> 
+Object::Object()
+{  
+unsigned int random = 0;
+Assimp::Importer importer;
+std::string input;
+input = "../objects/table.obj" ;
+std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
+std::cin >> random;
+
+
+
+
+const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
+
+aiMesh *mesh = scene->mMeshes[0];
+
+
+aiMaterial* mat = scene->mMaterials[1];
+aiColor4D color (0.f,0.f,0.f,0.f);
+aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
+
+angle = 0.0f;
+float q,w,e;
+q= color.r;
+w= color.g;
+e= color.b;
+float x,y,z;
+for(int i = 0; i < mesh->mNumVertices; i++) {
+              x = mesh->mVertices[i].x;
+              y = mesh->mVertices[i].y;
+              z = mesh->mVertices[i].z;
+          if(random == 1) {
+            
+              float xq=1, xw=1, xe=1;
+              if(rand() % 4 == 0) {
+                  xq*= -1;
+              }
+              if(rand() % 4 == 0) {
+                  xw*= -1;
+              }
+              if(rand() % 4 == 0) {
+                  xe*= -1;
+              }
+           
+
+              q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+              w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+              e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+          }
+       
+   Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
+   Vertices.push_back(vzq);
+}
+
+
+for(int i = 0; i < mesh->mNumFaces; i++) {
+    aiFace face = mesh->mFaces[i];
+    unsigned int* mIndices = face.mIndices;
+    Indices.push_back(mIndices[0]);
+    Indices.push_back(mIndices[1]);
+    Indices.push_back(mIndices[2]);
+}
+
+
+for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
+    aiString mtlName =  scene->mMeshes[i]->mName;
+}
+
+
+  angle = 0.0f;
+ 
+
+  glGenBuffers(1, &VB);
+  glBindBuffer(GL_ARRAY_BUFFER, VB);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
+
+  glGenBuffers(1, &IB);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
+}
+Object:: Object(std::string objname)
+{
+
+    unsigned int random = 0;
+    Assimp::Importer importer;
+    std::string input;
+    input = "../objects/"+objname ;
+   std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
+    std::cin >> random;
+
+
+
+
+    const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
+
+    aiMesh *mesh = scene->mMeshes[0];
+
+
+    aiMaterial* mat = scene->mMaterials[1];
+    aiColor4D color (0.f,0.f,0.f,0.f);
+    aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
+
+    angle = 0.0f;
+    float q,w,e;
+    q= color.r;
+    w= color.g;
+    e= color.b;
+    float x,y,z;
+    for(int i = 0; i < mesh->mNumVertices; i++) {
+        x = mesh->mVertices[i].x;
+        y = mesh->mVertices[i].y;
+        z = mesh->mVertices[i].z;
+        if(random == 1) {
+
+            float xq=1, xw=1, xe=1;
+            if(rand() % 4 == 0) {
+                xq*= -1;
+            }
+            if(rand() % 4 == 0) {
+                xw*= -1;
+            }
+            if(rand() % 4 == 0) {
+                xe*= -1;
+            }
+
+
+            q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+            w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+            e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+        }
+
+        Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
+        Vertices.push_back(vzq);
+    }
+
+
+    for(int i = 0; i < mesh->mNumFaces; i++) {
+        aiFace face = mesh->mFaces[i];
+        unsigned int* mIndices = face.mIndices;
+        Indices.push_back(mIndices[0]);
+        Indices.push_back(mIndices[1]);
+        Indices.push_back(mIndices[2]);
+    }
+
+
+    for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
+        aiString mtlName =  scene->mMeshes[i]->mName;
+    }
+
+
+    angle = 0.0f;
+
+
+    glGenBuffers(1, &VB);
+    glBindBuffer(GL_ARRAY_BUFFER, VB);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
+
+    glGenBuffers(1, &IB);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
+}
+Object::~Object()
+{
+  Vertices.clear();
+  Indices.clear();
+}
+ //float x = 0.0f;
+void Object::Update(unsigned int dt)
+{
+  angle += dt * M_PI/1000;
+  model = glm::mat4(1.0f); 
+  //model = glm::rotate(model,  (angle), glm::vec3(0.5, 0, 0.0));
+}
+
+glm::mat4 Object::GetModel()
+{
+  return model;
+}
+
+void Object::Render()
+{
+  glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(1);
+
+  glBindBuffer(GL_ARRAY_BUFFER, VB);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+
+  glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
+
+  glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(1);
+}
+
