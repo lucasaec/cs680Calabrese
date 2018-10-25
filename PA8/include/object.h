@@ -8,7 +8,7 @@ class Object
 {
   public:
     Object();
-    Object(std::string);
+    Object(std::string, float, float, float, float);
     ~Object();
     void Update(unsigned int dt);
     void Render();
@@ -16,9 +16,10 @@ class Object
     int level;
     Object* parent;
     glm::mat4 GetModel();
+    glm::mat4 model;
 
   private:
-    glm::mat4 model;
+    
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
     GLuint VB;

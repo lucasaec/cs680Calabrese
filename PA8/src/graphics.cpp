@@ -45,13 +45,13 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_table = new Object("table.obj");
+  m_table = new Object("table.obj",4,0,0,0);
   list.push_back(m_table);
-  m_cylinder = new Object("cylinder1.obj");
+  m_cylinder = new Object("cylinder.obj",2,2,2,2);
   list.push_back(m_cylinder);
-  m_cube = new Object("cube1.obj");
+  m_cube = new Object("cube.obj",2,-3,2.0,2);
   list.push_back(m_cube);
-  m_sphere = new Object("sphere1.obj");
+  m_sphere = new Object("sphere.obj",3,-2,3,-2);
   list.push_back(m_sphere);
 
   /*m_cube->children.push_back( new Object ("cylinder.obj"));

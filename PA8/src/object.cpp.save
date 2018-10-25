@@ -11,9 +11,9 @@ unsigned int random = 0;
 Assimp::Importer importer;
 std::string input;
 input = "../objects/table.obj" ;
-//std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
-//std::cin >> random;
-random = 1;
+std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
+std::cin >> random;
+
 
 
 
@@ -75,6 +75,7 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
 
 
   angle = 0.0f;
+ 
 
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -84,16 +85,16 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 }
-Object:: Object(std::string objname, float scale, float posx, float posy, float posz)
+Object:: Object(std::string objname)
 {
 
     unsigned int random = 0;
     Assimp::Importer importer;
     std::string input;
     input = "../objects/"+objname ;
-   //std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
-   // std::cin >> random;
-    random = 1;
+   std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
+    std::cin >> random;
+
 
 
 
@@ -131,7 +132,7 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
 
 
             q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-            w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
+ up           w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
             e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
         }
 
@@ -164,9 +165,6 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     glGenBuffers(1, &IB);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-    model = glm::mat4(1.0f);
-    model = glm::translate(glm::vec3(posx, posy, posz) );
-    model = glm::scale(model, glm::vec3(1.0*scale,1.0*scale,1.0*scale) );
 }
 Object::~Object()
 {
@@ -177,7 +175,7 @@ Object::~Object()
 void Object::Update(unsigned int dt)
 {
   angle += dt * M_PI/1000;
-  
+  model = glm::mat4(1.0f); 
   //model = glm::rotate(model,  (angle), glm::vec3(0.5, 0, 0.0));
 }
 
