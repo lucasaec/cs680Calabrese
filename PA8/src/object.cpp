@@ -88,14 +88,7 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 
-  btDefaultMotionState *shapeMotionState = NULL; 
-  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 0), btVector3(0, 0, 0))); 
-  btScalar mass(1);
-  btVector3 inertia(0, 0, 0); 
-  shape->calculateLocalInertia(mass, inertia);
-  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
-  rigidBody = new btRigidBody(shapeRigidBodyCI);
-  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+  
 }
 /**
  *
@@ -103,6 +96,7 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
  */
 Object:: Object(std::string objname, float scale, float posx, float posy, float posz)
 {
+    scale1 = scale;
     objTriMesh = new btTriangleMesh();
     unsigned int random = 0;
     Assimp::Importer importer;
@@ -164,12 +158,16 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
         Indices.push_back(mIndices[0]);
         Indices.push_back(mIndices[1]);
         Indices.push_back(mIndices[2]);
+
         aiVector3D position = mesh->mVertices[face.mIndices[0]]; 
         triArray[0] = btVector3(position.x, position.y, position.z);
+
         position = mesh->mVertices[face.mIndices[1]]; 
         triArray[1] = btVector3(position.x, position.y, position.z);
+
         position = mesh->mVertices[face.mIndices[2]]; 
         triArray[2] = btVector3(position.x, position.y, position.z);
+
         objTriMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
     }
 
@@ -190,8 +188,17 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
     model = glm::mat4(1.0f);
-    model = glm::translate(glm::vec3(posx, posy, posz) );
-    model = glm::scale(model, glm::vec3(1.0*scale,1.0*scale,1.0*scale) );
+    model = glm::translate(glm::vec3(posx, posy+5, posz) );
+    model = glm::scale(model, glm::vec3(1.0*scale1,1.0*scale1,1.0*scale1) );
+    btDefaultMotionState *shapeMotionState = NULL; 
+  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 0), btVector3(0, 0, 0))); 
+  btScalar mass(1);
+  btVector3 inertia(0, 0, 0); 
+  shape->calculateLocalInertia(mass, inertia);
+  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
+  rigidBody = new btRigidBody(shapeRigidBodyCI);
+  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+  rigidBody->getMotionState();
 }
 Object::~Object()
 {
@@ -199,16 +206,31 @@ Object::~Object()
   Indices.clear();
 }
  //float x = 0.0f;
+int counter = 0;
 void Object::Update(unsigned int dt)
 {
+  counter++;
   if(physics == 1) {
       //angle += dt * M_PI/1000;
   btTransform trans;
   btScalar m[16]; 
   worldStuff->dynamicsWorld->stepSimulation(dt, 10); 
-  //rigidBody->getMotionState()->getWorldTransform(trans);
+  if(worldStuff == NULL) {
+  std::cout << "Not good" << '\n';
+  } 
+  if(rigidBody == NULL) {
+  std::cout << "Not good" << '\n';
+  } 
+ // rigidBody->getMotionState();
+ rigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m); 
   model = glm::make_mat4(m);
+  std::cout << dt << '\n';
+  if( counter == 100) {
+    model = glm::translate(glm::vec3(0, 20,0) );
+    counter = 0;
+  }
+   model = glm::scale(model, glm::vec3(1.0*scale1/1,1.0*scale1/1,1.0*scale1/1) );
   //model = glm::rotate(model,  (angle), glm::vec3(0.5, 0, 0.0));
   }
   

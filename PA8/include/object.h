@@ -14,6 +14,7 @@ class Object
     void Render();
     std::vector<Object*> children;
     int level;
+    float scale1;
     Object* parent;
     glm::mat4 GetModel();
     glm::mat4 model;

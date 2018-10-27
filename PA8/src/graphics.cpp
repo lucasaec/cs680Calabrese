@@ -1,10 +1,10 @@
 #include "graphics.h"
 #include "BulletUp.h"
-BulletUp* worldStuff = new BulletUp();
-  
+
+ BulletUp* worldStuff; 
 Graphics::Graphics()
 {
-
+worldStuff = new BulletUp();
 }
 
 Graphics::~Graphics()
@@ -50,17 +50,6 @@ worldStuff->Initialize();
   // Create the object
   m_table = new Object("table.obj",4,0,0,0);
   m_table->physics = 0;
-/**
-  btDefaultMotionState *shapeMotionState = NULL; 
-  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 0), btVector3(0, 0, 0))); 
-  btScalar mass(1);
-  btVector3 inertia(0, 0, 0); 
-  m_table->shape->calculateLocalInertia(mass, inertia);
-  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState,  m_table->shape, inertia);
-  btRigidBody *rigidBody = new btRigidBody(shapeRigidBodyCI);
-  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
-**/
- 
   list.push_back(m_table);
   
 
@@ -71,18 +60,10 @@ worldStuff->Initialize();
   m_cube = new Object("cube.obj",2,-3,2.0,2);
   m_cube->physics = 0;
   list.push_back(m_cube);
-  m_sphere = new Object("sphere.obj",3,-2,3,-2);
+  m_sphere = new Object("sphere.obj",3,-2,15,-2);
   m_sphere->physics = 1;
    list.push_back(m_sphere);
   
-  
-
-  /*m_cube->children.push_back( new Object ("cylinder.obj"));
-  m_cube->children.at(0)->parent = m_cube;
-  m_cube->children.at(0)->level =1;
-  list.push_back(m_cube->children.at(0));
-  //list.push_back(m_cube);
-*/
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -154,6 +135,11 @@ void Graphics::Update(unsigned int dt)
 
 void Graphics::Render()
 {
+ /*
+  m_camera->view = glm::lookAt( glm::vec3(0.0, 60, -30.0), //Eye Position
+                      glm::vec3(0.0, 0.0, 0.0), //Focus point
+                      glm::vec3(0.0, 1.0, 0.0));*/
+
   //clear the screen
   glClearColor(0.0, 0.0, 0.2, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
