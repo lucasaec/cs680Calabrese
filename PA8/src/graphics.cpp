@@ -1,5 +1,7 @@
 #include "graphics.h"
-
+#include "BulletUp.h"
+BulletUp* worldStuff = new BulletUp();
+  
 Graphics::Graphics()
 {
 
@@ -12,6 +14,7 @@ Graphics::~Graphics()
 std::vector<Object*> list;
 bool Graphics::Initialize(int width, int height)
 {
+worldStuff->Initialize();
   // Used for the linux OS
   #if !defined(__APPLE__) && !defined(MACOSX)
     // cout << glewGetString(GLEW_VERSION) << endl;
@@ -46,13 +49,33 @@ bool Graphics::Initialize(int width, int height)
 
   // Create the object
   m_table = new Object("table.obj",4,0,0,0);
+  m_table->physics = 0;
+/**
+  btDefaultMotionState *shapeMotionState = NULL; 
+  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 0), btVector3(0, 0, 0))); 
+  btScalar mass(1);
+  btVector3 inertia(0, 0, 0); 
+  m_table->shape->calculateLocalInertia(mass, inertia);
+  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState,  m_table->shape, inertia);
+  btRigidBody *rigidBody = new btRigidBody(shapeRigidBodyCI);
+  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+**/
+ 
   list.push_back(m_table);
+  
+
+
   m_cylinder = new Object("cylinder.obj",2,2,2,2);
+ m_cylinder ->physics = 0;
   list.push_back(m_cylinder);
   m_cube = new Object("cube.obj",2,-3,2.0,2);
+  m_cube->physics = 0;
   list.push_back(m_cube);
   m_sphere = new Object("sphere.obj",3,-2,3,-2);
-  list.push_back(m_sphere);
+  m_sphere->physics = 1;
+   list.push_back(m_sphere);
+  
+  
 
   /*m_cube->children.push_back( new Object ("cylinder.obj"));
   m_cube->children.at(0)->parent = m_cube;

@@ -1,6 +1,6 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
-
+#include <btBulletDynamicsCommon.h>
 #include <iostream>
 using namespace std;
 
