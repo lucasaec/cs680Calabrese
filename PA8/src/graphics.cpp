@@ -49,7 +49,7 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  m_table = new Object("table.obj",4,0,0,0,0);
+  m_table = new Object("table4.obj",4,0,0,0,0);
 
   list.push_back(m_table);
   
@@ -147,7 +147,7 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
                       glm::vec3(0.0, 1.0, 0.0));
 */
   //clear the screen
-std::cout << d.x << ' ' << d.y << ' ' << d.z << '\n';
+//std::cout << d.x << ' ' << d.y << ' ' << d.z << '\n';
   glClearColor(0.0, 0.0, 0.2, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

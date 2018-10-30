@@ -200,8 +200,8 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
 /*Motion state stuff*/
 if(type == 0) {
     btDefaultMotionState *shapeMotionState = NULL; 
-  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 0), btVector3(0, 0, 0))); 
-  btScalar mass(1);
+  shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0))); 
+  btScalar mass(0);
   //std::cout << mass << '\n';
   btVector3 inertia(0, 0, 0); 
   shape->calculateLocalInertia(mass, inertia);
@@ -209,11 +209,33 @@ if(type == 0) {
   rigidBody = new btRigidBody(shapeRigidBodyCI);
   worldStuff->dynamicsWorld->addRigidBody(rigidBody);
 }
-if(type == 3) {
+if(type == 3 ) {
   btDefaultMotionState *shapeMotionState = NULL; 
-btBoxShape* shape=new btBoxShape(btVector3(3/2.0,3/2.0,3/2.0));
+btCollisionShape* shape=new btBoxShape(btVector3(3.0,3.0,3.0));
 btVector3 inertia(0,0,0);
-shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(1, 1, 1, 1), btVector3(0, 0, 0))); 
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0))); 
+btScalar mass(1);
+shape->calculateLocalInertia(mass, inertia);
+  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
+  rigidBody = new btRigidBody(shapeRigidBodyCI);
+  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+}
+if(type == 2) {
+btDefaultMotionState *shapeMotionState = NULL; 
+btCollisionShape* shape=new btCylinderShape(btVector3(3.0,3.0,0));
+btVector3 inertia(0,0,0);
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, 0))); 
+btScalar mass(0);
+shape->calculateLocalInertia(mass, inertia);
+  btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
+  rigidBody = new btRigidBody(shapeRigidBodyCI);
+  worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+}
+if(type == 4) {
+  btDefaultMotionState *shapeMotionState = NULL; 
+btCollisionShape* shape = new btSphereShape((btScalar)3.0f);
+btVector3 inertia(0,0,0);
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0))); 
 btScalar mass(1);
 shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -235,17 +257,15 @@ void Object::Update(unsigned int dt)
 {
   counter++;
 
-  if(physics == 3) { 
-   
-  }
-  if(physics == 0 || physics == 3) {
+  
+  if(physics == 2 || physics == 3 || physics == 4 || physics == 0) {
   //std::cout << worldStuff->a << '\n';
   //physics stuff???
 //rigidBody->setLinearVelocity(btVector3(0,0,0) );
   btTransform trans;
   btScalar m[16]; 
   trans.setIdentity();
-  trans.setOrigin(btVector3(0,0,0));
+  trans.setOrigin(btVector3(0,50,0));
 
   worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 10); 
   //std::cout << (float)dt/ (float)1000 << '\n';
@@ -257,11 +277,8 @@ void Object::Update(unsigned int dt)
   //std::cout << m[0] << '\n';
   model = glm::make_mat4(m);
   //std::cout << dt << '\n';
-  if( counter == 100) {
-    model = glm::translate(glm::vec3(0, 20,0) );
-    counter = 0;
-  }
-   model = glm::scale(model, glm::vec3(1.0*scale1/1,1.0*scale1/1,1.0*scale1/1) );
+ 
+  // model = glm::scale(model, glm::vec3(1.0*scale1/1,1.0*scale1/1,1.0*scale1/1) );
   //model = glm::rotate(model,  (angle), glm::vec3(0.5, 0, 0.0));
   }
   
