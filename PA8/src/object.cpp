@@ -211,9 +211,9 @@ if(type == 0) {
 }
 if(type == 3 ) {
   btDefaultMotionState *shapeMotionState = NULL; 
-btCollisionShape* shape=new btBoxShape(btVector3(3.0,3.0,3.0));
+btCollisionShape* shape=new btBoxShape(btVector3(.4,.4,.4));
 btVector3 inertia(0,0,0);
-shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0))); 
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10, 0))); 
 btScalar mass(1);
 shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -222,9 +222,9 @@ shape->calculateLocalInertia(mass, inertia);
 }
 if(type == 2) {
 btDefaultMotionState *shapeMotionState = NULL; 
-btCollisionShape* shape=new btCylinderShape(btVector3(3.0,3.0,0));
+btCollisionShape* shape=new btCylinderShape(btVector3(.5,1,1));
 btVector3 inertia(0,0,0);
-shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, 0))); 
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0))); 
 btScalar mass(0);
 shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -233,9 +233,9 @@ shape->calculateLocalInertia(mass, inertia);
 }
 if(type == 4) {
   btDefaultMotionState *shapeMotionState = NULL; 
-btCollisionShape* shape = new btSphereShape((btScalar)3.0f);
+btCollisionShape* shape = new btSphereShape((btScalar).4f);
 btVector3 inertia(0,0,0);
-shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0))); 
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10, 0))); 
 btScalar mass(1);
 shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -244,6 +244,7 @@ shape->calculateLocalInertia(mass, inertia);
 
 
 }
+rigidBody->setActivationState(DISABLE_DEACTIVATION);
   //rigidBody->getMotionState();
 }
 Object::~Object()
@@ -252,12 +253,11 @@ Object::~Object()
   Indices.clear();
 }
  //float x = 0.0f;
-int counter = 0;
+
 void Object::Update(unsigned int dt)
 {
-  counter++;
 
-  
+ 
   if(physics == 2 || physics == 3 || physics == 4 || physics == 0) {
   //std::cout << worldStuff->a << '\n';
   //physics stuff???
@@ -265,7 +265,7 @@ void Object::Update(unsigned int dt)
   btTransform trans;
   btScalar m[16]; 
   trans.setIdentity();
-  trans.setOrigin(btVector3(0,50,0));
+ 
 
   worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 10); 
   //std::cout << (float)dt/ (float)1000 << '\n';
@@ -288,6 +288,13 @@ glm::mat4 Object::GetModel()
 {
   return model;
 }
+
+/**
+ *
+ *
+ *
+ */
+
 
 void Object::Render()
 {

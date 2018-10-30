@@ -17,8 +17,10 @@ class Graphics
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
     void Render();
+void keys(unsigned int);
 
   private:
+unsigned int a;
     std::string ErrorString(GLenum error);
 
     Camera *m_camera;

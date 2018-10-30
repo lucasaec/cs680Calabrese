@@ -73,9 +73,10 @@ void Engine::Run()
     m_window->Swap();
   }
 }
-
+unsigned int a;
 void Engine::Keyboard()
 {
+
   if(m_event.type == SDL_QUIT)
   {
     m_running = false;
@@ -87,7 +88,34 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-  }
+  
+	else if(m_event.key.keysym.sym == SDLK_LEFT)
+        {
+	a=1;
+	}
+	else if(m_event.key.keysym.sym == SDLK_RIGHT)
+        {
+	a=2;
+	}
+		else if(m_event.key.keysym.sym == SDLK_UP)
+        {
+	a=3;
+	}
+	else if(m_event.key.keysym.sym == SDLK_DOWN)
+        {
+	a=4;
+	}
+         else if(m_event.key.keysym.sym == SDLK_SPACE)
+        {
+	  a=5;
+	}
+
+}
+else if(m_event.type == SDL_KEYUP)
+{
+    a = 0;
+}
+m_graphics->keys(a);
 }
 
 unsigned int Engine::getDT()

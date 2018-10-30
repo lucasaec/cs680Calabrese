@@ -124,11 +124,45 @@ worldStuff->Initialize();
 
   return true;
 }
+void Graphics::keys(unsigned int key)
+{
+a=key;
+}
 
 void Graphics::Update(unsigned int dt)
 {
+ 
+      if(a == 1) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(.5,0,0));
+      
+      }
+      if(a == 2) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(-.5,0,0));
+      
+      }
+      if(a == 3) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,.5));
+      
+      }
+      if(a == 4) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,-.5));
+      
+      }
+      if(a == 5) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,1,0));
+      }
+    
+  
+  
+
   // Update the object
   m_cube->Update(dt);
+
   m_table->Update(dt);
   m_cylinder->Update(dt);
   m_sphere->Update(dt);
