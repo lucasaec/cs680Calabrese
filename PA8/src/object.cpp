@@ -202,7 +202,7 @@ if(type == 0) {
     btDefaultMotionState *shapeMotionState = NULL; 
   shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0))); 
   btScalar mass(0);
-  //std::cout << mass << '\n';
+  
   btVector3 inertia(0, 0, 0); 
   shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -245,41 +245,36 @@ shape->calculateLocalInertia(mass, inertia);
 
 }
 rigidBody->setActivationState(DISABLE_DEACTIVATION);
-  //rigidBody->getMotionState();
+  
 }
 Object::~Object()
 {
   Vertices.clear();
   Indices.clear();
 }
- //float x = 0.0f;
+ 
 
 void Object::Update(unsigned int dt)
 {
 
  
   if(physics == 2 || physics == 3 || physics == 4 || physics == 0) {
-  //std::cout << worldStuff->a << '\n';
-  //physics stuff???
-//rigidBody->setLinearVelocity(btVector3(0,0,0) );
+  
   btTransform trans;
   btScalar m[16]; 
   trans.setIdentity();
  
 
   worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 10); 
-  //std::cout << (float)dt/ (float)1000 << '\n';
+
  
   
- // rigidBody->getMotionState();
+
  rigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m); 
-  //std::cout << m[0] << '\n';
+  
   model = glm::make_mat4(m);
-  //std::cout << dt << '\n';
- 
-  // model = glm::scale(model, glm::vec3(1.0*scale1/1,1.0*scale1/1,1.0*scale1/1) );
-  //model = glm::rotate(model,  (angle), glm::vec3(0.5, 0, 0.0));
+
   }
   
 }
@@ -289,11 +284,7 @@ glm::mat4 Object::GetModel()
   return model;
 }
 
-/**
- *
- *
- *
- */
+
 
 
 void Object::Render()
