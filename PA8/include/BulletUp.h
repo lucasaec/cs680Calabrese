@@ -10,6 +10,7 @@ class BulletUp
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld; 
     ~BulletUp();
+    int a;
   private:
 };
 

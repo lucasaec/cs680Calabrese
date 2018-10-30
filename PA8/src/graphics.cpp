@@ -5,6 +5,7 @@
 Graphics::Graphics()
 {
 worldStuff = new BulletUp();
+worldStuff->a = 10;
 }
 
 Graphics::~Graphics()
@@ -48,20 +49,20 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  m_table = new Object("table.obj",4,0,0,0);
-  m_table->physics = 0;
+  m_table = new Object("table.obj",4,0,0,0,0);
+
   list.push_back(m_table);
   
 
 
-  m_cylinder = new Object("cylinder.obj",2,2,2,2);
- m_cylinder ->physics = 0;
+  m_cylinder = new Object("cylinder.obj",2,2,2,2,2);
+
   list.push_back(m_cylinder);
-  m_cube = new Object("cube.obj",2,-3,2.0,2);
-  m_cube->physics = 0;
+  m_cube = new Object("cube.obj",2,-3,2.0,2,3);
+ 
   list.push_back(m_cube);
-  m_sphere = new Object("sphere.obj",3,-2,15,-2);
-  m_sphere->physics = 1;
+  m_sphere = new Object("sphere.obj",3,-2,15,-2,4);
+
    list.push_back(m_sphere);
   
   // Set up the shaders
@@ -135,12 +136,18 @@ void Graphics::Update(unsigned int dt)
 
 void Graphics::Render()
 {
- /*
-  m_camera->view = glm::lookAt( glm::vec3(0.0, 60, -30.0), //Eye Position
-                      glm::vec3(0.0, 0.0, 0.0), //Focus point
-                      glm::vec3(0.0, 1.0, 0.0));*/
-
+ 
+glm::mat4 c;
+c = m_cube->model;
+glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+//vec3 eye =  glm::vec3(0, 0, 0);
+/*
+  m_camera->view = glm::lookAt( glm::vec3(d.x*10, d.y*3, d.z*3), //Eye Position
+                      glm::vec3(d.x, d.y, d.z), //Focus point
+                      glm::vec3(0.0, 1.0, 0.0));
+*/
   //clear the screen
+std::cout << d.x << ' ' << d.y << ' ' << d.z << '\n';
   glClearColor(0.0, 0.0, 0.2, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

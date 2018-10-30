@@ -8,7 +8,7 @@ class Object
 {
   public:
     Object();
-    Object(std::string, float, float, float, float);
+    Object(std::string, float, float, float, float, int);
     ~Object();
     void Update(unsigned int dt);
     void Render();
