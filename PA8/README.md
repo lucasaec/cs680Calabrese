@@ -57,7 +57,7 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 /usr/NX/scripts/vgl/vglrun ./Tutorial
 ```
 # How to load an object
-Place object files in the objects folder. Place material files in the objects folder. They should be download when the repository is cloned.
+Place object files in the objects folder. They should be download when the repository is cloned.
 See "Text Input" to know what to do next.
 
 ## Text Input
@@ -85,7 +85,7 @@ space -pushes cube up with a force (towards the sky)
 
 # Extra Credit
 We added used triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
-The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj.
+The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
 ```0 ```
 
 ### Group Members
