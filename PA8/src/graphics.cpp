@@ -49,7 +49,11 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  m_table = new Object("table4.obj",4,0,0,0,0);
+  std::cout << "Please choose a file for a table: bowl.obj or table4.obj" << "\n";
+  std::string response;
+  cin >> response;
+
+  m_table = new Object(response,4,0,0,0,0);
 
   list.push_back(m_table);
   
