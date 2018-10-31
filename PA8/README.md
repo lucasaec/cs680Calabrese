@@ -65,14 +65,11 @@ Run the code like this:
 Example:
 ```./BulletTest```
 
-The program will then ask you to give it a file name (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. 
-
-
-The program will then ask you to enter a file name.
+The program will then ask you to give it a file name in terminal (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. 
 
 Please only choose "table4.obj" or "bowl.obj". table4 is for testing the regular requirements of the assignment, while the bowl is for testing the extra credit
 
-## Controls
+## Keyboard Controls
 up arrow - pushes cube forward with a force
 
 left arrow - pushes cube left with a force
@@ -81,12 +78,11 @@ right arrow -pushes cube right with a force
 
 down arrow -pushes cube backwards with a force
 
-space -pushes cube up with a force (towards the sky)
+spacebar -pushes cube up with a force (towards the sky)
 
 # Extra Credit
 We added used triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
 The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
-```0 ```
 
 ### Group Members
 Andrew Flangas
