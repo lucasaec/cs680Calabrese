@@ -236,7 +236,7 @@ if(type == 4) {
   btDefaultMotionState *shapeMotionState = NULL; 
 btCollisionShape* shape = new btSphereShape((btScalar).4f);
 btVector3 inertia(0,0,0);
-shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10, 0))); 
+shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10, 4))); 
 btScalar mass(1);
 shape->calculateLocalInertia(mass, inertia);
   btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
