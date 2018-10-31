@@ -7,6 +7,10 @@ For both of the operating systems to run this project installation of these thre
 
 This project uses OpenGL 3.3. Some computers, such as virtual machines in the ECC, can not run this version. In in order to run OpenGL 2.7 follow the instructions at [Using OpenGL 2.7](https://github.com/HPC-Vis/computer-graphics/wiki/Using-OpenGL-2.7)
 
+The cmakelists.txt file includes imagemagick so imagemagick may need to be installed.
+I used: sudo apt-get install libbullet-dev
+to install bullet.
+
 ### Ubuntu/Linux
 ```bash
 sudo apt-get install libglew-dev libglm-dev libsdl2-dev
@@ -35,15 +39,7 @@ Please don't use cmake. please just use the makefile
 
 
 ### Makefile Instructions 
-The makefile works as expected and must be updated with new files added in. ./Tutorial without command line arguments will not load any objects. Please see below in this Readme file to know how to use the command line arguments and load objects.
-
-```bash
-mkdir build
-cd build
-cp ../makefile .
-make
-./Tutorial
-```
+Please use cmake
 
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
@@ -57,40 +53,24 @@ See "Text Input" to know what to do next.
 ## Text Input
 Run the code like this:
 Example:
-```./Tutorial```
+```./BulletTest```
 
-The program will then ask you to give it a file name. Enter the file name of the object you want to load. For example:
+The program will then ask you to give it a file name (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. For example:
 
 Please enter a file name
 
-```box2.obj```
+``````
 
-The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0.
+The program will then ask you to enter a file name.
 
-Would you like the input to be random? Enter 1 for yes 0 for no
+Please only choose "table4.obj" or "bowl.obj". table4 is for testing the regular requirements of the assignment, while the bowl is for testing the extra credit
 
 ```1 ```
 
 
 
 # Extra Credit
-To load materials place materials in the objects folder. 
-After following the build instructions run the code like this:
-Example:
-```./Tutorial```
-
-You will be prompted for the file name. In the terminal, Type dragon.obj or box2.obj and press enter to enter a file name.
-
-Example:
-
-Please enter a file name
-
-```box2.obj```
-
-
-The program will then ask you to enter 0 or 1. If you want a random color enter 1. If you want one of the object's material colors enter 0. Enter 0 and then press enter in the terminal to load the object's material.
-
-Would you like the input to be random? Enter 1 for yes 0 for no
+We added triangle meshes for the table and the bowl. You can test the triangle meshes with the bowl.
 
 ```0 ```
 
