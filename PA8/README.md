@@ -65,22 +65,26 @@ Run the code like this:
 Example:
 ```./BulletTest```
 
-The program will then ask you to give it a file name (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. For example:
+The program will then ask you to give it a file name (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. 
 
-Please enter a file name
-
-``````
 
 The program will then ask you to enter a file name.
 
 Please only choose "table4.obj" or "bowl.obj". table4 is for testing the regular requirements of the assignment, while the bowl is for testing the extra credit
 
-```1 ```
+## Controls
+up arrow - pushes cube forward with a force
 
+left arrow - pushes cube left with a force
 
+right arrow -pushes cube right with a force
+
+down arrow -pushes cube backwards with a force
+
+space -pushes cube up with a force (towards the sky)
 
 # Extra Credit
-We added triangle meshes for the table and the bowl. You can test the triangle meshes with the bowl.
+We added used triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
 
 ```0 ```
 
