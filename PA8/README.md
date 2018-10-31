@@ -1,4 +1,4 @@
-# PA5: Loading Objects with Assimp
+# PA8: Bullet
 
 # Dependencies, Building, and Running
 
