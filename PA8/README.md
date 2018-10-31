@@ -79,8 +79,11 @@ down arrow -pushes cube backwards with a force
 spacebar -pushes cube up with a force (towards the sky)
 
 # Extra Credit
-We added used triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
-The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
+We added triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
+The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj, table.obj works too, but it's small. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
+
+# Note
+The objects are small, so they might be hidden behind walls. You can use the cube to push the sphere.
 
 ### Group Members
 Andrew Flangas
