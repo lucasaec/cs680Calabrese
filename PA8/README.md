@@ -37,16 +37,13 @@ Running the make in a separate directory will allow easy cleanup of the build da
 ### CMake Instructions
 The building of the project is done using CMake, installation with apt-get or brew may be necessary. Later use with CMake and Shader files will be require the copy of a directory where those files are stored (ex. shaders). To do this in the 
 
-`
+```
 mkdir build
-
 cd build
-
 cmake ..
-
 make
-
-./BulletTest`
+./BulletTest
+```
 
 
 ### Makefile Instructions 
