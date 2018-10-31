@@ -85,7 +85,7 @@ space -pushes cube up with a force (towards the sky)
 
 # Extra Credit
 We added used triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
-
+The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj.
 ```0 ```
 
 ### Group Members
