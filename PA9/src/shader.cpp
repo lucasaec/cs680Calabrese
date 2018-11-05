@@ -45,7 +45,7 @@ bool Shader::AddShader(GLenum ShaderType)
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-      s = m_shaderLoader.load("../shader/Fragment.frag");
+      s = m_shaderLoader.load("../shader/FragmentLighting.frag");
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
