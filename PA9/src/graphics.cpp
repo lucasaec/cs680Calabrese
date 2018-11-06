@@ -99,26 +99,58 @@ worldStuff->Initialize();
   }
 
   // Locate the projection matrix in the shader
-  m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
-  if (m_projectionMatrix == INVALID_UNIFORM_LOCATION) 
+  m_AmbientProduct = m_shader->GetUniformLocation("AmbientProduct");
+  if (m_AmbientProduct == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_projectionMatrix not found\n");
+    printf("m_AmbientProduct not found\n");
     return false;
   }
 
   // Locate the view matrix in the shader
-  m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
-  if (m_viewMatrix == INVALID_UNIFORM_LOCATION) 
+  m_DiffuseProduct = m_shader->GetUniformLocation("DiffuseProduct");
+  if (m_DiffuseProduct == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_viewMatrix not found\n");
+    printf("m_DiffuseProduct not found\n");
     return false;
   }
 
   // Locate the model matrix in the shader
-  m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  m_SpecularProduct = m_shader->GetUniformLocation("SpecularProduct");
+  if (m_SpecularProduct == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_modelMatrix not found\n");
+    printf("m_SpecularProduct not found\n");
+    return false;
+  }
+
+  // Locate the projection matrix in the shader
+  m_ModelView = m_shader->GetUniformLocation("ModelView");
+  if (m_ModelView == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_ModelView not found\n");
+    return false;
+  }
+
+  // Locate the view matrix in the shader
+  m_Projection = m_shader->GetUniformLocation("Projection");
+  if (m_Projection == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Projection not found\n");
+    return false;
+  }
+
+  // Locate the model matrix in the shader
+  m_LightPosition = m_shader->GetUniformLocation("LightPosition");
+  if (m_LightPosition == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  }
+
+  // Locate the model matrix in the shader
+  m_Shininess = m_shader->GetUniformLocation("Shininess");
+  if (m_Shininess == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Shininess not found\n");
     return false;
   }
 
@@ -193,17 +225,17 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   m_shader->Enable();
 
   // Send in the projection and view to the shader
-  glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
+  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
   // Render the object
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
+  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
   m_table->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
   m_cylinder->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
+  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
   m_sphere->Render();
   // Get any errors from OpenGL
   auto error = glGetError();

@@ -26,9 +26,12 @@ unsigned int a;
     Camera *m_camera;
     Shader *m_shader;
 
-    GLint m_projectionMatrix;
-    GLint m_viewMatrix;
-    GLint m_modelMatrix;
+    GLint m_AmbientProduct, m_DiffuseProduct, m_SpecularProduct;
+    GLint m_ModelView;
+    GLint m_Projection;
+    GLint m_LightPosition;
+    GLint m_Shininess;
+    
 
     Object *m_cube;
     Object *m_table;

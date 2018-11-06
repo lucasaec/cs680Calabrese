@@ -41,7 +41,7 @@ bool Shader::AddShader(GLenum ShaderType)
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-      s = m_shaderLoader.load("../shader/Vertex.vert");
+      s = m_shaderLoader.load("../shader/VertexLigting.vert");
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
