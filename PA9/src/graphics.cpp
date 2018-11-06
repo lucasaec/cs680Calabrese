@@ -171,13 +171,11 @@ if (a == 7)
 {
    amb-=0.005;
  } 
+for(unsigned int i=0; i<list.size(); i++)
+{
+list.at(i)->Update(dt);
+}
 
-  // Update the object
-  m_cube->Update(dt);
-
-  m_table->Update(dt);
-  m_cylinder->Update(dt);
-  m_sphere->Update(dt);
 }
 
 void Graphics::Render()
@@ -211,22 +209,11 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,0.1,0.1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
   glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
-  
- glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  
-  m_cube->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
- 
-  m_table->Render();
-
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
- 
-  m_cylinder->Render();
-  
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
-
-  m_sphere->Render();
+ for(unsigned int x = 0; x < list.size(); x++) {
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
+          list.at(x)->Render();   
+      } 
 
   // Get any errors from OpenGL
   auto error = glGetError();

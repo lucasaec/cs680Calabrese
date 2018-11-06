@@ -662,7 +662,7 @@ p1=p;
 void Graphics::IterativeRender(Object* obj) {
 if(!scaledView) {
       for(unsigned int x = 0; x < list1.size(); x++) {
-          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
           list1.at(x)->Render();   
       }
 }
