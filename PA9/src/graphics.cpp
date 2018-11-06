@@ -49,11 +49,11 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  std::cout << "Please choose a file for a table: bowl.obj or table4.obj" << "\n";
-  std::string response;
-  cin >> response;
+  //std::cout << "Please choose a file for a table: bowl.obj or table4.obj" << "\n";
+  //std::string response;
+ // cin >> response;
 
-  m_table = new Object(response,4,0,0,0,0);
+  m_table = new Object("table4.obj",4,0,0,0,0);
 
   list.push_back(m_table);
   
@@ -99,58 +99,26 @@ worldStuff->Initialize();
   }
 
   // Locate the projection matrix in the shader
-  m_AmbientProduct = m_shader->GetUniformLocation("AmbientProduct");
-  if (m_AmbientProduct == INVALID_UNIFORM_LOCATION) 
+  m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
+  if (m_projectionMatrix == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_AmbientProduct not found\n");
+    printf("m_projectionMatrix not found\n");
     return false;
   }
 
   // Locate the view matrix in the shader
-  m_DiffuseProduct = m_shader->GetUniformLocation("DiffuseProduct");
-  if (m_DiffuseProduct == INVALID_UNIFORM_LOCATION) 
+  m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
+  if (m_viewMatrix == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_DiffuseProduct not found\n");
+    printf("m_viewMatrix not found\n");
     return false;
   }
 
   // Locate the model matrix in the shader
-  m_SpecularProduct = m_shader->GetUniformLocation("SpecularProduct");
-  if (m_SpecularProduct == INVALID_UNIFORM_LOCATION) 
+  m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_SpecularProduct not found\n");
-    return false;
-  }
-
-  // Locate the projection matrix in the shader
-  m_ModelView = m_shader->GetUniformLocation("ModelView");
-  if (m_ModelView == INVALID_UNIFORM_LOCATION) 
-  {
-    printf("m_ModelView not found\n");
-    return false;
-  }
-
-  // Locate the view matrix in the shader
-  m_Projection = m_shader->GetUniformLocation("Projection");
-  if (m_Projection == INVALID_UNIFORM_LOCATION) 
-  {
-    printf("m_Projection not found\n");
-    return false;
-  }
-
-  // Locate the model matrix in the shader
-  m_LightPosition = m_shader->GetUniformLocation("LightPosition");
-  if (m_LightPosition == INVALID_UNIFORM_LOCATION) 
-  {
-    printf("m_LightPosition not found\n");
-    return false;
-  }
-
-  // Locate the model matrix in the shader
-  m_Shininess = m_shader->GetUniformLocation("Shininess");
-  if (m_Shininess == INVALID_UNIFORM_LOCATION) 
-  {
-    printf("m_Shininess not found\n");
+    printf("m_modelMatrix not found\n");
     return false;
   }
 
@@ -162,7 +130,9 @@ worldStuff->Initialize();
 }
 void Graphics::keys(unsigned int key)
 {
+amb = 0.0;
 a=key;
+
 }
 
 void Graphics::Update(unsigned int dt)
@@ -193,8 +163,14 @@ void Graphics::Update(unsigned int dt)
           m_cube->rigidBody->applyCentralImpulse(btVector3(0,1,0));
       }
     
-  
-  
+  if(a == 6)
+{
+   amb+=0.005;
+ }
+if (a == 7)
+{
+   amb-=0.005;
+ } 
 
   // Update the object
   m_cube->Update(dt);
@@ -225,18 +201,33 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   m_shader->Enable();
 
   // Send in the projection and view to the shader
-  glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  //Shader
 
   // Render the object
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  glUniform4f(m_shader->GetUniformLocation("LightPosition"),10,10,-10,0);
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,0.1,0.1,1);
+  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
+  
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  
   m_cube->Render();
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
+ 
   m_table->Render();
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+ 
   m_cylinder->Render();
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
+  
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
+
   m_sphere->Render();
+
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

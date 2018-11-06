@@ -109,12 +109,21 @@ void Engine::Keyboard()
         {
 	  a=5;
 	}
-
+else if(m_event.key.keysym.sym == SDLK_a)
+        {
+	  a=6;
+	}
+else if(m_event.key.keysym.sym == SDLK_d)
+        {
+	  a=7;
+	}
 }
+
 else if(m_event.type == SDL_KEYUP)
 {
-    a = 0;
+  a = 0;
 }
+
 m_graphics->keys(a);
 }
 

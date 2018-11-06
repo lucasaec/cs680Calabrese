@@ -1,17 +1,21 @@
 #include "graphics.h"
+#include "BulletUp.h"
 
+ BulletUp* worldStuff; 
 Graphics::Graphics()
 {
-
+worldStuff = new BulletUp();
+worldStuff->a = 10;
 }
 
 Graphics::~Graphics()
 {
 
 }
-
+std::vector<Object*> list;
 bool Graphics::Initialize(int width, int height)
 {
+worldStuff->Initialize();
   // Used for the linux OS
   #if !defined(__APPLE__) && !defined(MACOSX)
     // cout << glewGetString(GLEW_VERSION) << endl;
@@ -45,8 +49,26 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object();
+  //std::cout << "Please choose a file for a table: bowl.obj or table4.obj" << "\n";
+  //std::string response;
+ // cin >> response;
 
+  m_table = new Object("table4.obj",4,0,0,0,0);
+
+  list.push_back(m_table);
+  
+
+
+  m_cylinder = new Object("cylinder.obj",2,2,2,2,2);
+
+  list.push_back(m_cylinder);
+  m_cube = new Object("cube.obj",2,-3,2.0,2,3);
+ 
+  list.push_back(m_cube);
+  m_sphere = new Object("sphere.obj",3,-2,15,-2,4);
+
+   list.push_back(m_sphere);
+  
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -106,16 +128,69 @@ bool Graphics::Initialize(int width, int height)
 
   return true;
 }
+void Graphics::keys(unsigned int key)
+{
+amb = 0.0;
+a=key;
+if(a == 6)
+amb+=0.05;
+else if (a == 7)
+amb-=0.05;
+}
 
 void Graphics::Update(unsigned int dt)
 {
+ 
+      if(a == 1) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(.5,0,0));
+      
+      }
+      if(a == 2) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(-.5,0,0));
+      
+      }
+      if(a == 3) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,.5));
+      
+      }
+      if(a == 4) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,-.5));
+      
+      }
+      if(a == 5) {
+
+          m_cube->rigidBody->applyCentralImpulse(btVector3(0,1,0));
+      }
+    
+  
+  
+
   // Update the object
   m_cube->Update(dt);
+
+  m_table->Update(dt);
+  m_cylinder->Update(dt);
+  m_sphere->Update(dt);
 }
 
 void Graphics::Render()
 {
+ 
+glm::mat4 c;
+c = m_cube->model;
+glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+//vec3 eye =  glm::vec3(0, 0, 0);
+/*
+  m_camera->view = glm::lookAt( glm::vec3(d.x*10, d.y*3, d.z*3), //Eye Position
+                      glm::vec3(d.x, d.y, d.z), //Focus point
+                      glm::vec3(0.0, 1.0, 0.0));
+*/
   //clear the screen
+//std::cout << d.x << ' ' << d.y << ' ' << d.z << '\n';
   glClearColor(0.0, 0.0, 0.2, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -125,10 +200,29 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-
+  //Shader
+  glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,0.1,0.1,1);
+  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
   // Render the object
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+
+  
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
+ 
+  m_table->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+ 
+  m_cylinder->Render();
+  
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
+
+  m_sphere->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

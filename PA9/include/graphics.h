@@ -21,17 +21,15 @@ void keys(unsigned int);
 
   private:
 unsigned int a;
+float amb;
     std::string ErrorString(GLenum error);
 
     Camera *m_camera;
     Shader *m_shader;
 
-    GLint m_AmbientProduct, m_DiffuseProduct, m_SpecularProduct;
-    GLint m_ModelView;
-    GLint m_Projection;
-    GLint m_LightPosition;
-    GLint m_Shininess;
-    
+    GLint m_projectionMatrix;
+    GLint m_viewMatrix;
+    GLint m_modelMatrix;
 
     Object *m_cube;
     Object *m_table;

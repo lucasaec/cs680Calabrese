@@ -19,7 +19,7 @@ input = "../objects/table.obj" ;
 //std::cin >> random;
 random = 1;
 
-
+float a,b,c;
 
 const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
 
@@ -40,26 +40,18 @@ for(int i = 0; i < mesh->mNumVertices; i++) {
               x = mesh->mVertices[i].x;
               y = mesh->mVertices[i].y;
               z = mesh->mVertices[i].z;
-          if(random == 1) {
-            
-              float xq=1, xw=1, xe=1;
-              if(rand() % 4 == 0) {
-                  xq*= -1;
-              }
-              if(rand() % 4 == 0) {
-                  xw*= -1;
-              }
-              if(rand() % 4 == 0) {
-                  xe*= -1;
-              }
-           
+        
+if(mesh->HasNormals())
+{
+a = mesh->mNormals[i].x;
+b = mesh->mNormals[i].y;
+c = mesh->mNormals[i].z;
+//norm = glm::vec3(normal.x,normal.y,normal.z);
 
-              q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-              w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-              e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-          }
-       
-   Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
+
+}
+
+   Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e),glm::vec3(a,b,c)};
    Vertices.push_back(vzq);
 }
 
@@ -80,15 +72,7 @@ for(unsigned int i = 0; i < scene->mNumMeshes; i++) {
 
   angle = 0.0f;
 
-  glGenBuffers(1, &VB);
-  glBindBuffer(GL_ARRAY_BUFFER, VB);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
 
-  glGenBuffers(1, &IB);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-
-  
 }
 /**
  *
@@ -103,9 +87,7 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     Assimp::Importer importer;
     std::string input;
     input = "../objects/"+objname ;
-   //std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
-   // std::cin >> random;
-    random = 1;
+    random = 0;
 
 
 
@@ -117,37 +99,32 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     aiMaterial* mat = scene->mMaterials[1];
     aiColor4D color (0.f,0.f,0.f,0.f);
     aiGetMaterialColor(mat,AI_MATKEY_COLOR_DIFFUSE,&color);
-
+    glm::vec3 norm;
     angle = 0.0f;
     float q,w,e;
     q= color.r;
     w= color.g;
     e= color.b;
     float x,y,z;
+float a,b,c;
+
     for(int i = 0; i < mesh->mNumVertices; i++) {
         x = mesh->mVertices[i].x;
         y = mesh->mVertices[i].y;
         z = mesh->mVertices[i].z;
-        if(random == 1) {
-
-            float xq=1, xw=1, xe=1;
-            if(rand() % 4 == 0) {
-                xq*= -1;
-            }
-            if(rand() % 4 == 0) {
-                xw*= -1;
-            }
-            if(rand() % 4 == 0) {
-                xe*= -1;
-            }
+       
+if(mesh->HasNormals())
+{
+a = mesh->mNormals[i].x;
+b = mesh->mNormals[i].y;
+c = mesh->mNormals[i].z;
+//norm = glm::vec3(normal.x,normal.y,normal.z);
 
 
-            q =(x/y/z*xq*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-            w = (y/z/x*xw*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-            e = (z/x/y*xe*(float)(rand() % 10) ) +  (float)1/((rand() % 100 + 1) );
-        }
+}
 
-        Vertex vzq = {glm::vec3(x,y,z),glm::vec3(q,w,e)};
+       
+        Vertex vzq = { glm::vec3(x,y,z), glm::vec3(q,w,e), glm::vec3(a,b,c) };
         Vertices.push_back(vzq);
     }
 
@@ -176,7 +153,7 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
         //std::cout << a << '\n';
   
     }
-     //std::cout << "AAAAAAAAAAAAAAAAAAA" << '\n';
+ 
     if(type == 0) {
     shape = new btBvhTriangleMeshShape(objTriMesh, true); 
     }
@@ -184,14 +161,6 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     angle = 0.0f;
 
 
-    glGenBuffers(1, &VB);
-    glBindBuffer(GL_ARRAY_BUFFER, VB);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
-
-    glGenBuffers(1, &IB);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-    
     /** Model stuff that gets overwritten anyways**/
     model = glm::mat4(1.0f);
     model = glm::translate(glm::vec3(posx, posy+5, posz) );
@@ -290,6 +259,19 @@ glm::mat4 Object::GetModel()
 
 void Object::Render()
 {
+
+    glGenBuffers(1, &VB);
+    glBindBuffer(GL_ARRAY_BUFFER, VB);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
+
+    glGenBuffers(1, &IB);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
+    
+     glGenBuffers(1, &normal);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, normal);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
+
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
 

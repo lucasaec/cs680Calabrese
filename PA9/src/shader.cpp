@@ -41,11 +41,11 @@ bool Shader::AddShader(GLenum ShaderType)
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-      s = m_shaderLoader.load("../shader/VertexLigting.vert");
+      s = m_shaderLoader.load("../shader/Vertex.vert");
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-      s = m_shaderLoader.load("../shader/FragmentLighting.frag");
+      s = m_shaderLoader.load("../shader/Fragment.frag");
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
