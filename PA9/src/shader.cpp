@@ -34,18 +34,26 @@ bool Shader::Initialize()
 }
 
 // Use this method to add shaders to the program. When finished - call finalize()
-bool Shader::AddShader(GLenum ShaderType)
+bool Shader::AddShader(GLenum ShaderType, unsigned int pershade)
 {
   shaderLoader m_shaderLoader = shaderLoader();
   std::string s = "";
 
-  if(ShaderType == GL_VERTEX_SHADER)
+  if(ShaderType == GL_VERTEX_SHADER && pershade == 1)
   {
-      s = m_shaderLoader.load("../shader/Vertex.vert");
+      s = m_shaderLoader.load("../shader/pervertex_shader.vert");
   }
-  else if(ShaderType == GL_FRAGMENT_SHADER)
+  else if(ShaderType == GL_FRAGMENT_SHADER && pershade == 1)
   {
-      s = m_shaderLoader.load("../shader/Fragment.frag");
+      s = m_shaderLoader.load("../shader/pervertex_shader.frag");
+  }
+  else if(ShaderType == GL_VERTEX_SHADER && pershade == 0)
+  {
+      s = m_shaderLoader.load("../shader/perfragment_shader.vert");
+  }
+  else if(ShaderType == GL_FRAGMENT_SHADER && pershade == 0)
+  {
+      s = m_shaderLoader.load("../shader/perfragment_shader.frag");
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);

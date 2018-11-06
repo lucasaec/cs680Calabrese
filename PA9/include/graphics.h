@@ -14,6 +14,7 @@ class Graphics
   public:
     Graphics();
     ~Graphics();
+Shader *m_shader;
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
     void Render();
@@ -25,7 +26,7 @@ float amb;
     std::string ErrorString(GLenum error);
 
     Camera *m_camera;
-    Shader *m_shader;
+   // Shader *m_shader;
 
     GLint m_projectionMatrix;
     GLint m_viewMatrix;
