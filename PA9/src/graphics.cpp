@@ -58,7 +58,7 @@ worldStuff->Initialize();
   //std::string response;
  // cin >> response;
 
-  m_table = new Object("bowl4.obj",4,0,0,0,0);
+  m_table = new Object("table4.obj",4,0,0,0,0);
 
   list.push_back(m_table);
   
