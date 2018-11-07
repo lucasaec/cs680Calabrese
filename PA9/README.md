@@ -81,13 +81,21 @@ m - change to per vertex lighting
 
 n - change to per fragment lighting
 
-1 -
+1 - increase the table's specular light
 
-2 -
+2 - decrease table's specular light
 
-3 -
+3 - increase specular light of cube
 
-4 -
+4 - decrease specular light of cube
+
+5 - increase specular light for cylinder
+
+6 - decrease specular light for cylinder
+
+7 - increase secular light for sphere
+
+8 - decrease specular light for sphere
 
 # Extra Credit
 
