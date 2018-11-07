@@ -62,6 +62,11 @@ Run the code like this:
 Example:
 ```./BulletTest```
 
+The program will then ask you to give it a file name in terminal 
+Enter the file name of the object you want to load. 
+
+Please only choose "table4.obj" or "eg.obj". table4 is for testing the regular requirements of the assignment, while the eg.obj is for loading in a sphere to try out per-vertex and per-fragment lighting.
+
 ## Keyboard Controls
 up arrow - pushes cube forward with a force
 
