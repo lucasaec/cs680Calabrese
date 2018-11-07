@@ -22,7 +22,7 @@ void keys(unsigned int);
 
   private:
 unsigned int a;
-float amb;
+float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;
     std::string ErrorString(GLenum error);
 
     Camera *m_camera;

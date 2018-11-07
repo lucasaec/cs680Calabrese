@@ -109,13 +109,45 @@ void Engine::Keyboard()
         {
 	  a=5;
 	}
-else if(m_event.key.keysym.sym == SDLK_a)
+	else if(m_event.key.keysym.sym == SDLK_a)
         {
 	  a=6;
 	}
-else if(m_event.key.keysym.sym == SDLK_d)
+	else if(m_event.key.keysym.sym == SDLK_s)
         {
 	  a=7;
+	}
+	else if(m_event.key.keysym.sym == SDLK_1)
+        {
+	  a=8;
+	}
+	else if(m_event.key.keysym.sym == SDLK_2)
+        {
+	  a=9;
+	}
+	else if(m_event.key.keysym.sym == SDLK_3)
+        {
+	  a=10;
+	}
+	else if(m_event.key.keysym.sym == SDLK_4)
+        {
+	  a=11;
+	}
+	else if(m_event.key.keysym.sym == SDLK_5)
+        {
+	  a=12;
+	}
+	else if(m_event.key.keysym.sym == SDLK_6)
+        {
+	  a=13;
+	}
+	else if(m_event.key.keysym.sym == SDLK_7)
+        {
+	  a=14;
+	}
+	else if(m_event.key.keysym.sym == SDLK_8)
+        {
+	  a=15;
 	}
      if(m_event.key.keysym.sym == SDLK_m)
      {
