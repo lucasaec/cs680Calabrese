@@ -56,16 +56,11 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```
 # How to load an object
 Place object files in the objects folder. They should be download when the repository is cloned.
-See "Text Input" to know what to do next.
 
 ## Text Input
 Run the code like this:
 Example:
 ```./BulletTest```
-
-The program will then ask you to give it a file name in terminal (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. 
-
-Please only choose "table4.obj" or "bowl.obj". table4 is for testing the regular requirements of the assignment, while the bowl is for testing the extra credit
 
 ## Keyboard Controls
 up arrow - pushes cube forward with a force
@@ -79,12 +74,19 @@ down arrow -pushes cube backwards with a force
 spacebar -pushes cube up with a force (towards the sky)
 
 a - increases ambient lighting 
+
 s - decreases ambient lighting
+
 m - change to per vertex lighting
+
 n - change to per fragment lighting
+
 1 -
+
 2 -
+
 3 -
+
 4 -
 
 # Extra Credit
