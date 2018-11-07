@@ -40,7 +40,7 @@ for(int i = 0; i < mesh->mNumVertices; i++) {
               x = mesh->mVertices[i].x;
               y = mesh->mVertices[i].y;
               z = mesh->mVertices[i].z;
-        
+    
 if(mesh->HasNormals())
 {
 a = mesh->mNormals[i].x;
@@ -87,7 +87,7 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     Assimp::Importer importer;
     std::string input;
     input = "../objects/"+objname ;
-    random = 0;
+    random = 1;
 
 
 
@@ -112,7 +112,7 @@ float a,b,c;
         x = mesh->mVertices[i].x;
         y = mesh->mVertices[i].y;
         z = mesh->mVertices[i].z;
-       
+   
 if(mesh->HasNormals())
 {
 a = mesh->mNormals[i].x;

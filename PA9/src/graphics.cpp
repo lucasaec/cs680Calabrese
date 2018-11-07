@@ -204,35 +204,45 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   //Shader
 
   // Render the object
-  
+  glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.1,0.1,0.1,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
+  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
+
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+/*glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.1,0.1,0.1,1);
-  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,0.1,0.1,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.0);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);*/
   m_cube->Render();
+
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
-glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+ /*glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.1,0.1,0.1,1);
   glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,0.1,0.1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);*/
   m_table->Render();
+
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
-glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+ /*glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.1,0.1,0.1,1);
-  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0.1,1,1,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);*/
   m_cylinder->Render();
+
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
-glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
+ /* glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0,0,0,1);
-  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,0.1,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),1,1,1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"),0.5);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);*/
   m_sphere->Render();
+
+
  /*for(unsigned int x = 0; x < list.size(); x++) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
           list.at(x)->Render();   
