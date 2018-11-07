@@ -54,11 +54,11 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  //std::cout << "Please choose a file for a table: bowl.obj or table4.obj" << "\n";
-  //std::string response;
- // cin >> response;
+  std::cout << "Please choose a file for a table: eg.obj or table4.obj" << "\n";
+  std::string response;
+  cin >> response;
 
-  m_table = new Object("table4.obj",4,0,0,0,0);
+  m_table = new Object(response,4,0,0,0,0);
 
   list.push_back(m_table);
   
@@ -211,7 +211,7 @@ void Graphics::Render()
 {
  
 glm::mat4 c;
-c = m_cube->model;
+c = m_sphere->model;
 glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 //vec3 eye =  glm::vec3(0, 0, 0);
 /*
@@ -235,6 +235,7 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   // Render the object
   //glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1);
+glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],d[1],d[2],1);
  // glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0,0,0,1);
  // glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_tab,spec_tab,spec_tab,1);
  // glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);

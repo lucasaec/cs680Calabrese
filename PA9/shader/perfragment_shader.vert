@@ -6,6 +6,7 @@ in vec3 vNormal;
 out vec3 fN;
 out vec3 fE;
 out vec3 fL;
+out vec3 frag_pos;
 
 uniform mat4 projectionMatrix; 
 uniform mat4 viewMatrix; 
@@ -13,8 +14,10 @@ uniform mat4 modelMatrix;
 
 uniform vec4 LightPosition;
 
+
 void main()
 {
+       
 	fN = vNormal;
 	fE = vPosition.xyz;
 	fL = LightPosition.xyz;
@@ -25,4 +28,5 @@ void main()
 	}
 	
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vPosition;
+        frag_pos = (viewMatrix * modelMatrix *  vPosition).xyz;
 }
