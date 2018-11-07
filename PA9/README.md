@@ -1,4 +1,4 @@
-# PA8: Bullet
+# PA9: Lighting
 
 # Dependencies, Building, and Running
 
@@ -56,16 +56,11 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```
 # How to load an object
 Place object files in the objects folder. They should be download when the repository is cloned.
-See "Text Input" to know what to do next.
 
 ## Text Input
 Run the code like this:
 Example:
 ```./BulletTest```
-
-The program will then ask you to give it a file name in terminal (so you can test the extra credit with the bowl). Enter the file name of the object you want to load. 
-
-Please only choose "table4.obj" or "bowl.obj". table4 is for testing the regular requirements of the assignment, while the bowl is for testing the extra credit
 
 ## Keyboard Controls
 up arrow - pushes cube forward with a force
@@ -78,9 +73,31 @@ down arrow -pushes cube backwards with a force
 
 spacebar -pushes cube up with a force (towards the sky)
 
+a - increases ambient lighting 
+
+s - decreases ambient lighting
+
+m - change to per vertex lighting
+
+n - change to per fragment lighting
+
+1 - increase the table's specular light
+
+2 - decrease table's specular light
+
+3 - increase specular light of cube
+
+4 - decrease specular light of cube
+
+5 - increase specular light for cylinder
+
+6 - decrease specular light for cylinder
+
+7 - increase secular light for sphere
+
+8 - decrease specular light for sphere
+
 # Extra Credit
-We added triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
-The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
 
 # Note
 The objects are small, so they might be hidden behind walls. You can use the cube to push the sphere.
