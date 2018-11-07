@@ -1,4 +1,4 @@
-# PA8: Bullet
+# PA9: Lighting
 
 # Dependencies, Building, and Running
 
@@ -78,9 +78,16 @@ down arrow -pushes cube backwards with a force
 
 spacebar -pushes cube up with a force (towards the sky)
 
+a - increases ambient lighting 
+s - decreases ambient lighting
+m - change to per vertex lighting
+n - change to per fragment lighting
+1 -
+2 -
+3 -
+4 -
+
 # Extra Credit
-We added triangle meshes for collision shapes for the table and the bowl. You can test the triangle meshes with the bowl.
-The program will prompt you for a file to load in the terminal. You can use table4.obj or bowl.obj. Please note that there is a hole at the bottom of the bowl, so you may need to add an upwards force to push the cube out.
 
 # Note
 The objects are small, so they might be hidden behind walls. You can use the cube to push the sphere.
