@@ -11,6 +11,7 @@ spec_tab=0.0;
 spec_cube=0.0;
 spec_cyl=0.0;
 spec_sphere = 0.0;
+x=0.0;
 }
 
 Graphics::~Graphics()
@@ -54,8 +55,8 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  std::cout << "Please choose a file for a table: eg.obj or table4.obj" << "\n";
-  std::string response;
+  std::cout << "Please choose a file for a table: eg.obj or table4.obj or dragon.obj" << "\n";
+  
   cin >> response;
 
   m_table = new Object(response,4,0,0,0,0);
@@ -200,6 +201,14 @@ if (a==14)
 if (a==15)
 {spec_sphere-=0.01;
 }
+if (a==16 )
+{
+x+=0.01;
+}
+if(a==17 && x > -0.2)
+{
+x-=0.01;
+}
 for(unsigned int i=0; i<list.size(); i++)
 {
 list.at(i)->Update(dt);
@@ -211,8 +220,17 @@ void Graphics::Render()
 {
  
 glm::mat4 c;
+glm::vec4 d;
+if(response=="table4.obj")
+{
 c = m_sphere->model;
-glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+}
+else if(response=="dragon.obj")
+{
+c= m_cube->model;
+d = c * glm::vec4(0.0, 0.0,0.0,1.0);
+}
 //vec3 eye =  glm::vec3(0, 0, 0);
 /*
   m_camera->view = glm::lookAt( glm::vec3(d.x*10, d.y*3, d.z*3), //Eye Position
@@ -236,6 +254,8 @@ glm::vec4 d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
   //glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,20,0,0);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1);
 glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],d[1],d[2],1);
+
+glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
  // glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),0,0,0,1);
  // glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_tab,spec_tab,spec_tab,1);
  // glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);

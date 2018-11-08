@@ -149,6 +149,16 @@ void Engine::Keyboard()
         {
 	  a=15;
 	}
+else if(m_event.key.keysym.sym == SDLK_q)
+{
+a=16;
+}
+
+else if(m_event.key.keysym.sym == SDLK_w)
+{
+a=17;
+}
+
      if(m_event.key.keysym.sym == SDLK_m)
      {
 		      m_graphics->m_shader->Initialize();

@@ -17,13 +17,14 @@ uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 
 uniform vec4 LightPosition;
 uniform float Shininess;
-
+uniform vec4 spotLightPosition;
+uniform float spotLightStrength;
 
 void main(void)
 {
 
 
-    
+    vec3 cSpotLight = (viewMatrix * modelMatrix * spotLightPosition).xyz;
     vec3 pos = ((viewMatrix * modelMatrix) * v_position).xyz;
 	
     vec3 L = normalize( LightPosition.xyz - pos );
@@ -45,7 +46,9 @@ void main(void)
     if( dot(L, N) < 0.0 )  specular = vec4(0.0, 0.0, 0.0, 1.0); 
     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v_position;
 
-  
+    if(acos(dot( normalize(cSpotLight), normalize(pos) ) ) < .05 ){
+            ambient += vec4 (.2+spotLightStrength,.2+spotLightStrength,.2+spotLightStrength,.2+spotLightStrength);   
+        }
     color = ambient + diffuse + specular;
     color.a = 1.0;
 

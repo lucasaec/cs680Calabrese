@@ -19,7 +19,8 @@ Shader *m_shader;
     void Update(unsigned int dt);
     void Render();
 void keys(unsigned int);
-
+std::string response;
+float x;
   private:
 unsigned int a;
 float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;

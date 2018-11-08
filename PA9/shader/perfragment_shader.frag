@@ -17,6 +17,7 @@ uniform vec4 LightPosition;
 uniform float Shininess;
 uniform vec4 spotLightPosition;
 
+uniform float spotLightStrength;
 
 void main()
 {
@@ -40,7 +41,7 @@ void main()
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
 	}
         if(acos(dot( normalize(cSpotLight), normalize(frag_pos) ) ) < .05 ){
-            ambient += vec4 (.2,.2,.2,.2);   
+            ambient += vec4 (.2+spotLightStrength,.2+spotLightStrength,.2+spotLightStrength,.2+spotLightStrength);   
         }
       
      
