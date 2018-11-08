@@ -65,7 +65,7 @@ Example:
 The program will then ask you to give it a file name in terminal 
 Enter the file name of the object you want to load. 
 
-Please only choose "table4.obj" or "eg.obj". table4 is for testing the regular requirements of the assignment, while the eg.obj is for loading in a sphere to try out per-vertex and per-fragment lighting.
+Please only choose "table4.obj" or "eg.obj" or "dragon.obj". table4 is for testing the regular requirements of the assignment, while the eg.obj is for loading in a sphere to try out per-vertex and per-fragment lighting.dragon.obj help in understanding the spotlight a better way. dragon.obj will act weird because its probably too expensive for bullet. 
 
 ## Keyboard Controls
 up arrow - pushes cube forward with a force
@@ -102,6 +102,9 @@ n - change to per fragment lighting
 
 8 - decrease specular light for sphere
 
+q- increase spotlight strength
+
+w - decrease spotlight strength
 # Extra Credit
 
 # Note
