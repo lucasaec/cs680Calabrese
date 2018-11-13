@@ -9,17 +9,8 @@ Object::Object()
 {  
 unsigned int random = 0;
 Assimp::Importer importer;
-std::string input;
-std::cout << "Please enter a file name. (dragon.obj or box2.obj)" << '\n';
-std::cin >> input;
-input = "../objects/" + input;
-std::cout << "Would you like the colors to be random? Enter 1 for yes 0 for no" << '\n';
-std::cin >> random;
 
-
-
-
-const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
+const aiScene *scene = importer.ReadFile("../objects/table4.obj", aiProcess_Triangulate);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
 
 aiMesh *mesh = scene->mMeshes[0];
 
@@ -93,7 +84,7 @@ Object::~Object()
   Vertices.clear();
   Indices.clear();
 }
- //float x = 0.0f;
+ 
 void Object::Update(unsigned int dt)
 {
   angle += dt * M_PI/1000;

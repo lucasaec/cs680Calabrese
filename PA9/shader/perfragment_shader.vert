@@ -29,5 +29,5 @@ void main()
 	}
 	
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vPosition;
-        frag_pos = (viewMatrix * modelMatrix *  vPosition).xyz;
+        frag_pos = (viewMatrix * zmodelMatrix *  vPosition).xyz;
 }

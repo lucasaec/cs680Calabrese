@@ -21,7 +21,7 @@ uniform float spotLightStrength;
 
 void main()
 {
-        vec3 cSpotLight = (viewMatrix * modelMatrix * spotLightPosition).xyz;
+        vec3 cSpotLight = (viewMatrixmodelMatrix * spotLightPosition).xyz;
 
 	vec3 N = normalize( (viewMatrix*modelMatrix) * vec4(fN, 0.0) ).xyz;
 	vec3 E = normalize(fE);
