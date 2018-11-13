@@ -1,4 +1,4 @@
-PROJECT(BulletTest)
+PROJECT(Pinball)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 add_definitions     ( ${BULLET_DEFINITIONS} )
 include_directories ( ${BULLET_INCLUDE_DIRS} )

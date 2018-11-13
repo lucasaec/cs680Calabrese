@@ -64,9 +64,9 @@ worldStuff->Initialize();
   m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"sun.jpg");
   list1.push_back(m_sphere);
 
-  list1.push_back(new Object("cylinder.obj",2,-3.5,2,8,8,"earth3.jpg") );
-  list1.push_back(new Object("cylinder.obj",2,0,2,4,8,"earth3.jpg") );
-  list1.push_back(new Object("cylinder.obj",2,3.5,2,8,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,0,2,4,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"earth3.jpg") );
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
