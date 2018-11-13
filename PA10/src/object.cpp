@@ -137,16 +137,16 @@ aiMesh *mesh = scene->mMeshes[0];
        rigidBody->setRestitution(1.0);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }//setRestitution(5.0)
-    if(type == 8) {
+    if(type == 8) { //bumper
         btDefaultMotionState *shapeMotionState = NULL; 
         btCollisionShape* shape=new btCylinderShape(btVector3(.5,2,1));
         btVector3 inertia(0,0,0);
-        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, 0))); 
+        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
         btScalar mass(0);
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
-        rigidBody->setRestitution(4.0);
+        rigidBody->setRestitution(2.0);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }
     if(type == 4) {
@@ -158,6 +158,7 @@ aiMesh *mesh = scene->mMeshes[0];
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
+        rigidBody->setRestitution(1.0);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }
     rigidBody->setActivationState(DISABLE_DEACTIVATION); 

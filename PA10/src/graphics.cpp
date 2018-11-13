@@ -58,14 +58,15 @@ worldStuff->Initialize();
   m_cylinder = new Object("flipper.obj",2,2,2,2,3,"earth3.jpg");
   list1.push_back(m_cylinder);
 
-  m_cube = new Object("cube.obj",2,-3,2.0,2,2,"earth3.jpg");
+  m_cube = new Object("sphere.obj",2,-3,2.0,2,4,"sun.jpg");
   list1.push_back(m_cube);
 
-  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"earth3.jpg");
+  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"sun.jpg");
   list1.push_back(m_sphere);
 
-  list1.push_back(new Object("cylinder.obj",2,2,2,2,8,"earth3.jpg") );
-  
+  list1.push_back(new Object("cylinder.obj",2,-3.5,2,8,8,"earth3.jpg") );
+  list1.push_back(new Object("cylinder.obj",2,0,2,4,8,"earth3.jpg") );
+  list1.push_back(new Object("cylinder.obj",2,3.5,2,8,8,"earth3.jpg") );
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -229,6 +230,14 @@ void Graphics::Render() {
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(4)->GetModel()));
     glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
     list1.at(4)->Render();
+
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(5)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(5)->Render();
+
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(6)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(6)->Render();
  /*for(unsigned int x = 0; x < list.size(); x++) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
           list.at(x)->Render();   
