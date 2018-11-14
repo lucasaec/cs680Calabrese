@@ -204,11 +204,15 @@ void Graphics::Update(unsigned int dt) {
 }
 
 bool Graphics::Render() {
- 
+    bool rebool = true;
     glm::mat4 c;
     glm::vec4 d;
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+
+  m_camera->view = glm::lookAt( glm::vec3(d[0], d[1]+40,d[2]-10), //Eye Position
+                      glm::vec3(d[0], 0, d[2]), //Focus point
+                      glm::vec3(0.0, 1.0, 0.0));
 
     glClearColor(0.0, 0.0, 0.2, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -225,9 +229,17 @@ bool Graphics::Render() {
     return false;
     }
     if(d[2] < -18 && d[0] > -9) {
+    /*delete m_cube->rigidBody;
+    delete m_cube->objTriMesh;
+    delete m_cube->shape;
+    m_cube->rigidBody = NULL;
+    m_cube->objTriMesh = NULL;
+    m_cube->shape = NULL;
     delete m_cube;
-    m_cube = NULL;
+    m_cube = NULL;*/
+
     m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
+    list1.push_back(m_cube);
     balls++;
     std::cout << "Strike: " << balls <<"\n";
     }
