@@ -59,6 +59,9 @@ worldStuff->Initialize();
   m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"mars.jpg");
   list1.push_back(m_cylinder);
 
+
+
+  
   m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
   list1.push_back(m_cube);
 
@@ -77,6 +80,9 @@ worldStuff->Initialize();
  list1.push_back(new Object("tri2.obj",0,0,0,0,0,"sun.jpg") );
  list1.push_back(new Object("tri3.obj",0,0,0,0,0,"sun.jpg") );
 list1.push_back(new Object("tri4.obj",0,0,0,0,0,"sun.jpg") );
+
+  l_flipper = new Object("flipper3.obj",2,-2,2,2,11,"mars.jpg");
+  list1.push_back(l_flipper);
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -307,6 +313,10 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(12)->GetM
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(13)->GetModel()));
     glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
     list1.at(13)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(l_flipper->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    l_flipper->Render();
 
 
  /*for(unsigned int x = 0; x < list.size(); x++) {

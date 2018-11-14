@@ -37,6 +37,7 @@ float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;
     Object *m_table;
     Object *m_sphere;
     Object *m_cylinder;
+    Object *l_flipper;
 };
 
 #endif /* GRAPHICS_H */
