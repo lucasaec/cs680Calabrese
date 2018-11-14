@@ -1,6 +1,7 @@
 
 #include "engine.h"
-
+bool lFlipper = false;
+bool rFlipper = false;
 Engine::Engine(string name, int width, int height)
 {
   m_WINDOW_NAME = name;
@@ -149,9 +150,9 @@ void Engine::Keyboard()
         {
 	  a=15;
 	}
-        else if(m_event.key.keysym.sym == SDLK_m)
+        if(m_event.key.keysym.sym == SDLK_m)
         {
-	  a=20;
+	  rFlipper = true;
 	}
 else if(m_event.key.keysym.sym == SDLK_q)
 {
@@ -188,6 +189,11 @@ a=17;
 else if(m_event.type == SDL_KEYUP)
 {
   a = 0;
+  
+ if(m_event.key.keysym.sym == SDLK_m)
+        {
+	  rFlipper = false;
+	}
 }
 
 m_graphics->keys(a);

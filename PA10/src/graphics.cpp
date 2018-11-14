@@ -1,6 +1,7 @@
 #include "graphics.h"
 #include "BulletUp.h"
-
+extern bool lFlipper;
+extern bool rFlipper;
 BulletUp* worldStuff; 
 std::vector<Object*> list1;
 int balls = 0;
@@ -192,7 +193,7 @@ void Graphics::Update(unsigned int dt) {
     if(a==17 && x > -0.2) {
         x-=0.01;
     }
-    if(a == 20) {
+    if(rFlipper) {
         m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
     }
     else {
