@@ -17,7 +17,7 @@ class Graphics
 Shader *m_shader;
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
-    void Render();
+    bool Render();
 void keys(unsigned int);
 std::string response;
 float x;

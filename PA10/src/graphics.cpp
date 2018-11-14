@@ -3,7 +3,7 @@
 
 BulletUp* worldStuff; 
 std::vector<Object*> list1;
-
+int balls = 0;
 Graphics::Graphics() {
     worldStuff = new BulletUp();
     worldStuff->a = 10;
@@ -203,7 +203,7 @@ void Graphics::Update(unsigned int dt) {
     }
 }
 
-void Graphics::Render() {
+bool Graphics::Render() {
  
     glm::mat4 c;
     glm::vec4 d;
@@ -219,12 +219,17 @@ void Graphics::Render() {
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
 
-    std::cout << d[0] << " "  << d[1] << " "  << d[2] << "\n";
+    //std::cout << d[0] << " "  << d[1] << " "  << d[2] << "\n";
+    if(balls == 3) {
+    std::cout << "GAME OVER" <<"\n";
+    return false;
+    }
     if(d[2] < -18 && d[0] > -9) {
     delete m_cube;
     m_cube = NULL;
     m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
-    
+    balls++;
+    std::cout << "Strike: " << balls <<"\n";
     }
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
     glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
@@ -303,6 +308,7 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(13)->GetM
     string val = ErrorString( error );
     std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
   }
+  return true;
 }
 
 std::string Graphics::ErrorString(GLenum error)
