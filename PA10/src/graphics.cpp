@@ -58,7 +58,7 @@ worldStuff->Initialize();
   m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"mars.jpg");
   list1.push_back(m_cylinder);
 
-  m_cube = new Object("sphere.obj",2,-3,2.0,2,4,"sun.jpg");
+  m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
   list1.push_back(m_cube);
 
   m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"sun.jpg");
@@ -75,6 +75,7 @@ worldStuff->Initialize();
  list1.push_back(new Object("tri.obj",0,0,0,0,0,"sun.jpg") );
  list1.push_back(new Object("tri2.obj",0,0,0,0,0,"sun.jpg") );
  list1.push_back(new Object("tri3.obj",0,0,0,0,0,"sun.jpg") );
+list1.push_back(new Object("tri4.obj",0,0,0,0,0,"sun.jpg") );
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -206,7 +207,7 @@ void Graphics::Render() {
  
     glm::mat4 c;
     glm::vec4 d;
-    c = m_sphere->model;
+    c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
     glClearColor(0.0, 0.0, 0.2, 1.0);
@@ -217,10 +218,18 @@ void Graphics::Render() {
     glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
+
+    std::cout << d[0] << " "  << d[1] << " "  << d[2] << "\n";
+    if(d[2] < -18 && d[0] > -9) {
+    delete m_cube;
+    m_cube = NULL;
+    m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
+    
+    }
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
     glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
     glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.5);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.1,.1,.1,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,10,0,0);
 
@@ -276,6 +285,10 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(11)->GetM
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(12)->GetModel()));
     glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
     list1.at(12)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(13)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(13)->Render();
 
 
  /*for(unsigned int x = 0; x < list.size(); x++) {
