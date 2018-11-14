@@ -23,6 +23,6 @@ void BulletUp::Initialize() {
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
     solver = new btSequentialImpulseConstraintSolver;
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0, -9.8, -3));
+    dynamicsWorld->setGravity(btVector3(0, -9.8, -1));
     
 }

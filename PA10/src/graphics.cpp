@@ -55,7 +55,7 @@ worldStuff->Initialize();
   m_table = new Object("table4.obj",4,0,0,0,0,"earth3.jpg");
   list1.push_back(m_table);
   
-  m_cylinder = new Object("flipper.obj",2,2,2,2,3,"earth3.jpg");
+  m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"mars.jpg");
   list1.push_back(m_cylinder);
 
   m_cube = new Object("sphere.obj",2,-3,2.0,2,4,"sun.jpg");
@@ -67,6 +67,14 @@ worldStuff->Initialize();
   list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"earth3.jpg") );
   list1.push_back(new Object("bumper.obj",2,0,2,4,8,"earth3.jpg") );
   list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,3.5,2,0,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"earth3.jpg") );
+  
+
+  list1.push_back(new Object("wall.obj",0,0,0,0,0,"sun.jpg") );
+ list1.push_back(new Object("tri.obj",0,0,0,0,0,"sun.jpg") );
+ list1.push_back(new Object("tri2.obj",0,0,0,0,0,"sun.jpg") );
+ list1.push_back(new Object("tri3.obj",0,0,0,0,0,"sun.jpg") );
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -183,6 +191,12 @@ void Graphics::Update(unsigned int dt) {
     if(a==17 && x > -0.2) {
         x-=0.01;
     }
+    if(a == 20) {
+        m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
+    }
+    else {
+        m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,.3,0) );
+    }
     for(unsigned int i=0; i<list1.size(); i++) {
         list1.at(i)->Update(dt);
     }
@@ -206,7 +220,7 @@ void Graphics::Render() {
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
     glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
     glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.5);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,10,0,0);
 
@@ -238,6 +252,32 @@ void Graphics::Render() {
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(6)->GetModel()));
     glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
     list1.at(6)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(7)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(7)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(8)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(8)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(9)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(9)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(10)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(10)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(11)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(11)->Render();
+
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(12)->GetModel()));
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+    list1.at(12)->Render();
+
+
  /*for(unsigned int x = 0; x < list.size(); x++) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
           list.at(x)->Render();   

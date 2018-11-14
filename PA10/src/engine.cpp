@@ -149,6 +149,10 @@ void Engine::Keyboard()
         {
 	  a=15;
 	}
+        else if(m_event.key.keysym.sym == SDLK_m)
+        {
+	  a=20;
+	}
 else if(m_event.key.keysym.sym == SDLK_q)
 {
 a=16;
@@ -159,7 +163,7 @@ else if(m_event.key.keysym.sym == SDLK_w)
 a=17;
 }
 
-     if(m_event.key.keysym.sym == SDLK_m)
+     if(m_event.key.keysym.sym == SDLK_b)
      {
 		      m_graphics->m_shader->Initialize();
 		      m_graphics->m_shader->AddShader(GL_VERTEX_SHADER, 1);
