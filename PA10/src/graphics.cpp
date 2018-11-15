@@ -10,10 +10,10 @@ Graphics::Graphics()
     worldStuff = new BulletUp();
     worldStuff->a = 10;
     amb = 0.0;
-    spec_tab=0.0;
-    spec_cube=0.0;
-    spec_cyl=0.0;
-    spec_sphere = 0.0;
+    spec_tab=0.7;
+    spec_cube=0.5;
+    spec_cyl=0.5;
+    spec_sphere= 0.9;
     x=0.0;
 	cam=0.0;
 	camera=0.0;
@@ -245,7 +245,7 @@ bool Graphics::Render() {
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
-  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+25+cam1,0.0-30+camera), //Eye Position
+  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
 
@@ -278,15 +278,16 @@ bool Graphics::Render() {
     balls++;
     std::cout << "Strike: " << balls <<"\n";
     }
-    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
-    glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
-    glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.1,.1,.1,.1);
+    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.5,0.5,0.5,1); 
+   // glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
+   // glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,10,0,0);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
+  //  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
     m_cube->Render();
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));

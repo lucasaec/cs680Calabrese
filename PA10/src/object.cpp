@@ -234,7 +234,6 @@ void Object::Render()
 {
     
     
-   
 
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
