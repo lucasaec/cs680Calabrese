@@ -23,6 +23,8 @@ std::string response;
 float x;
 float camera;
 float cam;
+float cam1;
+
   private:
 unsigned int a;
 float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;
