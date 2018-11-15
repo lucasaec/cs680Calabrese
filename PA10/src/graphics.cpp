@@ -5,7 +5,8 @@ extern bool rFlipper;
 BulletUp* worldStuff; 
 std::vector<Object*> list1;
 int balls = 0;
-Graphics::Graphics() {
+Graphics::Graphics() 
+{
     worldStuff = new BulletUp();
     worldStuff->a = 10;
     amb = 0.0;
@@ -14,6 +15,8 @@ Graphics::Graphics() {
     spec_cyl=0.0;
     spec_sphere = 0.0;
     x=0.0;
+	cam=0.0;
+	camera=0.0;
 }
 
 Graphics::~Graphics()
@@ -65,8 +68,8 @@ worldStuff->Initialize();
   m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"wood2.jpg");
   list1.push_back(m_cube);
 
-  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"wood2.jpg");
-  list1.push_back(m_sphere);
+  //m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"wood2.jpg");
+  //list1.push_back(m_sphere);
 
   list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"wood2.jpg") );
   list1.push_back(new Object("bumper.obj",2,0,2,4,8,"wood2.jpg") );
@@ -199,6 +202,22 @@ void Graphics::Update(unsigned int dt) {
     if(a==17 && x > -0.2) {
         x-=0.01;
     }
+if(a==16)
+{
+camera+=0.05;
+}
+if(a==17)
+{
+cam+=0.05;
+}
+if(a==18)
+{
+cam-=0.05;
+}
+if(a==19)
+{
+camera-=0.05;
+}
     if(rFlipper) {
         m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
     }
@@ -217,8 +236,8 @@ bool Graphics::Render() {
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
-  m_camera->view = glm::lookAt( glm::vec3(d[0], d[1]+40,d[2]-10), //Eye Position
-                      glm::vec3(d[0], 0, d[2]), //Focus point
+  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+40+camera,0.0-10+camera), //Eye Position
+                      glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
 
     glClearColor(0.0, 0.0, 0.2, 1.0);
@@ -269,9 +288,9 @@ bool Graphics::Render() {
     glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cyl,spec_cyl,spec_cyl,1);
     m_cylinder->Render();
 
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    m_sphere->Render();
+    //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
+    //glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
+   // m_sphere->Render();
 
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(4)->GetModel()));

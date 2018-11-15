@@ -150,6 +150,23 @@ void Engine::Keyboard()
         {
 	  a=15;
 	}
+if (m_event.key.keysym.sym == SDLK_KP_8)
+{
+a=16;
+}
+else if(m_event.key.keysym.sym == SDLK_KP_4)
+{
+a=17;
+}
+else if(m_event.key.keysym.sym == SDLK_KP_6)
+{
+a=18;
+}
+else if(m_event.key.keysym.sym == SDLK_KP_5)
+{
+a=19;
+}
+
         if(m_event.key.keysym.sym == SDLK_m)
         {
 	  rFlipper = true;
