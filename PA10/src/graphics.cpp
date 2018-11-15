@@ -236,7 +236,7 @@ bool Graphics::Render() {
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
-  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+40+camera,0.0-10+camera), //Eye Position
+  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+20+camera,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
 
