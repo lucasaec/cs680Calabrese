@@ -1,6 +1,8 @@
 #version 330
-attribute vec4 v_position;
-attribute vec3 v_normal;
+layout (location = 0) in vec4 v_position;
+layout (location = 1) in vec3 v_normal;
+layout (location = 2) in vec2 v_uvs;
+
 
 
 varying vec4 color;  
@@ -19,6 +21,8 @@ uniform vec4 LightPosition;
 uniform float Shininess;
 uniform vec4 spotLightPosition;
 uniform float spotLightStrength;
+
+smooth out vec2 uvs;
 
 void main(void)
 {
@@ -51,5 +55,5 @@ void main(void)
         }
     color = ambient + diffuse + specular;
     color.a = 1.0;
-
+    uvs = v_uvs;
 }

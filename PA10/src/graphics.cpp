@@ -68,8 +68,8 @@ worldStuff->Initialize();
   m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"wood2.jpg");
   list1.push_back(m_cube);
 
-  //m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"wood2.jpg");
-  //list1.push_back(m_sphere);
+  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"wood2.jpg");
+  list1.push_back(m_sphere);
 
   list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"wood2.jpg") );
   list1.push_back(new Object("bumper.obj",2,0,2,4,8,"wood2.jpg") );
@@ -78,11 +78,11 @@ worldStuff->Initialize();
   list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"wood2.jpg") );
   
 
-  list1.push_back(new Object("wall.obj",0,0,0,-2.7,0,"wood3.jpg") );
- list1.push_back(new Object("tri.obj",0,0,0,0,0,"wood3.jpg") );
- list1.push_back(new Object("tri2.obj",0,0,0,0,0,"wood3.jpg") );
- list1.push_back(new Object("tri3.obj",0,0,0,0,0,"wood3.jpg") );
-list1.push_back(new Object("tri4.obj",0,0,0,0,0,"wood3.jpg") );
+  list1.push_back(new Object("wall.obj",0,0,0,-2.7,0,"wood2.jpg") );
+ list1.push_back(new Object("tri.obj",0,0,0,0,0,"wood2.jpg") );
+ list1.push_back(new Object("tri2.obj",0,0,0,0,0,"wood2.jpg") );
+ list1.push_back(new Object("tri3.obj",0,0,0,0,0,"wood2.jpg") );
+list1.push_back(new Object("tri4.obj",0,0,0,0,0,"wood2.jpg") );
 
   l_flipper = new Object("flipper3.obj",2,-2,2,2,11,"wood1.jpg");
   list1.push_back(l_flipper);
@@ -265,7 +265,7 @@ bool Graphics::Render() {
     m_cube = NULL;*/
 
     m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"wood2.jpg");
-    list1.push_back(m_cube);
+    list1.at(2) = m_cube;
     balls++;
     std::cout << "Strike: " << balls <<"\n";
     }
@@ -293,56 +293,14 @@ bool Graphics::Render() {
    // m_sphere->Render();
 
 
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(4)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(4)->Render();
-
- glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(5)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(5)->Render();
-
- glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(6)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(6)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(7)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(7)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(8)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(8)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(9)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(9)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(10)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(10)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(11)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(11)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(12)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(12)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(13)->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    list1.at(13)->Render();
-
-glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(l_flipper->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
-    l_flipper->Render();
+    
 
 
- /*for(unsigned int x = 0; x < list.size(); x++) {
-          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list.at(x)->GetModel()));
-          list.at(x)->Render();   
+ for(unsigned int x = 4; x < list1.size(); x++) {
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
+          list1.at(x)->Render();   
       } 
-  */
+  
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )
