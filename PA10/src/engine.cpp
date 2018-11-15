@@ -166,6 +166,14 @@ else if(m_event.key.keysym.sym == SDLK_KP_5)
 {
 a=19;
 }
+else if(m_event.key.keysym.sym == SDLK_KP_1)
+{
+a=20;
+}
+else if(m_event.key.keysym.sym == SDLK_KP_2)
+{
+a=21;
+}
 
         if(m_event.key.keysym.sym == SDLK_m)
         {

@@ -17,6 +17,7 @@ Graphics::Graphics()
     x=0.0;
 	cam=0.0;
 	camera=0.0;
+cam1=0.0;
 }
 
 Graphics::~Graphics()
@@ -218,6 +219,14 @@ if(a==19)
 {
 camera-=0.05;
 }
+if(a==20)
+{
+cam1+=0.05;
+}
+if(a==21)
+{
+cam1-=0.05;
+}
     if(rFlipper) {
         m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
     }
@@ -236,7 +245,7 @@ bool Graphics::Render() {
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
-  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+20+camera,0.0-30+camera), //Eye Position
+  m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+25+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
 

@@ -178,7 +178,7 @@ aiMesh *mesh = scene->mMeshes[0];
         btCollisionShape* shape = new btSphereShape((btScalar).4f);
         btVector3 inertia(0,0,0);
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
-        btScalar mass(.6);
+        btScalar mass(1.6);
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
