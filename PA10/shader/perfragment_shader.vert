@@ -7,29 +7,20 @@ layout (location = 2) in vec2 v_uvs;
 out vec3 fN;
 out vec3 fE;
 out vec3 fL;
-out vec3 frag_pos;
+smooth out vec2 uvs;
 
 uniform mat4 projectionMatrix; 
 uniform mat4 viewMatrix; 
 uniform mat4 modelMatrix;
 
-uniform vec4 LightPosition;
-
-smooth out vec2 uvs;
-
 void main()
 {
-       
-	fN = vNormal;
-	fE = vPosition.xyz;
-	fL = LightPosition.xyz;
+       vec3 pos=((viewMatrix * modelMatrix)*vPosition).xyz;
+
+	fN = ((viewMatrix * modelMatrix)* vec4(vNormal,0.0)).xyz;
+	fE = -pos;
+	fL = (modelMatrix * vPosition).xyz;
 	
-	if(LightPosition.w != 0.0)
-	{
-		fL = LightPosition.xyz - vPosition.xyz;
-	}
-	
-	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vPosition;
-        frag_pos = (viewMatrix*modelMatrix*vPosition).xyz;
+	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vPosition;
         uvs = v_uvs;
 }
