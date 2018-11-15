@@ -53,35 +53,35 @@ worldStuff->Initialize();
   }
 
   // Create the object
-  m_table = new Object("table4.obj",4,0,0,0,0,"earth3.jpg");
+  m_table = new Object("table4.obj",4,0,0,0,0,"wood.jpg");
   list1.push_back(m_table);
   
-  m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"mars.jpg");
+  m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"wood1.jpg");
   list1.push_back(m_cylinder);
 
 
 
   
-  m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
+  m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"wood2.jpg");
   list1.push_back(m_cube);
 
-  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"sun.jpg");
+  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"wood2.jpg");
   list1.push_back(m_sphere);
 
-  list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"earth3.jpg") );
-  list1.push_back(new Object("bumper.obj",2,0,2,4,8,"earth3.jpg") );
-  list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"earth3.jpg") );
-  list1.push_back(new Object("bumper.obj",2,3.5,2,0,8,"earth3.jpg") );
-  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"earth3.jpg") );
+  list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"wood2.jpg") );
+  list1.push_back(new Object("bumper.obj",2,0,2,4,8,"wood2.jpg") );
+  list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"wood2.jpg") );
+  list1.push_back(new Object("bumper.obj",2,3.5,2,0,8,"wood2.jpg") );
+  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"wood2.jpg") );
   
 
-  list1.push_back(new Object("wall.obj",0,0,0,0,0,"sun.jpg") );
- list1.push_back(new Object("tri.obj",0,0,0,0,0,"sun.jpg") );
- list1.push_back(new Object("tri2.obj",0,0,0,0,0,"sun.jpg") );
- list1.push_back(new Object("tri3.obj",0,0,0,0,0,"sun.jpg") );
-list1.push_back(new Object("tri4.obj",0,0,0,0,0,"sun.jpg") );
+  list1.push_back(new Object("wall.obj",0,0,0,0,0,"wood3.jpg") );
+ list1.push_back(new Object("tri.obj",0,0,0,0,0,"wood3.jpg") );
+ list1.push_back(new Object("tri2.obj",0,0,0,0,0,"wood3.jpg") );
+ list1.push_back(new Object("tri3.obj",0,0,0,0,0,"wood3.jpg") );
+list1.push_back(new Object("tri4.obj",0,0,0,0,0,"wood3.jpg") );
 
-  l_flipper = new Object("flipper3.obj",2,-2,2,2,11,"mars.jpg");
+  l_flipper = new Object("flipper3.obj",2,-2,2,2,11,"wood1.jpg");
   list1.push_back(l_flipper);
   // Set up the shaders
   m_shader = new Shader();
@@ -245,7 +245,7 @@ bool Graphics::Render() {
     delete m_cube;
     m_cube = NULL;*/
 
-    m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"sun.jpg");
+    m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"wood2.jpg");
     list1.push_back(m_cube);
     balls++;
     std::cout << "Strike: " << balls <<"\n";
