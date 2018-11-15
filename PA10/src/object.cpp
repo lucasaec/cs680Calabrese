@@ -254,6 +254,6 @@ void Object::Render()
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
-  glEnableVertexAttribArray(2);
+  glDisableVertexAttribArray(2);
 }
 
