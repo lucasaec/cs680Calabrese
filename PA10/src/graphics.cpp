@@ -78,7 +78,7 @@ worldStuff->Initialize();
   list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"wood2.jpg") );
   
 
-  list1.push_back(new Object("wall.obj",0,0,0,0,0,"wood3.jpg") );
+  list1.push_back(new Object("wall.obj",0,0,0,-2.7,0,"wood3.jpg") );
  list1.push_back(new Object("tri.obj",0,0,0,0,0,"wood3.jpg") );
  list1.push_back(new Object("tri2.obj",0,0,0,0,0,"wood3.jpg") );
  list1.push_back(new Object("tri3.obj",0,0,0,0,0,"wood3.jpg") );
