@@ -16,9 +16,9 @@ uniform mat4 modelMatrix;
 void main()
 {
        vec3 pos=((viewMatrix * modelMatrix)*vPosition).xyz;
-
+vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
 	fN = ((viewMatrix * modelMatrix)* vec4(vNormal,0.0)).xyz;
-	fE = -pos;
+	fE = normalize(campos-pos);
 	fL = (modelMatrix * vPosition).xyz;
 	
 	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vPosition;

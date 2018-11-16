@@ -181,12 +181,12 @@ a=21;
 	}
 else if(m_event.key.keysym.sym == SDLK_q)
 {
-a=16;
+a=22;
 }
 
 else if(m_event.key.keysym.sym == SDLK_w)
 {
-a=17;
+a=23;
 }
 
      if(m_event.key.keysym.sym == SDLK_b)
@@ -209,6 +209,10 @@ a=17;
 		      
 		      
         }
+if(m_event.key.keysym.sym == SDLK_p)
+a=50;
+if(m_event.key.keysym.sym == SDLK_l)
+a=51;
 }
 
 else if(m_event.type == SDL_KEYUP)
@@ -219,8 +223,8 @@ else if(m_event.type == SDL_KEYUP)
         {
 	  rFlipper = false;
 	}
-}
 
+}
 m_graphics->keys(a);
 }
 

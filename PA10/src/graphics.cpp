@@ -197,10 +197,10 @@ void Graphics::Update(unsigned int dt) {
     if (a==15) {
         spec_sphere-=0.01;
     }
-    if (a==16) {
+    if (a==22) {
         x+=0.01;
     }
-    if(a==17 && x > -0.2) {
+    if(a==23 && x > -0.2) {
         x-=0.01;
     }
 if(a==16)
@@ -248,7 +248,7 @@ bool Graphics::Render() {
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
-
+m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
     glClearColor(0.0, 0.0, 0.2, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -272,7 +272,6 @@ bool Graphics::Render() {
     m_cube->shape = NULL;
     delete m_cube;
     m_cube = NULL;*/
-
     m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"tron3.jpg");
     list1.at(2) = m_cube;
     balls++;
@@ -284,6 +283,7 @@ bool Graphics::Render() {
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,10,0,0);
+glUniform4f(m_shader->GetUniformLocation("ballposition"),d[0],d[1],d[2],0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
@@ -302,7 +302,13 @@ glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,
     //glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
    // m_sphere->Render();
 
-
+if(a==50)
+{
+glUniform1f(m_shader->GetUniformLocation("spot"),1.0);
+glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,50,0,0);
+}
+else if(a==51)
+glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
     
 
 

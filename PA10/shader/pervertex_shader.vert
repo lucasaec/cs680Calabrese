@@ -14,34 +14,75 @@ uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform vec4 LightPosition;
 uniform float Shininess;
 uniform sampler2D gSampler;
+uniform vec4 ballposition;
+uniform float spot;
 
 const float strength = 30;
 
 void main(void)
 {
+if(spot==1.0)
+{
+vec4 direction=normalize(ballposition-LightPosition);
 	vec4 v=vec4(v_position,1.0);
     vec3 pos = ((viewMatrix*modelMatrix) * v).xyz;
-	
+vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
     vec3 L = normalize( LightPosition.xyz - (modelMatrix*vec4(v_position,1.0)).xyz );
-    vec3 E = normalize( -pos );
-	vec3 N = normalize((viewMatrix*modelMatrix)*vec4(v_normal,0.0)).xyz;
+    vec3 E = normalize( campos-pos );
+	vec3 N = normalize(modelMatrix*vec4(v_normal,0.0)).xyz;
     
 	vec3 H = normalize( L + E );
  
-    
+
     // Compute terms in the illumination equation
     vec4 ambient = AmbientProduct;
 
     float Kd = max( dot(L, N), 0.0 );
     vec4  diffuse = Kd*DiffuseProduct;
-    float Ks = pow( max(dot(N, H), 0.0), Shininess );
+    float Ks = pow( max(dot(N, H), 0.0),15 );
     vec4  specular = Ks * SpecularProduct;
     if( dot(L, N) < 0.0 )  
+	{
 	specular = vec4(0.0, 0.0, 0.0, 1.0); 
-    gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
+	 }
 
-    
+        if(acos(dot(-L,direction.xyz))>cos(45))
+	{
+		diffuse*=0;
+		specular*=0;
+	}
+ gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
     color = ambient + diffuse + specular;
     color.a = 1.0;
     uvs = v_uvs;
+}
+else
+{
+vec4 v=vec4(v_position,1.0);
+    vec3 pos = ((viewMatrix*modelMatrix) * v).xyz;
+vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
+    vec3 L = normalize( LightPosition.xyz - (modelMatrix*vec4(v_position,1.0)).xyz );
+    vec3 E = normalize( campos-pos );
+	vec3 N = normalize(modelMatrix*vec4(v_normal,0.0)).xyz;
+    
+	vec3 H = normalize( L + E );
+ 
+
+    // Compute terms in the illumination equation
+    vec4 ambient = AmbientProduct;
+
+    float Kd = max( dot(L, N), 0.0 );
+    vec4  diffuse = Kd*DiffuseProduct;
+    float Ks = pow( max(dot(N, H), 0.0),15 );
+    vec4  specular = Ks * SpecularProduct;
+    if( dot(L, N) < 0.0 )  
+	{
+	specular = vec4(0.0, 0.0, 0.0, 1.0); 
+	 }
+
+ gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
+    color = ambient + diffuse + specular;
+    color.a = 1.0;
+    uvs = v_uvs;
+}
 }
