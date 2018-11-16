@@ -83,9 +83,9 @@ worldStuff->Initialize();
  list1.push_back(new Object("tri.obj",0,0,0,0,0,"tron2.jpg") );
  list1.push_back(new Object("tri2.obj",0,0,0,0,0,"tron2.jpg") );
  list1.push_back(new Object("tri3.obj",0,0,0,0,0,"tron2.jpg") );
-list1.push_back(new Object("tri4.obj",0,0,0,0,0,"tron2.jpg") );
+list1.push_back(new Object("tri4.obj",1,-.3,0,.2,0,"tron2.jpg") );
 
-  l_flipper = new Object("flipper3.obj",2,-2,2,2,11,"tron1.jpg");
+  l_flipper = new Object("flipper3.obj",1,.5,-.08,-.4,11,"tron1.jpg");
   list1.push_back(l_flipper);
   // Set up the shaders
   m_shader = new Shader();
@@ -232,6 +232,12 @@ cam1-=0.05;
     }
     else {
         m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,.3,0) );
+    }
+    if(lFlipper) {
+        l_flipper->rigidBody->applyTorqueImpulse(btVector3(0,15,0) );
+    }
+    else {
+        l_flipper->rigidBody->applyTorqueImpulse(btVector3(0,-.3,0) );
     }
     for(unsigned int i=0; i<list1.size(); i++) {
         list1.at(i)->Update(dt);

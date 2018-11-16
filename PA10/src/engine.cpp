@@ -179,6 +179,11 @@ a=21;
         {
 	  rFlipper = true;
 	}
+
+ if(m_event.key.keysym.sym == SDLK_z)
+        {
+	  lFlipper = true;
+	}
 else if(m_event.key.keysym.sym == SDLK_q)
 {
 a=22;
@@ -222,6 +227,10 @@ else if(m_event.type == SDL_KEYUP)
  if(m_event.key.keysym.sym == SDLK_m)
         {
 	  rFlipper = false;
+	}
+ if(m_event.key.keysym.sym == SDLK_z)
+        {
+	  lFlipper = false;
 	}
 
 }

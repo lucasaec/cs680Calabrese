@@ -131,9 +131,9 @@ aiMesh *mesh = scene->mMeshes[0];
     }
     if(type == 11 ) { //flipper
         btDefaultMotionState *shapeMotionState = NULL; 
-        btCollisionShape* shape=new btBoxShape(btVector3(3.2,1.3,.25));
+        btCollisionShape* shape=new btBoxShape(btVector3(3.4,1.3,.25));
         btVector3 inertia(0,0,0);
-        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(7, 1.5, -14))); 
+        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(7+posx, 1.5+posy, -14+posz))); 
         btScalar mass(1);
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
@@ -144,8 +144,8 @@ aiMesh *mesh = scene->mMeshes[0];
         frame.setOrigin(btVector3(0,10,0));
         btGeneric6DofConstraint* constraint = new btGeneric6DofConstraint(*rigidBody, frame,true);
 	//constraint->
-        constraint->setAngularLowerLimit(btVector3(0, -.6, 0));
-        constraint->setAngularUpperLimit(btVector3(0, M_PI/2.5, 0));
+        constraint->setAngularLowerLimit(btVector3(0, -1.2, 0));
+        constraint->setAngularUpperLimit(btVector3(0, .5, 0));
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         worldStuff->dynamicsWorld->addConstraint(constraint);
     }
@@ -165,7 +165,7 @@ aiMesh *mesh = scene->mMeshes[0];
         btDefaultMotionState *shapeMotionState = NULL; 
         btCollisionShape* shape=new btCylinderShape(btVector3(.5,2,1));
         btVector3 inertia(0,0,0);
-        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
+        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, 0, posz))); 
         btScalar mass(0);
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
