@@ -18,6 +18,7 @@ Shader *m_shader;
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
     bool Render();
+    void Fire(float force);
 void keys(unsigned int);
 std::string response;
 float x;
@@ -42,6 +43,7 @@ float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;
     Object *m_sphere;
     Object *m_cylinder;
     Object *l_flipper;
+    Object *launcher;
 };
 
 #endif /* GRAPHICS_H */

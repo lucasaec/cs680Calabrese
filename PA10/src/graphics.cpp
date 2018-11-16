@@ -1,12 +1,40 @@
 #include "graphics.h"
 #include "BulletUp.h"
+
 extern bool lFlipper;
 extern bool rFlipper;
+extern bool pullBack;
+extern float timePulled;
+bool allowCollision = true;
 BulletUp* worldStuff; 
 std::vector<Object*> list1;
 int balls = 0;
+int score = 0;
+bool farLeft = false;
+static void afunction(btDynamicsWorld *world, btScalar timeStep) {
+    int nMfolds = world->getDispatcher()->getNumManifolds();
+    bool collideOnce = false;
+    //printf("numManifolds = %d\n",numManifolds);
+    for (int cMfold=0;cMfold<nMfolds;cMfold++) { 
+        btPersistentManifold* persistentFold =  worldStuff->dispatcher->getManifoldByIndexInternal(cMfold);
+        const btCollisionObject* object1 = (persistentFold->getBody0());
+        const btCollisionObject* object2 = (persistentFold->getBody1());
+        if(object1->getUserIndex() == 2 || object2->getUserIndex() == 2) {
+           std::cout << "Wow! 2 points!!!" << '\n';
+           score += 2;
+          // collideOnce = true;
+           //allowCollision = false; 
+           std::cout << "-----" << '\n';
+        }
+    }
+    /* if(!collideOnce) {
+         allowCollision = true;
+         std::cout << "CoolBeans!!!" << '\n';
+     }*/
+}
 Graphics::Graphics() 
 {
+    allowCollision = true;
     worldStuff = new BulletUp();
     worldStuff->a = 10;
     amb = 0.0;
@@ -58,37 +86,45 @@ worldStuff->Initialize();
 
   // Create the object
   m_table = new Object("table4.obj",4,0,0,0,0,"tron.jpg");
-  list1.push_back(m_table);
+  list1.push_back(m_table);//0
   
   m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"tron1.jpg");
-  list1.push_back(m_cylinder);
+  list1.push_back(m_cylinder);//1
 
 
 
   
-  m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"tron3.jpg");
-  list1.push_back(m_cube);
+  m_cube = new Object("sphere.obj",2,-10,2.0,10,4,"tron3.jpg");
+  list1.push_back(m_cube);//2
 
   m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"tron3.jpg");
-  list1.push_back(m_sphere);
+  list1.push_back(m_sphere);//3
 
   list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"tron1.jpg") );
   list1.push_back(new Object("bumper.obj",2,0,2,4,8,"tron1.jpg") );
   list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"tron1.jpg") );
   list1.push_back(new Object("bumper.obj",2,3.5,2,0,8,"tron1.jpg") );
-  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"tron1.jpg") );
+  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"tron1.jpg") );//8
   
 
   list1.push_back(new Object("wall.obj",0,0,0,-2.7,0,"tron2.jpg") );
  list1.push_back(new Object("tri.obj",0,0,0,0,0,"tron2.jpg") );
  list1.push_back(new Object("tri2.obj",0,0,0,0,0,"tron2.jpg") );
  list1.push_back(new Object("tri3.obj",0,0,0,0,0,"tron2.jpg") );
-list1.push_back(new Object("tri4.obj",1,-.3,0,.2,0,"tron2.jpg") );
+list1.push_back(new Object("tri4.obj",1,-.3,0,.2,0,"tron2.jpg") );//13
 
   l_flipper = new Object("flipper3.obj",1,.5,-.08,-.4,11,"tron1.jpg");
   list1.push_back(l_flipper);
   // Set up the shaders
+
+  launcher = new Object("launcher.obj",0,-10.5579,1,-17,2,"tron1.jpg");//15
+  list1.push_back(launcher);
+ 
+
+list1.push_back(new Object("backboard.obj",0,0,0,0,0,"tron1.jpg") );
   m_shader = new Shader();
+
+worldStuff->dynamicsWorld->setInternalTickCallback(afunction);
   if(!m_shader->Initialize())
   {
     printf("Shader Failed to Initialize\n");
@@ -151,21 +187,22 @@ void Graphics::keys(unsigned int key) {
     a = key;
 }
 
+
 void Graphics::Update(unsigned int dt) {
     if(a == 1) {
-          m_cube->rigidBody->applyCentralImpulse(btVector3(.5,0,0));
+          //m_cube->rigidBody->applyCentralImpulse(btVector3(.5,0,0));
     }
     if(a == 2) {
-         m_cube->rigidBody->applyCentralImpulse(btVector3(-.5,0,0));
+        // m_cube->rigidBody->applyCentralImpulse(btVector3(-.5,0,0));
     }
     if(a == 3) {
-         m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,.5));
+       //  m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,.5));
     }
     if(a == 4) {
-         m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,-.5));
+      //   m_cube->rigidBody->applyCentralImpulse(btVector3(0,0,-.5));
     }
     if(a == 5) {
-         m_cube->rigidBody->applyCentralImpulse(btVector3(0,1,0));
+     //    m_cube->rigidBody->applyCentralImpulse(btVector3(0,1,0));
     }
     if(a == 6) {
         amb+=0.005;
@@ -243,13 +280,22 @@ cam1-=0.05;
         list1.at(i)->Update(dt);
     }
 }
-
+void Graphics::Fire(float force) {
+    if(farLeft) {
+        launcher->rigidBody->applyCentralImpulse(btVector3(0,0,force));
+    }
+}
 bool Graphics::Render() {
     bool rebool = true;
     glm::mat4 c;
     glm::vec4 d;
     c = m_cube->model;
     d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+  
+    glm::mat4 e;
+    glm::vec4 f;
+    e = launcher->model;
+    f = e * glm::vec4(0.0, 0.0, 0.0, 1.0);
 
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
@@ -267,11 +313,18 @@ m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
     //std::cout << d[0] << " "  << d[1] << " "  << d[2] << "\n";
     if(balls == 3) {
     std::cout << "GAME OVER" <<"\n";
+    std::cout << "Score: " << score << '\n';
     return false;
     }
-    if(d[2] < -18 && d[0] > -9) {
+    if(d[0] < -9) {
+        farLeft = true;
+    }
+    else {
+        farLeft = false;
+    }
+    if(d[2] < -17 && d[0] > -9) {
     /*delete m_cube->rigidBody;
-    delete m_cube->objTriMesh;
+    delete m_cube->objTriMesh; //-5.34226
     delete m_cube->shape;
     m_cube->rigidBody = NULL;
     m_cube->objTriMesh = NULL;
@@ -283,6 +336,21 @@ m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
     balls++;
     std::cout << "Strike: " << balls <<"\n";
     }
+  /**  if(f[2] > -12) {
+     std::cout << "TOO FAR";
+     list1.at(15) =  new Object("launcher.obj",0,-10.5579,1,-17,2,"tron1.jpg");
+     delete launcher->rigidBody;
+     launcher->rigidBody = NULL;
+     delete launcher;
+     launcher = NULL;
+     
+   
+      launcher=list1.at(15);
+    }
+    std::cout << f[2] << '\n';*/
+
+ 
+    
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.5,0.5,0.5,1); 
    // glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
    // glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);

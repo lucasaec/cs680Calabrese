@@ -2,6 +2,8 @@
 #include "engine.h"
 bool lFlipper = false;
 bool rFlipper = false;
+bool pullBack = false;
+float timePulled = 0;
 Engine::Engine(string name, int width, int height)
 {
   m_WINDOW_NAME = name;
@@ -178,11 +180,23 @@ a=21;
         if(m_event.key.keysym.sym == SDLK_m)
         {
 	  rFlipper = true;
+        
 	}
 
  if(m_event.key.keysym.sym == SDLK_z)
         {
 	  lFlipper = true;
+	}
+if(m_event.key.keysym.sym == SDLK_SPACE)
+        {
+	  pullBack = true;
+          if(timePulled < 20) {
+              timePulled += ( (float) getDT() )/5;
+          }
+          else {
+              timePulled = 20;
+          }
+          //std::cout << timePulled << '\n';
 	}
 else if(m_event.key.keysym.sym == SDLK_q)
 {
@@ -232,8 +246,18 @@ else if(m_event.type == SDL_KEYUP)
         {
 	  lFlipper = false;
 	}
-
+if(m_event.key.keysym.sym == SDLK_SPACE)
+        {
+          if(timePulled > 0 ) {
+              m_graphics->Fire(timePulled);
+          }
+          
+          timePulled =0;
+          //::cout << timePulled << '\n';
+	  pullBack = false;
+	}
 }
+ 
 m_graphics->keys(a);
 }
 

@@ -3,7 +3,6 @@
 in vec3 fN;
 in vec3 fL;
 in vec3 fE;
-
 smooth in vec2 uvs; 
 
 out vec4 frag_color;
@@ -25,15 +24,16 @@ void main()
 {
 if(spot==1.0)
 {
+
 vec4 direction=normalize(LightPosition-ballposition);
 	vec3 N = normalize(fN);
 	vec3 E = normalize(fE);
 	
 //vec3 fL=LightPosition.xyz;
-if(LightPosition.w!=0.0)
-{
+//if(LightPosition.w!=0.0)
+//{
 //fL=LightPosition.xyz-fL;
-}
+//}
 
 vec3 L = normalize(fL);
 	
@@ -50,6 +50,9 @@ vec3 L = normalize(fL);
 	{
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
 	}
+
+
+
           if(acos(dot(-L,direction.xyz))>cos(45))
 {
 diffuse*=0;
