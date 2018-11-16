@@ -37,11 +37,11 @@ Graphics::Graphics()
     allowCollision = true;
     worldStuff = new BulletUp();
     worldStuff->a = 10;
-    amb = 0.0;
-    spec_tab=0.7;
+    amb = 0.5;
+    spec_tab=0.3;
     spec_cube=0.5;
-    spec_cyl=0.5;
-    spec_sphere= 0.9;
+   spotlight_strength=0.3;
+    spot_rad= 0.0;
     x=0.0;
 	cam=0.0;
 	camera=0.0;
@@ -222,47 +222,42 @@ void Graphics::Update(unsigned int dt) {
     if (a==11) { 
        spec_cube-=0.01;
     }
-    if(a==12) { 
-       spec_cyl+=0.01;
+   if(a==12&&spotlight_strength<0.8) { 
+       spotlight_strength+=0.01;
      }
-    if(a==13) {
-        spec_cyl-=0.01;
+    if(a==13&&spotlight_strength>0.01) {
+        spotlight_strength-=0.01;
     }
     if (a==14) {
-        spec_sphere+=0.01;
+        spot_rad+=0.005;
     }
     if (a==15) {
-        spec_sphere-=0.01;
+        spot_rad-=0.005;
     }
-    if (a==22) {
-        x+=0.01;
-    }
-    if(a==23 && x > -0.2) {
-        x-=0.01;
-    }
+   
 if(a==16)
 {
-camera+=0.05;
+camera+=0.1;
 }
 if(a==17)
 {
-cam+=0.05;
+cam+=0.1;
 }
 if(a==18)
 {
-cam-=0.05;
+cam-=0.1;
 }
 if(a==19)
 {
-camera-=0.05;
+camera-=0.1;
 }
 if(a==20)
 {
-cam1+=0.05;
+cam1+=0.1;
 }
 if(a==21)
 {
-cam1-=0.05;
+cam1-=0.1;
 }
     if(rFlipper) {
         m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
@@ -351,14 +346,17 @@ m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
 
  
     
-    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),0.5,0.5,0.5,1); 
+    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
    // glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
    // glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
-    glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,10,0,0);
+    glUniform4f(m_shader->GetUniformLocation("LightPosition"),10,50,0,0);
 glUniform4f(m_shader->GetUniformLocation("ballposition"),d[0],d[1],d[2],0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
+glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
+glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
+
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   //  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
@@ -369,7 +367,7 @@ glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,
     m_table->Render();
 
     glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cyl,spec_cyl,spec_cyl,1);
+    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_tab,spec_tab,spec_tab,1);
     m_cylinder->Render();
 
     //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));

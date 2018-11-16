@@ -28,7 +28,7 @@ float cam1;
 
   private:
 unsigned int a;
-float amb,spec_tab,spec_cube,spec_cyl,spec_sphere;
+float amb,spec_tab,spec_cube,spotlight_strength,spot_rad;
     std::string ErrorString(GLenum error);
 
     Camera1 *m_camera;

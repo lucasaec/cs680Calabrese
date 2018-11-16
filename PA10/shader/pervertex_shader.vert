@@ -9,13 +9,14 @@ smooth out vec2 uvs;
 uniform mat4 projectionMatrix; 
 uniform mat4 viewMatrix; 
 uniform mat4 modelMatrix; 
-
+uniform float spotlight_strength;
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform vec4 LightPosition;
 uniform float Shininess;
 uniform sampler2D gSampler;
 uniform vec4 ballposition;
 uniform float spot;
+uniform float spotlight_radius;
 
 const float strength = 30;
 
@@ -46,11 +47,16 @@ vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
 	specular = vec4(0.0, 0.0, 0.0, 1.0); 
 	 }
 
-        if(acos(dot(-L,direction.xyz))>cos(45))
+        if(acos(dot(-L,direction.xyz))>(0.525+spotlight_radius))
 	{
 		diffuse*=0;
 		specular*=0;
 	}
+else
+{
+diffuse+=spotlight_strength;
+specular+=spotlight_strength;
+}
  gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
     color = ambient + diffuse + specular;
     color.a = 1.0;

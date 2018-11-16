@@ -14,18 +14,19 @@ uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform mat4 projectionMatrix; 
 uniform mat4 viewMatrix; 
 uniform mat4 modelMatrix; 
-
+uniform float spotlight_strength;
 uniform vec4 LightPosition;
 uniform float Shininess;
 uniform vec4 ballposition;
 uniform float spot;
+uniform float spotlight_radius;
 
 void main()
 {
 if(spot==1.0)
 {
-
-vec4 direction=normalize(LightPosition-ballposition);
+vec4 light=vec4(0.0,0.0,0.0,0.0);
+vec4 direction=normalize(light-ballposition);
 	vec3 N = normalize(fN);
 	vec3 E = normalize(fE);
 	
@@ -53,11 +54,17 @@ vec3 L = normalize(fL);
 
 
 
-          if(acos(dot(-L,direction.xyz))>cos(45))
+          if(acos(dot(-L,direction.xyz))>(0.525+spotlight_radius))
 {
 diffuse*=0;
 specular*=0;
 }
+else
+{
+diffuse+=spotlight_strength;
+specular+=spotlight_strength;
+}
+
 	frag_color = (diffuse + ambient + specular)* texture2D(gSampler, uvs.xy);
 	frag_color.a = 1.0;
 }

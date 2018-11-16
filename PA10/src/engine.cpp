@@ -198,15 +198,6 @@ if(m_event.key.keysym.sym == SDLK_SPACE)
           }
           //std::cout << timePulled << '\n';
 	}
-else if(m_event.key.keysym.sym == SDLK_q)
-{
-a=22;
-}
-
-else if(m_event.key.keysym.sym == SDLK_w)
-{
-a=23;
-}
 
      if(m_event.key.keysym.sym == SDLK_b)
      {

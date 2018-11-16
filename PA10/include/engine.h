@@ -13,6 +13,7 @@ class Engine
     Engine(string name, int width, int height);
     Engine(string name);
     ~Engine();
+unsigned int p;
     bool Initialize();
     void Run();
     void Keyboard();
