@@ -1,4 +1,4 @@
-# PA9: Lighting
+# PA10: Pinball
 
 # Dependencies, Building, and Running
 
@@ -12,20 +12,24 @@ I used: sudo apt-get install libbullet-dev
 to install bullet.
 
 ### Ubuntu/Linux
+
+It works on the ECC ubuntu machine since they already have it downloaded.
 ```bash
-sudo apt-get install libglew-dev libglm-dev libsdl2-dev
+sudo apt-get install libmagick++-dev
+
+sudo apt-get install libassimp-dev assimp-utilsev
+    
+sudo apt-get install libglew-dev libglm-dev libsdl2-dev sudo apt-get install libbullet-dev bullet-dev
 ```
 This project uses Assimp
-
-### Ubuntu/Linux
-```bash
- sudo apt-get install libassimp-dev assimp-utilsev
-```
 
 ### Mac OSX
 Installation of brew is suggested to easily install the libs. Ensure that the latest version of the Developer Tools is installed.
 ```bash
+brew install glew glm sdl2 
 brew install assimp
+brew install imagemagick 
+brew install bullet
 ```
 
 ## Building and Running
@@ -42,7 +46,7 @@ mkdir build
 cd build
 cmake ..
 make
-./BulletTest
+./Pinball
 ```
 
 
@@ -52,60 +56,52 @@ Please use cmake
 ## Ubuntu.cse.unr.edu
 OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
 ```bash
-/usr/NX/scripts/vgl/vglrun ./Tutorial
+/usr/NX/scripts/vgl/vglrun ./Pinball
 ```
 # How to load an object
 Place object files in the objects folder. They should be download when the repository is cloned.
 
-## Text Input
-Run the code like this:
-Example:
-```./BulletTest```
-
-The program will then ask you to give it a file name in terminal 
-Enter the file name of the object you want to load. 
-
-Please only choose "table4.obj" or "eg.obj". table4 is for testing the regular requirements of the assignment, while the eg.obj is for loading in a sphere to try out per-vertex and per-fragment lighting.
-
 ## Keyboard Controls
-up arrow - pushes cube forward with a force
+Hold space bar- plunger launcher
 
-left arrow - pushes cube left with a force
+‘Z’ key - operates the left paddle
 
-right arrow -pushes cube right with a force
+‘M’ key - operates the right paddle
 
-down arrow -pushes cube backwards with a force
+Camera controls- Use Numpad Keys
 
-spacebar -pushes cube up with a force (towards the sky)
+‘4’ and ‘6’ - camera to move left and right
 
-a - increases ambient lighting 
+‘1’ and ‘2’ - camera to move up and down
 
-s - decreases ambient lighting
+‘8’ and ‘5’ - camera to move closer and farther
 
-m - change to per vertex lighting
+‘N’ key- per fragment shader
 
-n - change to per fragment lighting
+‘B’ key- per vertex shader
 
-1 - increase the table's specular light
+‘P’ key- spotlight
 
-2 - decrease table's specular light
+‘L’ key- normal light
 
-3 - increase specular light of cube
+‘A’ and ‘S’ keys- ambient light adjustment
 
-4 - decrease specular light of cube
+‘1’ and ‘2’ keys- specular light adjustment
 
-5 - increase specular light for cylinder
+‘3’ and ‘4’ keys- specular light of the ball adjustment
 
-6 - decrease specular light for cylinder
+‘5’ and ‘6’ keys- spotlight intensity
 
-7 - increase secular light for sphere
-
-8 - decrease specular light for sphere
+‘7’ and ‘8’ keys- radius of spotlight adjustment
 
 # Extra Credit
 
-# Note
-The objects are small, so they might be hidden behind walls. You can use the cube to push the sphere.
+
+Plunger intensity changes via holding down the spacebar
+
+Spotlight radius and intensity can be changed with keyboard inputs.
+
+
 
 ### Group Members
 Andrew Flangas
