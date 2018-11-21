@@ -91,7 +91,7 @@ list1.push_back(m_cube);
 
   list1.push_back(new Object("testCube.obj",2,0,15,0,2,"wood.jpg") );
 
-
+list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"wood.jpg") );
 
 
 

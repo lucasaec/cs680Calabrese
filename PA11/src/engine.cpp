@@ -74,7 +74,7 @@ void Engine::Run()
     mousex -= 400;
     mousey += 150;
     mousey *= -1;
-    std::cout << "MOUSEX: " << mousex << " MOUSEY: " << mousey << '\n';
+   // std::cout << "MOUSEX: " << mousex << " MOUSEY: " << mousey << '\n';
     // Check the keyboard input
     while(SDL_PollEvent(&m_event) != 0)
     {
@@ -87,7 +87,7 @@ void Engine::Run()
 if(rotateRight) {
  rotationAmount += .1;
 }
-std::cout << getDT()<< '\n';
+//std::cout << getDT()<< '\n';
     // Update and render the graphics
     m_graphics->Update(m_DT);
     m_running = m_running && m_graphics->Render();

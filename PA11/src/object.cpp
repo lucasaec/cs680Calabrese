@@ -78,7 +78,7 @@ aiMesh *mesh = scene->mMeshes[0];
         Indices.push_back(mIndices[0]);
         Indices.push_back(mIndices[1]);
         Indices.push_back(mIndices[2]);
-        if(type == 0) {
+        if(type == 0 || type == 99) {
             aiVector3D position = mesh->mVertices[face.mIndices[0]]; 
             triArray[0] = btVector3(position.x, position.y, position.z);
  
@@ -92,7 +92,7 @@ aiMesh *mesh = scene->mMeshes[0];
         }
     }
     
-    if(type == 0) {
+    if(type == 0 || type == 99) {
         shape = new btBvhTriangleMeshShape(objTriMesh, true); 
     }
 
@@ -132,25 +132,18 @@ aiMesh *mesh = scene->mMeshes[0];
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         worldStuff->dynamicsWorld->addConstraint(constraint);
     }
-    if(type == 11 ) { //flipper
+    if(type == 99 ) { //All other Kinematic OBjects
         btDefaultMotionState *shapeMotionState = NULL; 
-        btCollisionShape* shape=new btBoxShape(btVector3(3.4,1.3,.25));
-        btVector3 inertia(0,0,0);
-        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(7+posx, 1.5+posy, -14+posz))); 
-        btScalar mass(1);
+        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
+        btScalar mass(0);
+        btVector3 inertia(0, 0, 0); 
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
-
-
-        btTransform frame =  btTransform::getIdentity();
-        frame.setOrigin(btVector3(0,10,0));
-        btGeneric6DofConstraint* constraint = new btGeneric6DofConstraint(*rigidBody, frame,true);
-	//constraint->
-        constraint->setAngularLowerLimit(btVector3(0, -1.2, 0));
-        constraint->setAngularUpperLimit(btVector3(0, .5, 0));
+        table4 = rigidBody;
+        
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
-        worldStuff->dynamicsWorld->addConstraint(constraint);
+        rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
     if(type == 2) {
         btDefaultMotionState *shapeMotionState = NULL; 
