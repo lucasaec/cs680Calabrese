@@ -25,8 +25,8 @@ void main()
 {
 if(spot==1.0)
 {
-vec4 light=LightPosition;
-vec4 direction=-normalize(light-ballposition);
+vec4 light=vec4(0.0,0.0,0.0,0.0);
+vec4 direction=normalize(light-ballposition);
 	vec3 N = normalize(fN);
 	vec3 E = normalize(fE);
 	
@@ -36,7 +36,7 @@ vec4 direction=-normalize(light-ballposition);
 //fL=LightPosition.xyz-fL;
 //}
 
-vec3 L = normalize(light.xyz-fL);
+vec3 L = normalize(fL);
 	
 	vec3 H = normalize(L + E);
 	vec4 ambient = AmbientProduct;

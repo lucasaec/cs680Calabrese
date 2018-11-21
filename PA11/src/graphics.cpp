@@ -27,7 +27,6 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
            std::cout << "-----" << '\n';
         }
     }
-	std::cout << "BLEH" << std::endl << std::endl;
     /* if(!collideOnce) {
          allowCollision = true;
          std::cout << "CoolBeans!!!" << '\n';
@@ -84,45 +83,21 @@ worldStuff->Initialize();
     printf("Camera Failed to Initialize\n");
     return false;
   }
-
-  // Create the object
-  m_table = new Object("table4.obj",4,0,0,0,0,"tron.jpg");
-  list1.push_back(m_table);//0
   
-  m_cylinder = new Object("flipper2.obj",2,2,2,2,3,"tron1.jpg");
-  list1.push_back(m_cylinder);//1
+ 
+m_cube = new Object("test.obj",2,0,0,0,0,"wood.jpg");
+list1.push_back(m_cube);
+
+
+  list1.push_back(new Object("testCube.obj",2,0,15,0,2,"wood.jpg") );
 
 
 
-  
-  m_cube = new Object("sphere.obj",2,-10,2.0,10,4,"tron3.jpg");
-  list1.push_back(m_cube);//2
 
-  m_sphere = new Object("sphere.obj",3,-2,15,-2,4,"tron3.jpg");
-  list1.push_back(m_sphere);//3
 
-  list1.push_back(new Object("bumper.obj",2,-3.5,2,8,8,"tron1.jpg") );
-  list1.push_back(new Object("bumper.obj",2,0,2,4,8,"tron1.jpg") );
-  list1.push_back(new Object("bumper.obj",2,3.5,2,8,8,"tron1.jpg") );
-  list1.push_back(new Object("bumper.obj",2,3.5,2,0,8,"tron1.jpg") );
-  list1.push_back(new Object("bumper.obj",2,-3.5,2,0,8,"tron1.jpg") );//8
-  
-
-  list1.push_back(new Object("wall.obj",0,0,0,-2.7,0,"tron2.jpg") );
- list1.push_back(new Object("tri.obj",0,0,0,0,0,"tron2.jpg") );
- list1.push_back(new Object("tri2.obj",0,0,0,0,0,"tron2.jpg") );
- list1.push_back(new Object("tri3.obj",0,0,0,0,0,"tron2.jpg") );
-list1.push_back(new Object("tri4.obj",1,-.3,0,.2,0,"tron2.jpg") );//13
-
-  l_flipper = new Object("flipper3.obj",1,.5,-.08,-.4,11,"tron1.jpg");
-  list1.push_back(l_flipper);
-  // Set up the shaders
-
-  launcher = new Object("launcher.obj",0,-10.5579,1,-17,2,"tron1.jpg");//15
-  list1.push_back(launcher);
  
 
-list1.push_back(new Object("backboard.obj",0,0,0,0,0,"tron1.jpg") );
+
   m_shader = new Shader();
 
 worldStuff->dynamicsWorld->setInternalTickCallback(afunction);
@@ -260,39 +235,20 @@ if(a==21)
 {
 cam1-=0.1;
 }
-    if(rFlipper) {
-        m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,-15,0) );
-    }
-    else {
-        m_cylinder->rigidBody->applyTorqueImpulse(btVector3(0,.3,0) );
-    }
-    if(lFlipper) {
-        l_flipper->rigidBody->applyTorqueImpulse(btVector3(0,15,0) );
-    }
-    else {
-        l_flipper->rigidBody->applyTorqueImpulse(btVector3(0,-.3,0) );
-    }
+  
     for(unsigned int i=0; i<list1.size(); i++) {
         list1.at(i)->Update(dt);
     }
 }
 void Graphics::Fire(float force) {
     if(farLeft) {
-        launcher->rigidBody->applyCentralImpulse(btVector3(0,0,force));
+        //launcher->rigidBody->applyCentralImpulse(btVector3(0,0,force));
     }
 }
 bool Graphics::Render() {
     bool rebool = true;
-    glm::mat4 c;
-    glm::vec4 d;
-    c = m_cube->model;
-    d = c * glm::vec4(0.0, 0.0, 0.0, 1.0);
+   
   
-    glm::mat4 e;
-    glm::vec4 f;
-    e = launcher->model;
-    f = e * glm::vec4(0.0, 0.0, 0.0, 1.0);
-
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
@@ -306,45 +262,8 @@ m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
 
-    //std::cout << d[0] << " "  << d[1] << " "  << d[2] << "\n";
-    if(balls == 3) {
-    std::cout << "GAME OVER" <<"\n";
-    std::cout << "Score: " << score << '\n';
-    return false;
-    }
-    if(d[0] < -9) {
-        farLeft = true;
-    }
-    else {
-        farLeft = false;
-    }
-    if(d[2] < -17 && d[0] > -9) {
-    /*delete m_cube->rigidBody;
-    delete m_cube->objTriMesh; //-5.34226
-    delete m_cube->shape;
-    m_cube->rigidBody = NULL;
-    m_cube->objTriMesh = NULL;
-    m_cube->shape = NULL;
-    delete m_cube;
-    m_cube = NULL;*/
-    m_cube = new Object("sphere.obj",2,-10,2.0,2,4,"tron3.jpg");
-    list1.at(2) = m_cube;
-    balls++;
-    std::cout << "Strike: " << balls <<"\n";
-    }
-  /**  if(f[2] > -12) {
-     std::cout << "TOO FAR";
-     list1.at(15) =  new Object("launcher.obj",0,-10.5579,1,-17,2,"tron1.jpg");
-     delete launcher->rigidBody;
-     launcher->rigidBody = NULL;
-     delete launcher;
-     launcher = NULL;
-     
-   
-      launcher=list1.at(15);
-    }
-    std::cout << f[2] << '\n';*/
-
+    
+  
  
     
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
@@ -352,24 +271,16 @@ m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
    // glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
-    glUniform4f(m_shader->GetUniformLocation("LightPosition"),1,10,0,0);
-glUniform4f(m_shader->GetUniformLocation("ballposition"),d[0],d[1],d[2],0);
+    glUniform4f(m_shader->GetUniformLocation("LightPosition"),10,50,0,0);
+glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
 glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
 glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
 
 
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  //  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
-    m_cube->Render();
 
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_table->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_tab,spec_tab,spec_tab,1);
-    m_table->Render();
+   
 
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
-    glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_tab,spec_tab,spec_tab,1);
-    m_cylinder->Render();
 
     //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sphere->GetModel()));
     //glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
@@ -385,7 +296,7 @@ glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
     
 
 
- for(unsigned int x = 4; x < list1.size(); x++) {
+ for(unsigned int x = 0; x < list1.size(); x++) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
           list1.at(x)->Render();   
       } 
