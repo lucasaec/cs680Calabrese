@@ -21,6 +21,8 @@ uniform vec4 ballposition;
 uniform float spot;
 uniform float spotlight_radius;
 
+uniform float opacity;
+
 void main()
 {
 if(spot==1.0)
@@ -66,7 +68,7 @@ specular+=spotlight_strength;
 }
 
 	frag_color = (diffuse + ambient + specular)* texture2D(gSampler, uvs.xy);
-	frag_color.a = 1.0;
+	frag_color.a = opacity;
 }
 else
 {
@@ -96,7 +98,7 @@ vec3 L = normalize(fL);
 	}
          
 	frag_color = (diffuse + ambient + specular)* texture2D(gSampler, uvs.xy);
-	frag_color.a = 1.0;
+	frag_color.a = opacity;
 }
 }
 

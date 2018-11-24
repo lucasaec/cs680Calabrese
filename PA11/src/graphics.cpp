@@ -85,19 +85,21 @@ worldStuff->Initialize();
   }
   
  
-m_cube = new Object("test.obj",2,0,0,0,0,"wood.jpg");
+m_cube = new Object("stick.obj",2,0,-4.5,-3.5,0,"white.jpg");
 list1.push_back(m_cube);
 
 
-  list1.push_back(new Object("testCube.obj",2,0,15,0,2,"wood.jpg") );
+  list1.push_back(new Object("testCube.obj",2,0,15,0,2,"metal.jpg") );
 
-list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"wood.jpg") );
+list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
-
-
+list1.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
+list1.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
+glassT = new Object("GlassTop.obj",2,0,-15,15,99,"Glass.jpg"); //4
+list1.push_back(glassT);
  
-
-
+list1.push_back( new Object("GlassF.obj",2,0,-15,15,99,"Glass.jpg") );
+//list1.push_back( new Object("bowl.obj",2,0,0,0,0,"white.jpg") );
   m_shader = new Shader();
 
 worldStuff->dynamicsWorld->setInternalTickCallback(afunction);
@@ -154,6 +156,8 @@ worldStuff->dynamicsWorld->setInternalTickCallback(afunction);
 
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
+glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDepthFunc(GL_LESS);
 
   return true;
@@ -213,27 +217,27 @@ void Graphics::Update(unsigned int dt) {
    
 if(a==16)
 {
-camera+=0.1;
+camera+=1;
 }
 if(a==17)
 {
-cam+=0.1;
+cam+=1;
 }
 if(a==18)
 {
-cam-=0.1;
+cam-=1;
 }
 if(a==19)
 {
-camera-=0.1;
+camera-=1;
 }
 if(a==20)
 {
-cam1+=0.1;
+cam1+=1;
 }
 if(a==21)
 {
-cam1-=0.1;
+cam1-=1;
 }
   
     for(unsigned int i=0; i<list1.size(); i++) {
@@ -294,13 +298,20 @@ glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,50,0,0);
 else if(a==51)
 glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
     
-
-
+ 
+//glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
+  //        glassT->Render();
  for(unsigned int x = 0; x < list1.size(); x++) {
+          if(x == 6 || x == 3 || x == 4 || x == 5) { //MAKES GLASS TRANSPARENT be careful where you add objects
+              glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
+          }
+          else {
+               glUniform1f(m_shader->GetUniformLocation("opacity"),1);
+          }
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
           list1.at(x)->Render();   
       } 
-  
+ 
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

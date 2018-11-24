@@ -25,7 +25,10 @@ float x;
 float camera;
 float cam;
 float cam1;
-
+    Object *glassT;
+    Object *glassL;
+    Object *glassR;
+    Object *glassF;
   private:
 unsigned int a;
 float amb,spec_tab,spec_cube,spotlight_strength,spot_rad;
@@ -44,6 +47,8 @@ float amb,spec_tab,spec_cube,spotlight_strength,spot_rad;
     Object *m_cylinder;
     Object *l_flipper;
     Object *launcher;
+
+    
 };
 
 #endif /* GRAPHICS_H */
