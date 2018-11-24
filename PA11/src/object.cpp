@@ -108,7 +108,8 @@ aiMesh *mesh = scene->mMeshes[0];
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         table4 = rigidBody;
-        
+        rigidBody->setRestitution(0);
+        rigidBody->setUserIndex(2);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
@@ -141,7 +142,7 @@ aiMesh *mesh = scene->mMeshes[0];
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         table4 = rigidBody;
-        
+        //rigidBody->setRestitution(1);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
@@ -172,17 +173,23 @@ aiMesh *mesh = scene->mMeshes[0];
     }
     if(type == 4) {
         btDefaultMotionState *shapeMotionState = NULL; 
-        btCollisionShape* shape = new btSphereShape((btScalar).4f);
+        btCollisionShape* shape = new btSphereShape((btScalar)1.0f);
         btVector3 inertia(0,0,0);
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
-        btScalar mass(.6);
+        btScalar mass(1);
         shape->calculateLocalInertia(mass, inertia);
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         rigidBody->setRestitution(1);
+        rigidBody->setUserIndex(5);
+        rigidBody->setUserPointer(rigidBody);
+        //rigidBody->setUserIndex(5);
+//rigidBody->setUserIndex(5);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }
-    rigidBody->setActivationState(DISABLE_DEACTIVATION); 
+    if(type != 67) {
+        rigidBody->setActivationState(DISABLE_DEACTIVATION); 
+    }
     glGenBuffers(1, &VB);
     glBindBuffer(GL_ARRAY_BUFFER, VB);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
@@ -200,6 +207,10 @@ Object::~Object()
  
 float x = 0;
 void Object::Update(unsigned int dt) { 
+if(physics == 67) {
+model = glm::mat4(1.0f);
+return;
+}
   x += .001;
   btTransform trans;
   btScalar m[16]; 
@@ -220,6 +231,8 @@ void Object::Update(unsigned int dt) {
     btQuaternion quaternion2 = btQuaternion(btVector3(1, 0, 0), mousey/-800.0);
      btQuaternion quaternion3 = btQuaternion(btVector3(0, 0, 1), rotationAmount);
     trans.setRotation(quaternion1*quaternion2*quaternion3);
+    rigidBody->setLinearVelocity(btVector3(0,0,0) );
+    rigidBody->setAngularVelocity(btVector3(0,0,0) );
  // trans.setRotation(quaternion1);
 
   //  trans.setRotation(btQuaternion(btVector3(1, 0, 0), x));
@@ -227,7 +240,65 @@ void Object::Update(unsigned int dt) {
    //rigidBody->setWorldTransform(trans);
    rigidBody->getMotionState()->setWorldTransform(trans);
    }
-  worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 10); 
+   else if(physics != 67 && physics != 99) {
+       btVector3 velocity = rigidBody->getLinearVelocity();
+       float speedx,speedy,speedz;
+       float max = 2;
+       speedx = velocity[0];
+       speedy = velocity[1];
+       speedz = velocity[2];
+       
+       if(velocity[0] > max) {
+           speedx = max;
+       }
+       else if(velocity[0] < -max) {
+           speedx = -max;
+       }
+       if(velocity[1] > max) {
+           speedy = max;
+       }
+       else if(velocity[1] < -max) {
+           speedy = -max;
+       }
+       else if(velocity[2] > max) {
+           speedz = max;
+       }
+       else if(velocity[2] < -max) {
+           speedz = -max;
+       }
+        if(speedy  <5) {
+      //	std::cout <<speedy << '\n';
+        }
+        rigidBody->setLinearVelocity(btVector3(speedx,speedy,speedz) );
+      
+       btVector3 avelocity = rigidBody->getAngularVelocity();
+     //rigidBody->setRollingFriction(10.0f);
+       max = 5;
+       speedx = avelocity[0];
+       speedy = avelocity[1];
+       speedz = avelocity[2];
+       
+       if(velocity[0] > max) {
+           speedx = max;
+       }
+       else if(velocity[0] < -max) {
+           speedx = -max;
+       }
+       if(velocity[1] > max) {
+           speedy = max;
+       }
+       else if(velocity[1] < -max) {
+           speedy = -max;
+       }
+       else if(velocity[2] > max) {
+           speedz = max;
+       }
+       else if(velocity[2] < -max) {
+           speedz = -max;
+       }
+       rigidBody->setAngularVelocity(btVector3(speedx,speedy,speedz) );
+   }
+  worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 100); 
   if(physics != 0)
   rigidBody->getMotionState()->getWorldTransform(trans);
 
