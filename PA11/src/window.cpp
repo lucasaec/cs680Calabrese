@@ -12,7 +12,13 @@ Window::~Window()
   gWindow = NULL;
   SDL_Quit();
 }
+SDL_Window* Window::GetWindow() {
+    return (gWindow);
+}
 
+SDL_GLContext Window::GetgContext() {
+    return (gContext);
+}
 bool Window::Initialize(const string &name, int* width, int* height)
 {
     // Start SDL

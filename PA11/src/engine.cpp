@@ -1,5 +1,8 @@
 
 #include "engine.h"
+#include "imgui.h"
+#include "imgui_impl_sdl.h"
+#include "imgui_impl_opengl3.h"
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
@@ -63,7 +66,22 @@ bool Engine::Initialize()
 void Engine::Run()
 {
   m_running = true;
+/////////////////////////////// 
+    SDL_Window* window = m_window->GetWindow();
+    SDL_GLContext gl_context = m_window->GetgContext();
+///////////////////////////////
+    // Setup Dear ImGui binding
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
 
+    ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
+    ImGui_ImplOpenGL3_Init("#version 130");
+
+  
+    // Setup style
+    ImGui::StyleColorsDark();
 //Uint32 SDL_GetMouseState(int* x,
                        //  int* y)
   while(m_running)
@@ -78,6 +96,7 @@ void Engine::Run()
     // Check the keyboard input
     while(SDL_PollEvent(&m_event) != 0)
     {
+      ImGui_ImplSDL2_ProcessEvent(&m_event);
       Keyboard();
     }
   
@@ -89,12 +108,26 @@ if(rotateRight) {
 }
 //std::cout << getDT()<< '\n';
     // Update and render the graphics
-    m_graphics->Update(m_DT);
-    m_running = m_running && m_graphics->Render();
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame(window);
 
+	ImGui::NewFrame();
+	m_graphics->Update(m_DT);
+	m_running = m_running && m_graphics->Render();
+{
+ImGui::Begin("Hello, World!");
+ImGui::Text("Some text.");
+ImGui::End();
+}
+ ImGui::Render();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     // Swap to the Window
     m_window->Swap();
+
   }
+ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
 }
 unsigned int a;
 

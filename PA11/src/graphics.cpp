@@ -126,19 +126,21 @@ worldStuff->Initialize();
 list1.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
 
 
-//list1.push_back( new Object("skybox.obj",2,0,0,0,67,"wood.jpg") );
+list1.push_back( new Object("skybox.obj",2,0,0,0,67,"skybox.jpeg") );
 
 list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
-for(int beez = 0; beez < 10; beez++) {
+for(int beez = 0; beez < 10; beez++) { //note to self, figure out how to prevent bees from exiting the box
 list1.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
 }
-for(int beez = 0; beez < 10; beez++) {
+for(int beez = 0; beez < 15; beez++) {
 list1.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
 }
 for(int beez = 0; beez < 10; beez++) {
 list1.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
-}list1.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
+}
+list1.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
+list1.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
 list1.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
 list1.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
 glassT = new Object("GlassTop.obj",2,0,-15,15,99,"Glass.jpg"); //4
@@ -220,7 +222,7 @@ void Graphics::keys(unsigned int key) {
 
 void Graphics::Update(unsigned int dt) {
 
-    for(int beeNumber = list1.size() -31-5-1; beeNumber < list1.size() - 4; beeNumber++) {
+    for(int beeNumber = list1.size() -41-1; beeNumber < list1.size() - 4; beeNumber++) {
        glm::vec4 BeePos = list1.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
        if(BeePos.y < -28 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
         list1.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
@@ -362,7 +364,7 @@ glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
  for(unsigned int x = 0; x < list1.size(); x++) {
-          if(x >32) { //MAKES GLASS TRANSPARENT be careful where you add objects
+          if(x >43-4) { //MAKES GLASS TRANSPARENT be careful where you add objects or change the values
               glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
           }
           else {
