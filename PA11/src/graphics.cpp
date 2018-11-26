@@ -20,7 +20,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
         const btCollisionObject* object1 = (persistentFold->getBody0());
         const btCollisionObject* object2 = (persistentFold->getBody1());
         if(object2->getUserIndex() == 5 && object1->getUserIndex() == 2) {
-           std::cout << "Wow! 2 points!!!" << '\n';
+   //        std::cout << "Wow! 2 points!!!" << '\n';
            //score += 2;
           // collideOnce = true;
            //allowCollision = false; 
@@ -29,11 +29,39 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
            
         }
         if(object2->getUserIndex() == 2) {
- std::cout << "Wow! 2 points!!!" << '\n';
+ //std::cout << score << '\n';
            btRigidBody * bod =  static_cast<btRigidBody*>(object1->getUserPointer());
-           std::cout << bod;
-           bod->setLinearVelocity(btVector3(0,0,0) );
+       //    std::cout << bod;
+ btVector3 velocity = bod->getLinearVelocity();
+       float speedx,speedy,speedz;
+       float max = .01;
+       speedx = velocity[0];
+       speedy = velocity[1];
+       speedz = velocity[2];
+       
+       if(velocity[0] > max) {
+           speedx = max;
+       }
+       else if(velocity[0] < -max) {
+           speedx = -max;
+       }
+       if(velocity[1] > max) {
+           speedy = max;
+       }
+       else if(velocity[1] < -max) {
+           speedy = -max;
+       }
+       else if(velocity[2] > max) {
+           speedz = max;
+       }
+       else if(velocity[2] < -max) {
+           speedz = -max;
+       }
+        bod->setLinearVelocity(btVector3(speedx,speedy,speedz) );
            //object1->setUserIndex2(88);
+          // std::cout << object2->getUserIndex() << '\n'; 
+          //object1->getUserIndex2();
+          score += 1;
         }
     }
     /* if(!collideOnce) {
@@ -94,8 +122,8 @@ worldStuff->Initialize();
   }
   
  
-m_cube = new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg");
-list1.push_back(m_cube);
+
+list1.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
 
 
 //list1.push_back( new Object("skybox.obj",2,0,0,0,67,"wood.jpg") );
@@ -103,14 +131,14 @@ list1.push_back(m_cube);
 list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
 for(int beez = 0; beez < 10; beez++) {
-list1.push_back( new Object("Bee.obj",2,0,-4.5,0,4,"Bee.jpg") );
+list1.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
 }
 for(int beez = 0; beez < 10; beez++) {
-list1.push_back( new Object("Bee.obj",2,0,-4.5,3,4,"Bee.jpg") );
+list1.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
 }
 for(int beez = 0; beez < 10; beez++) {
-list1.push_back( new Object("Bee.obj",2,0,-4.5,5,4,"Bee.jpg") );
-}
+list1.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+}list1.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
 list1.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
 list1.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
 glassT = new Object("GlassTop.obj",2,0,-15,15,99,"Glass.jpg"); //4
@@ -192,7 +220,7 @@ void Graphics::keys(unsigned int key) {
 
 void Graphics::Update(unsigned int dt) {
 
-    for(int beeNumber = list1.size() -31-5; beeNumber < list1.size() - 4; beeNumber++) {
+    for(int beeNumber = list1.size() -31-5-1; beeNumber < list1.size() - 4; beeNumber++) {
        glm::vec4 BeePos = list1.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
        if(BeePos.y < -28 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
         list1.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
@@ -334,7 +362,7 @@ glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
  for(unsigned int x = 0; x < list1.size(); x++) {
-          if(x >31) { //MAKES GLASS TRANSPARENT be careful where you add objects
+          if(x >32) { //MAKES GLASS TRANSPARENT be careful where you add objects
               glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
           }
           else {

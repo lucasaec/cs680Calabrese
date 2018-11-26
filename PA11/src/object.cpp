@@ -143,6 +143,7 @@ aiMesh *mesh = scene->mMeshes[0];
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         table4 = rigidBody;
         //rigidBody->setRestitution(1);
+         rigidBody->setUserIndex(45);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
@@ -168,12 +169,12 @@ aiMesh *mesh = scene->mMeshes[0];
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         rigidBody->setRestitution(1.4);
-        rigidBody->setUserIndex(2);
+       // rigidBody->setUserIndex(2);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }
     if(type == 4) {
         btDefaultMotionState *shapeMotionState = NULL; 
-        btCollisionShape* shape = new btSphereShape((btScalar)1.0f);
+        btCollisionShape* shape = new btSphereShape((btScalar)1);
         btVector3 inertia(0,0,0);
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
         btScalar mass(1);
@@ -181,7 +182,7 @@ aiMesh *mesh = scene->mMeshes[0];
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         rigidBody->setRestitution(1);
-        rigidBody->setUserIndex(5);
+        //rigidBody->setUserIndex(5);
         rigidBody->setUserPointer(rigidBody);
         //rigidBody->setUserIndex(5);
 //rigidBody->setUserIndex(5);
