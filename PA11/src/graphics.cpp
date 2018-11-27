@@ -7,7 +7,9 @@ extern bool pullBack;
 extern float timePulled;
 bool allowCollision = true;
 BulletUp* worldStuff; 
-std::vector<Object*> list1;
+std::vector<Object*> Glass;
+std::vector<Object*> Bees;
+std::vector<Object*> Other;
 int balls = 0;
 int score = 0;
 bool farLeft = false;
@@ -19,16 +21,15 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
         btPersistentManifold* persistentFold =  worldStuff->dispatcher->getManifoldByIndexInternal(cMfold);
         const btCollisionObject* object1 = (persistentFold->getBody0());
         const btCollisionObject* object2 = (persistentFold->getBody1());
-        if(object2->getUserIndex() == 5 && object1->getUserIndex() == 2) {
-   //        std::cout << "Wow! 2 points!!!" << '\n';
-           //score += 2;
-          // collideOnce = true;
-           //allowCollision = false; 
-           //std::cout << "-----" << '\n';
-          // object2->getUserPointer();
-           
+        /**
+         * I plan on destroy the balls when the are detected in the pot, Need to figure out how to prevent null pointer :1
+         *
+         */
+        if(object1->getUserIndex() == 64 && object2->getUserIndex() != 2 && object2->getUserIndex() != 45) {
+        //std::cout << "Cool"<< '\n';
+         
         }
-        if(object2->getUserIndex() == 2) {
+        if(object2->getUserIndex() == 2 && object1->getUserIndex() != 64) {
  //std::cout << score << '\n';
            btRigidBody * bod =  static_cast<btRigidBody*>(object1->getUserPointer());
        //    std::cout << bod;
@@ -123,30 +124,30 @@ worldStuff->Initialize();
   
  
 
-list1.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
+Other.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
 
+Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
+Other.push_back( new Object("skybox.obj",2,0,0,0,67,"skybox.jpeg") );
 
-list1.push_back( new Object("skybox.obj",2,0,0,0,67,"skybox.jpeg") );
-
-list1.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
+Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
 for(int beez = 0; beez < 10; beez++) { //note to self, figure out how to prevent bees from exiting the box
-list1.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
 }
-for(int beez = 0; beez < 15; beez++) {
-list1.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
+for(int beez = 0; beez < 20; beez++) {
+Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
 }
 for(int beez = 0; beez < 10; beez++) {
-list1.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
 }
-list1.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
-list1.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
-list1.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
-list1.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
+Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
+Other.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
+Glass.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
+Glass.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
 glassT = new Object("GlassTop.obj",2,0,-15,15,99,"Glass.jpg"); //4
-list1.push_back(glassT);
+Glass.push_back(glassT);
  
-list1.push_back( new Object("GlassF.obj",2,0,-15,15,99,"Glass.jpg") );
+Glass.push_back( new Object("GlassF.obj",2,0,-15,15,99,"Glass.jpg") );
 
 
 
@@ -222,28 +223,32 @@ void Graphics::keys(unsigned int key) {
 
 void Graphics::Update(unsigned int dt) {
 
-    for(int beeNumber = list1.size() -41-1; beeNumber < list1.size() - 4; beeNumber++) {
-       glm::vec4 BeePos = list1.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
+    for(int beeNumber = 0; beeNumber < Bees.size(); beeNumber++) {
+       glm::vec4 BeePos = Bees.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
        if(BeePos.y < -28 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
-        list1.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
+        Bees.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
+       }// Jar Spot: 9.79652 -22.8617 16.285
+       if(BeePos.y < -22.84 && BeePos.y > -22.94 &&  BeePos.x <= 9.5 && BeePos.x >= -9.84 && BeePos.z > 16.8  && BeePos.z < 15.9) { //detect points
+       std::cout << "scored a point" << "\n";     
        }
-    } // x less 2 and bigger -4 , y less than -30, z less than 14 > 8.5
-  //  glm::vec4 BeePos = list1.at(list1.size()-6)->GetModel() * glm::vec4(0,0,0,1);
+    } 
+   // x less 2 and bigger -4 , y less than -30, z less than 14 > 8.5
+   // glm::vec4 BeePos = Bees.at(0)->GetModel() * glm::vec4(0,0,0,1);
    // std::cout << BeePos.x << " " << BeePos.y << " " << BeePos.z << "\n";
- /* if(a == 1) {
-          list1.at(list1.size()-6)->rigidBody->applyCentralImpulse(btVector3(4,0,0));
+ /*if(a == 1) {
+          Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(4,0,0));
     }
     if(a == 2) {
-         list1.at(list1.size()-6)->rigidBody->applyCentralImpulse(btVector3(-4,0,0));
+         Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(-4,0,0));
     }
     if(a == 3) {
-      list1.at(list1.size()-6)->rigidBody->applyCentralImpulse(btVector3(0,0,4));
+      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,0,4));
     }
     if(a == 4) {
-      list1.at(list1.size()-6)->rigidBody->applyCentralImpulse(btVector3(0,0,-4));
+      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,0,-4));
     }
      if(a == 6) {
-      list1.at(list1.size()-6)->rigidBody->applyCentralImpulse(btVector3(0,50,0));
+      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,50,0));
       std::cout << "cool";
     }*/
     if(a == 6) {
@@ -302,9 +307,16 @@ if(a==21)
 cam1-=1;
 }
   
-    for(unsigned int i=0; i<list1.size(); i++) {
-        list1.at(i)->Update(dt);
+    for(unsigned int i=0; i<Other.size(); i++) {
+        Other.at(i)->Update(dt);
     }
+    for(unsigned int i=0; i<Bees.size(); i++) {
+        Bees.at(i)->Update(dt);
+    }
+    for(unsigned int i=0; i<Glass.size(); i++) {
+        Glass.at(i)->Update(dt);
+    }
+    
 }
 void Graphics::Fire(float force) {
     if(farLeft) {
@@ -359,21 +371,25 @@ glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,50,0,0);
 }
 else if(a==51)
 glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
-    
+    glUniform1f(m_shader->GetUniformLocation("opacity"),1);
  
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
- for(unsigned int x = 0; x < list1.size(); x++) {
-          if(x >43-4) { //MAKES GLASS TRANSPARENT be careful where you add objects or change the values
-              glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
+ for(unsigned int x = 0; x < Other.size(); x++) {   
+          if(Other.at(x)->physics != 64) {
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
+          Other.at(x)->Render();   
           }
-          else {
-               glUniform1f(m_shader->GetUniformLocation("opacity"),1);
-          }
-          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(list1.at(x)->GetModel()));
-          list1.at(x)->Render();   
-      } 
- 
+  } 
+  for(unsigned int x = 0; x < Bees.size(); x++) {   
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Bees.at(x)->GetModel()));
+          Bees.at(x)->Render();   
+  } 
+  glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
+  for(unsigned int x = 0; x < Glass.size(); x++) {   
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
+          Glass.at(x)->Render();   
+  } 
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

@@ -24,7 +24,7 @@ class Object
     btCollisionShape *shape;
     btRigidBody *rigidBody;
     int physics;
-
+    int beePoints;
     Magick::Image* image;
     Magick::Blob m_blob;
     GLuint texture;

@@ -21,6 +21,7 @@ Object::Object() {}
  */
 Object:: Object(std::string objname, float scale, float posx, float posy, float posz ,int type, std::string textName)
 {
+    beePoints = 0;
     physics = type;
     scale1 = scale;
     objTriMesh = new btTriangleMesh();
@@ -113,26 +114,6 @@ aiMesh *mesh = scene->mMeshes[0];
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
-    if(type == 3 ) { //flipper
-        btDefaultMotionState *shapeMotionState = NULL; 
-        btCollisionShape* shape=new btBoxShape(btVector3(3.2,1.3,.25));
-        btVector3 inertia(0,0,0);
-        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 1.5, -14))); 
-        btScalar mass(1);
-        shape->calculateLocalInertia(mass, inertia);
-        btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
-        rigidBody = new btRigidBody(shapeRigidBodyCI);
-
-
-        btTransform frame =  btTransform::getIdentity();
-        frame.setOrigin(btVector3(0,10,0));
-        btGeneric6DofConstraint* constraint = new btGeneric6DofConstraint(*rigidBody, frame,true);
-	//constraint->
-        constraint->setAngularLowerLimit(btVector3(0, -.6, 0));
-        constraint->setAngularUpperLimit(btVector3(0, M_PI/2.5, 0));
-        worldStuff->dynamicsWorld->addRigidBody(rigidBody);
-        worldStuff->dynamicsWorld->addConstraint(constraint);
-    }
     if(type == 99 ) { //All other Kinematic OBjects
         btDefaultMotionState *shapeMotionState = NULL; 
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
@@ -187,6 +168,19 @@ aiMesh *mesh = scene->mMeshes[0];
         //rigidBody->setUserIndex(5);
 //rigidBody->setUserIndex(5);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+    }
+    if(type == 64) {
+	btDefaultMotionState *shapeMotionState = NULL; 
+	btCollisionShape* shape=new btBoxShape(btVector3(.5,.5,.5));
+	btVector3 inertia(0,0,0);
+	shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(8.5, -23, 16))); 
+	btScalar mass(0);
+	shape->calculateLocalInertia(mass, inertia);
+	btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
+	rigidBody = new btRigidBody(shapeRigidBodyCI);
+        rigidBody->setUserIndex(64); 
+	worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+        rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
     }
     if(type != 67) {
         rigidBody->setActivationState(DISABLE_DEACTIVATION); 
