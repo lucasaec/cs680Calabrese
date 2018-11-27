@@ -93,7 +93,7 @@ void Engine::Run()
     if(gamePlaying) {
         gameTime += m_DT;
     }
-    if(gameTime/1000.0f >= 60.0f) {
+    if(gameTime/1000.0f >= 90.0f) {
           std::cout << "gameOver";
           gameTime = 0;
           gamePlaying = false;

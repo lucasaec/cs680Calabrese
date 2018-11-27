@@ -6,11 +6,20 @@ extern bool rFlipper;
 extern bool pullBack;
 extern bool gamePlaying;
 extern float timePulled;
+extern float gameTime;
+  int digit1 = 5;
+  int digit2 = 5;
+   int digit3 = 4;
+  int digit4 = 4;
 bool allowCollision = true;
 BulletUp* worldStuff; 
 std::vector<Object*> Glass;
 std::vector<Object*> Bees;
 std::vector<Object*> Other;
+std::vector<Object*> Score;
+std::vector<Object*> Score2;
+std::vector<Object*> Time1;
+std::vector<Object*> Time2;
 int balls = 0;
 int score = 0;
 int beesGone = 0;
@@ -167,6 +176,55 @@ for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent
     }
 }
 
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"Null.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"0.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"1.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"2.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"3.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"4.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"5.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"6.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"7.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"8.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"9.png") );
+
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"Null.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"0.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"1.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"2.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"3.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"4.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"5.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"6.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"7.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"8.png") );
+Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"9.png") );
+
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"Null.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"0.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"1.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"2.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"3.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"4.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"5.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"6.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"7.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"8.png") );
+Time1.push_back( new Object("digitTime1.obj",2,0,-15,15,67,"9.png") );
+
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"Null.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"0.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"1.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"2.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"3.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"4.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"5.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"6.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"7.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"8.png") );
+Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"9.png") );
+
+
 Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
 Other.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
 Glass.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
@@ -258,25 +316,8 @@ if(gamePlaying) {
  
     } 
 }
-   // x less 2 and bigger -4 , y less than -30, z less than 14 > 8.5
-   // glm::vec4 BeePos = Bees.at(0)->GetModel() * glm::vec4(0,0,0,1);
-   // std::cout << BeePos.x << " " << BeePos.y << " " << BeePos.z << "\n";
- /*if(a == 1) {
-          Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(4,0,0));
-    }
-    if(a == 2) {
-         Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(-4,0,0));
-    }
-    if(a == 3) {
-      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,0,4));
-    }
-    if(a == 4) {
-      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,0,-4));
-    }
-     if(a == 6) {
-      Bees.at(0)->rigidBody->applyCentralImpulse(btVector3(0,50,0));
-      std::cout << "cool";
-    }*/
+   
+ 
     if(a == 6) {
         amb+=0.005;
     }
@@ -342,7 +383,12 @@ cam1-=1;
     for(unsigned int i=0; i<Glass.size(); i++) {
         Glass.at(i)->Update(dt);
     }
-    
+ 
+  
+  Score.at(digit1)->Update(dt);
+  Score2.at(digit2)->Update(dt);
+  Time1.at(digit3)->Update(dt);
+  Time2.at(digit4)->Update(dt);
 }
 void Graphics::Fire(float force) {
     if(farLeft) {
@@ -401,6 +447,20 @@ glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
  
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
+ 
+  digit1 = score/10 + 1;
+  digit2 = score % 10 + 1;
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score.at(digit1)->GetModel()));
+  Score.at(digit1)->Render(); 
+glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)->GetModel()));
+  Score2.at(digit2)->Render();
+
+digit3 = (90-(int)gameTime/1000)/10 + 1;
+  digit4 = (90-(int)gameTime/1000) % 10 + 1;
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time1.at(digit3)->GetModel()));
+  Time1.at(digit3)->Render(); 
+ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
+  Time2.at(digit4)->Render(); 
  for(unsigned int x = 0; x < Other.size(); x++) {   
           if(Other.at(x)->physics != 64) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
@@ -416,6 +476,7 @@ glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
           Glass.at(x)->Render();   
   } 
+ 
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )
