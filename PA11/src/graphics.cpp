@@ -4,6 +4,7 @@
 extern bool lFlipper;
 extern bool rFlipper;
 extern bool pullBack;
+extern bool gamePlaying;
 extern float timePulled;
 bool allowCollision = true;
 BulletUp* worldStuff; 
@@ -12,6 +13,7 @@ std::vector<Object*> Bees;
 std::vector<Object*> Other;
 int balls = 0;
 int score = 0;
+int beesGone = 0;
 bool farLeft = false;
 static void afunction(btDynamicsWorld *world, btScalar timeStep) {
     int nMfolds = world->getDispatcher()->getNumManifolds();
@@ -27,11 +29,25 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
          */
         if(object1->getUserIndex() == 64 && object2->getUserIndex() != 2 && object2->getUserIndex() != 45) {
         //std::cout << "Cool"<< '\n';
-         
+            Object* obj =  static_cast<Object*>(object2->getUserPointer());
+           // std::cout << obj->beePoints << '\n';
+            score += obj->beePoints;
+            if(score < 0) { 
+                score = 0;
+            }
+           
+            Bees.erase(Bees.begin() + (obj->beeIndex - beesGone ) );
+            for(int beez = 0; beez < Bees.size(); beez++) {
+                Bees.at(beez)->beeIndex = beez;
+            }
+         //   std::cout << "beeSize: " <<  Bees.size() << '\n';
+           //  std::cout << "beeIndex: " <<  obj->beeIndex - beesGone << '\n';
+            worldStuff->dynamicsWorld->removeRigidBody(obj->rigidBody);
+            std::cout  << "Score: " << score << '\n';
         }
         if(object2->getUserIndex() == 2 && object1->getUserIndex() != 64) {
- //std::cout << score << '\n';
-           btRigidBody * bod =  static_cast<btRigidBody*>(object1->getUserPointer());
+ 
+           btRigidBody * bod =  (static_cast<Object*>(object1->getUserPointer()) )->rigidBody;
        //    std::cout << bod;
  btVector3 velocity = bod->getLinearVelocity();
        float speedx,speedy,speedz;
@@ -62,7 +78,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
            //object1->setUserIndex2(88);
           // std::cout << object2->getUserIndex() << '\n'; 
           //object1->getUserIndex2();
-          score += 1;
+          
         }
     }
     /* if(!collideOnce) {
@@ -131,15 +147,26 @@ Other.push_back( new Object("skybox.obj",2,0,0,0,67,"skybox.jpeg") );
 
 Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
-for(int beez = 0; beez < 10; beez++) { //note to self, figure out how to prevent bees from exiting the box
-Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+
+
+for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
+    if(beez < 9) {
+       Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+       Bees.at(beez)->beePoints = -2;
+       Bees.at(beez)->beeIndex = beez;
+    }
+    else if (beez < 29) {
+        Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
+        Bees.at(beez)->beePoints = 1;
+        Bees.at(beez)->beeIndex = beez;
+    }
+    else {
+       Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+       Bees.at(beez)->beePoints = 3;
+       Bees.at(beez)->beeIndex = beez;
+    }
 }
-for(int beez = 0; beez < 20; beez++) {
-Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
-}
-for(int beez = 0; beez < 10; beez++) {
-Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
-}
+
 Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
 Other.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
 Glass.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
@@ -222,16 +249,15 @@ void Graphics::keys(unsigned int key) {
 
 
 void Graphics::Update(unsigned int dt) {
-
+if(gamePlaying) {
     for(int beeNumber = 0; beeNumber < Bees.size(); beeNumber++) {
        glm::vec4 BeePos = Bees.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
        if(BeePos.y < -28 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
         Bees.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
        }// Jar Spot: 9.79652 -22.8617 16.285
-       if(BeePos.y < -22.84 && BeePos.y > -22.94 &&  BeePos.x <= 9.5 && BeePos.x >= -9.84 && BeePos.z > 16.8  && BeePos.z < 15.9) { //detect points
-       std::cout << "scored a point" << "\n";     
-       }
+ 
     } 
+}
    // x less 2 and bigger -4 , y less than -30, z less than 14 > 8.5
    // glm::vec4 BeePos = Bees.at(0)->GetModel() * glm::vec4(0,0,0,1);
    // std::cout << BeePos.x << " " << BeePos.y << " " << BeePos.z << "\n";

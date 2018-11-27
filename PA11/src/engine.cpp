@@ -6,6 +6,8 @@
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
+bool gamePlaying = true;
+float gameTime = 0;
 
 float rotationAmount= 0;
 
@@ -88,6 +90,14 @@ void Engine::Run()
   {
     // Update the DT
     m_DT = getDT();
+    if(gamePlaying) {
+        gameTime += m_DT;
+    }
+    if(gameTime/1000.0f >= 60.0f) {
+          std::cout << "gameOver";
+          gameTime = 0;
+          gamePlaying = false;
+    } 
     SDL_GetMouseState(&mousex,&mousey);
     mousex -= 400;
     mousey += 150;

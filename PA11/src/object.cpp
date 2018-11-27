@@ -22,6 +22,7 @@ Object::Object() {}
 Object:: Object(std::string objname, float scale, float posx, float posy, float posz ,int type, std::string textName)
 {
     beePoints = 0;
+    beeIndex = 0;
     physics = type;
     scale1 = scale;
     objTriMesh = new btTriangleMesh();
@@ -164,7 +165,7 @@ aiMesh *mesh = scene->mMeshes[0];
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         rigidBody->setRestitution(1);
         //rigidBody->setUserIndex(5);
-        rigidBody->setUserPointer(rigidBody);
+        rigidBody->setUserPointer(this);
         //rigidBody->setUserIndex(5);
 //rigidBody->setUserIndex(5);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);

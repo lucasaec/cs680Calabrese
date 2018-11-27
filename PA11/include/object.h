@@ -25,6 +25,7 @@ class Object
     btRigidBody *rigidBody;
     int physics;
     int beePoints;
+    int beeIndex;
     Magick::Image* image;
     Magick::Blob m_blob;
     GLuint texture;
