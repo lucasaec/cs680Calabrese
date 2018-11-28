@@ -17,7 +17,7 @@ uniform sampler2D gSampler;
 uniform vec4 ballposition;
 uniform float spot;
 uniform float spotlight_radius;
-
+uniform float opacity;
 const float strength = 30;
 
 void main(void)
@@ -59,7 +59,7 @@ specular+=spotlight_strength;
 }
  gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
     color = ambient + diffuse + specular;
-    color.a = 1.0;
+    color.a = opacity;
     uvs = v_uvs;
 }
 else
@@ -88,7 +88,7 @@ vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
 
  gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v;
     color = ambient + diffuse + specular;
-    color.a = 1.0;
+    color.a = opacity;
     uvs = v_uvs;
 }
 }
