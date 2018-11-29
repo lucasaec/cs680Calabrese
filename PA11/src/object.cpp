@@ -124,10 +124,10 @@ aiMesh *mesh = scene->mMeshes[0];
         btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
         rigidBody = new btRigidBody(shapeRigidBodyCI);
         table4 = rigidBody;
-        //rigidBody->setRestitution(1);
+        rigidBody->setRestitution(1.2);
          rigidBody->setUserIndex(45);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
-        rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+       // rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
     if(type == 2) {
         btDefaultMotionState *shapeMotionState = NULL; 
@@ -239,7 +239,7 @@ return;
    else if(physics != 67 && physics != 99) {
        btVector3 velocity = rigidBody->getLinearVelocity();
        float speedx,speedy,speedz;
-       float max = 2;
+       float max = 1;
        speedx = velocity[0];
        speedy = velocity[1];
        speedz = velocity[2];

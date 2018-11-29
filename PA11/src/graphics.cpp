@@ -147,12 +147,12 @@ worldStuff->Initialize();
     return false;
   }
   
- 
+ Other.push_back( new Object("skybox.obj",2,0,0,0,67,"Daylight Box UV.png") );
 
 Other.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
 
 Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
-Other.push_back( new Object("skybox.obj",2,0,0,0,67,"skybox.jpeg") );
+
 
 Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 
@@ -310,10 +310,12 @@ void Graphics::Update(unsigned int dt) {
 if(gamePlaying) {
     for(int beeNumber = 0; beeNumber < Bees.size(); beeNumber++) {
        glm::vec4 BeePos = Bees.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
-       if(BeePos.y < -28 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
+       if(BeePos.y < -25 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
         Bees.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
        }// Jar Spot: 9.79652 -22.8617 16.285
- 
+       if(BeePos.y < -40) {
+           std::cout << "glitched ball, modify timestep" << "\n";
+       }
     } 
 }
    
@@ -413,14 +415,24 @@ m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
     glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
-
-  
+/** Christina please make the skybox brighter, But i don't want to see any seams **/
+ glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),.9,.9,.9,1); 
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
+    glUniform1f(m_shader->GetUniformLocation("Shininess"),1);
+    glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,0,0,0);
+glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),0,0,0,1);
+glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),0);
+glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),0);
+glUniform1f(m_shader->GetUniformLocation("opacity"),1);
+  //this renders the skybox
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(0)->GetModel()));
+          Other.at(0)->Render();  
   
  
     
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
-   // glUniform4f(m_shader->GetUniformLocation("spotLightPosition"),d[0],20,d[2],1);
-   // glUniform1f(m_shader->GetUniformLocation("spotLightStrength"),x);
+
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),10,50,0,0);
@@ -465,7 +477,7 @@ digit3 = (90-(int)gameTime/1000)/10 + 1;
   Time1.at(digit3)->Render(); 
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
   Time2.at(digit4)->Render(); 
- for(unsigned int x = 0; x < Other.size(); x++) {   
+ for(unsigned int x = 1; x < Other.size(); x++) {   
           if(Other.at(x)->physics != 64) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
           Other.at(x)->Render();   
