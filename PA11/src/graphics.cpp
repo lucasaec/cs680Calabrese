@@ -176,17 +176,17 @@ for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent
     }
 }
 
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"Null.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"0.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"1.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"2.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"3.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"4.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"5.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"6.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"7.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"8.png") );
-Score.push_back( new Object("digitPoints1.obj",2,0,-15,15,67,"9.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"Null.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"0.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"1.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"2.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"3.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"4.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"5.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"6.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"7.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"8.png") );
+Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"9.png") );
 
 Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"Null.png") );
 Score2.push_back( new Object("digitPoints2.obj",2,0,-15,15,67,"0.png") );
