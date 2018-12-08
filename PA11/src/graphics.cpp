@@ -201,7 +201,7 @@ for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent
        Bees.at(beez)->beeIndex = beez;
     }
 }
-std::cout << Bees.size();
+//std::cout << Bees.size();
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"Null.png") );
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"0.png") );
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"1.png") );
@@ -442,7 +442,7 @@ m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
 /** Christina please make the skybox brighter, But i don't want to see any seams **/
- glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),.9,.9,.9,1); 
+ glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),1.1,1.1,1.1,1); 
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,0,0,0);

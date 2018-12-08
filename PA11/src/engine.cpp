@@ -7,6 +7,7 @@ bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
 bool gamePlaying = false;
+float allowClick = true;
 float gameTime = 0;
 int maxSeconds = 0;
 float rotationAmount= 0;
@@ -89,6 +90,7 @@ void Engine::Run()
   while(m_running)
   {
     // Update the DT
+
     m_DT = getDT();
     if(gamePlaying) {
         gameTime += m_DT;
@@ -109,7 +111,7 @@ void Engine::Run()
       ImGui_ImplSDL2_ProcessEvent(&m_event);
       Keyboard();
     }
-  
+  //  allowClick = true;
     if(rotateLeft) {
     rotationAmount -= .1; //cinsider multiplying by DT if it's not 0.
 }
@@ -127,7 +129,7 @@ if(rotateRight) {
 {
 ImGui::Begin("Menu");
      if (ImGui::BeginMenu("Start")) {
- 
+          //  allowClick = false;
             if(ImGui::Button("30 Seconds") && !gamePlaying) {
                 maxSeconds = 30;
                 gamePlaying = true;
@@ -146,9 +148,14 @@ ImGui::Begin("Menu");
                 m_graphics->reloadBees();
                 gameTime = 0;
             }
+
      ImGui::EndMenu(); 
      }
-     
+     if(ImGui::Button("Stop") && gamePlaying) {
+         gamePlaying = false;
+         maxSeconds = 0;
+        // allowClick = false;
+     }
 ImGui::End();
 }
  ImGui::Render();
@@ -170,7 +177,7 @@ void Engine::Keyboard()
   {
     m_running = false;
   }
-  if(m_event.type == SDL_MOUSEBUTTONDOWN)
+  if(m_event.type == SDL_MOUSEBUTTONDOWN && allowClick)
   {   
       if(m_event.button.button == SDL_BUTTON_LEFT) {
           rotateLeft = true;
