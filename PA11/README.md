@@ -112,4 +112,4 @@ Andrew Flangas
 
 Christina Symon
 
-Lucas Calabrese
+Lucas Calabrese -Game Logic, Models, Debugging, Some Lighting, Physics, Menus
