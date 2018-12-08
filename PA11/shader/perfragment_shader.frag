@@ -27,7 +27,7 @@ void main()
 {
 if(spot==1.0)
 {
-vec4 light=vec4(0.0,0.0,0.0,0.0);
+vec4 light=vec4(0,0,-5,0);
 vec4 direction=normalize(light-ballposition);
 	vec3 N = normalize(fN);
 	vec3 E = normalize(fE);
@@ -56,16 +56,7 @@ vec3 L = normalize(fL);
 
 
 
-          if(acos(dot(-L,direction.xyz))>(0.525+spotlight_radius))
-{
-diffuse*=0;
-specular*=0;
-}
-else
-{
-diffuse+=spotlight_strength;
-specular+=spotlight_strength;
-}
+
 
 	frag_color = (diffuse + ambient + specular)* texture2D(gSampler, uvs.xy);
 	frag_color.a = opacity;

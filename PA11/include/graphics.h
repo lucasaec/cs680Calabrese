@@ -19,6 +19,7 @@ Shader *m_shader;
     void Update(unsigned int dt);
     bool Render();
     void Fire(float force);
+    void reloadBees();
 void keys(unsigned int);
 std::string response;
 float x;

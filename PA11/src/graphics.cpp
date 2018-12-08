@@ -7,8 +7,9 @@ extern bool pullBack;
 extern bool gamePlaying;
 extern float timePulled;
 extern float gameTime;
-  int digit1 = 5;
-  int digit2 = 5;
+extern int maxSeconds;
+  int digit1 = 0;
+  int digit2 = 0;
    int digit3 = 4;
   int digit4 = 4;
 bool allowCollision = true;
@@ -100,10 +101,10 @@ Graphics::Graphics()
     allowCollision = true;
     worldStuff = new BulletUp();
     worldStuff->a = 10;
-    amb = 0.5;
+    amb = 0.9;
     spec_tab=0.3;
-    spec_cube=0.5;
-   spotlight_strength=0.3;
+    spec_cube=10;
+   spotlight_strength=0.2;
     spot_rad= 0.0;
     x=0.0;
 	cam=0.0;
@@ -111,11 +112,36 @@ Graphics::Graphics()
 cam1=0.0;
 }
 
-Graphics::~Graphics()
-{
-
+Graphics::~Graphics() {
 }
 
+
+void Graphics::reloadBees() {
+        if(Bees.size() == 40) {
+            return;
+        } 
+        for(int beez = 0; beez < Bees.size(); beez++) {
+            worldStuff->dynamicsWorld->removeRigidBody(Bees.at(beez)->rigidBody);
+        }
+	Bees.clear();
+	for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
+	    if(beez < 9) {
+	       Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+	       Bees.at(beez)->beePoints = -2;
+	       Bees.at(beez)->beeIndex = beez;
+	    }
+	    else if (beez < 29) {
+		Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
+		Bees.at(beez)->beePoints = 1;
+		Bees.at(beez)->beeIndex = beez;
+	    }
+	    else {
+	       Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+	       Bees.at(beez)->beePoints = 3;
+	       Bees.at(beez)->beeIndex = beez;
+	    }
+	}
+}
 
 bool Graphics::Initialize(int width, int height)
 {
@@ -175,7 +201,7 @@ for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent
        Bees.at(beez)->beeIndex = beez;
     }
 }
-
+std::cout << Bees.size();
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"Null.png") );
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"0.png") );
 Score.push_back( new Object("digitPoints1.obj",2,0,0,0,67,"1.png") );
@@ -225,7 +251,7 @@ Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"8.png") );
 Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"9.png") );
 
 
-Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.jpeg") );
+Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.png") );
 Other.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
 Glass.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
 Glass.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
@@ -332,7 +358,7 @@ if(gamePlaying) {
     if (a==9) {
        spec_tab-=0.01;
     } 
-    if (a==10) {
+    if (a==10) {// key 3 lol
        spec_cube+=0.01;
     }
     if (a==11) { 
@@ -434,8 +460,8 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
 
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
-    glUniform1f(m_shader->GetUniformLocation("Shininess"),1.0);
-    glUniform4f(m_shader->GetUniformLocation("LightPosition"),10,50,0,0);
+    glUniform1f(m_shader->GetUniformLocation("Shininess"),100);
+    glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,-4,10,0);//(moves it very far away)
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
 glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
@@ -463,16 +489,24 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
  
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
- 
-  digit1 = score/10 + 1;
-  digit2 = score % 10 + 1;
+  if(gamePlaying) {
+      digit1 = score/10 + 1;
+      digit2 = score % 10 + 1;
+      digit3 = (maxSeconds-(int)gameTime/1000)/10 + 1;
+      digit4 = (maxSeconds-(int)gameTime/1000) % 10 + 1;
+  }
+  else {
+    digit3 = 0;
+    digit4 = 0;   
+    score = 0;
+  }
+  
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score.at(digit1)->GetModel()));
   Score.at(digit1)->Render(); 
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)->GetModel()));
   Score2.at(digit2)->Render();
 
-digit3 = (90-(int)gameTime/1000)/10 + 1;
-  digit4 = (90-(int)gameTime/1000) % 10 + 1;
+  
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time1.at(digit3)->GetModel()));
   Time1.at(digit3)->Render(); 
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
@@ -482,12 +516,21 @@ digit3 = (90-(int)gameTime/1000)/10 + 1;
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
           Other.at(x)->Render();   
           }
+          if(x > Other.size() - 3) {
+           glUniform1f(m_shader->GetUniformLocation("Shininess"),5);
+          }
+          else {
+             glUniform1f(m_shader->GetUniformLocation("Shininess"),150);
+          }
   } 
+glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
   for(unsigned int x = 0; x < Bees.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Bees.at(x)->GetModel()));
           Bees.at(x)->Render();   
   } 
-  glUniform1f(m_shader->GetUniformLocation("opacity"),.4);
+
+glUniform1f(m_shader->GetUniformLocation("Shininess"),5);
+  glUniform1f(m_shader->GetUniformLocation("opacity"),.3);
   for(unsigned int x = 0; x < Glass.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
           Glass.at(x)->Render();   

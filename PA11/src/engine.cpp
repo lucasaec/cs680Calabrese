@@ -6,9 +6,9 @@
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
-bool gamePlaying = true;
+bool gamePlaying = false;
 float gameTime = 0;
-
+int maxSeconds = 0;
 float rotationAmount= 0;
 
 
@@ -93,8 +93,8 @@ void Engine::Run()
     if(gamePlaying) {
         gameTime += m_DT;
     }
-    if(gameTime/1000.0f >= 90.0f) {
-          std::cout << "gameOver";
+    if(gameTime/1000.0f >= maxSeconds) {
+          //std::cout << "gameOver";
           gameTime = 0;
           gamePlaying = false;
     } 
@@ -125,8 +125,30 @@ if(rotateRight) {
 	m_graphics->Update(m_DT);
 	m_running = m_running && m_graphics->Render();
 {
-ImGui::Begin("Hello, World!");
-ImGui::Text("Some text.");
+ImGui::Begin("Menu");
+     if (ImGui::BeginMenu("Start")) {
+ 
+            if(ImGui::Button("30 Seconds") && !gamePlaying) {
+                maxSeconds = 30;
+                gamePlaying = true;
+                m_graphics->reloadBees();
+                gameTime = 0;
+            }
+            if(ImGui::Button("60 Seconds") && !gamePlaying) {
+                maxSeconds = 60;
+                gamePlaying = true;
+                m_graphics->reloadBees();
+                gameTime = 0;
+            }
+            if(ImGui::Button("90 Seconds")&& !gamePlaying) {
+                maxSeconds = 90;
+                gamePlaying = true;
+                m_graphics->reloadBees();
+                gameTime = 0;
+            }
+     ImGui::EndMenu(); 
+     }
+     
 ImGui::End();
 }
  ImGui::Render();
