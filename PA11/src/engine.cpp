@@ -6,6 +6,7 @@
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
+bool bright = true;
 bool gamePlaying = false;
 float allowClick = true;
 float gameTime = 0;
@@ -104,7 +105,10 @@ void Engine::Run()
     mousex -= 400;
     mousey += 150;
     mousey *= -1;
-   // std::cout << "MOUSEX: " << mousex << " MOUSEY: " << mousey << '\n';
+  //  std::cout << "MOUSEX: " << mousex << " MOUSEY: " << mousey << '\n';
+    if(mousex > 500) {
+        mousex = 500;
+    }
     // Check the keyboard input
     while(SDL_PollEvent(&m_event) != 0)
     {
@@ -154,6 +158,11 @@ ImGui::Begin("Menu");
      if(ImGui::Button("Stop") && gamePlaying) {
          gamePlaying = false;
          maxSeconds = 0;
+        // allowClick = false;
+     }
+      if(ImGui::Button("Dark/Bright")) {
+         bright = !bright;
+         
         // allowClick = false;
      }
 ImGui::End();

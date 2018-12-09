@@ -115,7 +115,7 @@ aiMesh *mesh = scene->mMeshes[0];
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
         rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
-    if(type == 99 ) { //All other Kinematic OBjects
+    if(type == 99 ) { //All other static OBjects
         btDefaultMotionState *shapeMotionState = NULL; 
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
         btScalar mass(0);
@@ -222,7 +222,7 @@ return;
    //trans.setRotation(btQuaternion(btVector3(1, 1, 1), (float)mousex/(float)mousey));
    //mousex on y
    //mousey on x
-
+   //std::cout << mousex
    btQuaternion quaternion1 = btQuaternion(btVector3(0, 1, 0), (mousex)/-700.0);
     btQuaternion quaternion2 = btQuaternion(btVector3(1, 0, 0), mousey/-800.0);
      btQuaternion quaternion3 = btQuaternion(btVector3(0, 0, 1), rotationAmount);
@@ -294,7 +294,7 @@ return;
        }
        rigidBody->setAngularVelocity(btVector3(speedx,speedy,speedz) );
    }
-  worldStuff->dynamicsWorld->stepSimulation((float)dt/(float)1000, 100); 
+
   if(physics != 0)
   rigidBody->getMotionState()->getWorldTransform(trans);
 

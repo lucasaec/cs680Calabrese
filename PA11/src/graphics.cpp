@@ -7,6 +7,7 @@ extern bool pullBack;
 extern bool gamePlaying;
 extern float timePulled;
 extern float gameTime;
+extern bool bright;
 extern int maxSeconds;
   int digit1 = 0;
   int digit2 = 0;
@@ -21,6 +22,7 @@ std::vector<Object*> Score;
 std::vector<Object*> Score2;
 std::vector<Object*> Time1;
 std::vector<Object*> Time2;
+std::vector<Object*> Lights;
 int balls = 0;
 int score = 0;
 int beesGone = 0;
@@ -61,7 +63,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
        //    std::cout << bod;
  btVector3 velocity = bod->getLinearVelocity();
        float speedx,speedy,speedz;
-       float max = .01;
+       float max = .03;
        speedx = velocity[0];
        speedy = velocity[1];
        speedz = velocity[2];
@@ -253,6 +255,12 @@ Time2.push_back( new Object("digitTime2.obj",2,0,-15,15,67,"9.png") );
 
 Other.push_back( new Object("pot.obj",2,0,-15,15,99,"red.png") );
 Other.push_back( new Object("holder.obj",2,0,-15,15,99,"Gold.jpeg") );
+Lights.push_back( new Object("light1.obj",2,0,-15,15,99,"BeeLight.png") );
+Lights.push_back( new Object("light2.obj",2,0,-15,15,99,"BeeLight.png") );
+Lights.push_back( new Object("light3.obj",2,0,-15,15,99,"BeeLight.png") );
+Lights.push_back( new Object("light4.obj",2,0,-15,15,99,"BeeLight.png") );
+Lights.push_back( new Object("light5.obj",2,0,-15,15,99,"BeeLight.png") );
+Lights.push_back( new Object("light6.obj",2,0,-15,15,99,"BeeLight.png") );
 Glass.push_back( new Object("GlassR.obj",2,0,-15,15,99,"Glass.jpg") );
 Glass.push_back( new Object("GlassL.obj",2,0,-15,15,99,"Glass.jpg") );
 glassT = new Object("GlassTop.obj",2,0,-15,15,99,"Glass.jpg"); //4
@@ -333,6 +341,7 @@ void Graphics::keys(unsigned int key) {
 
 
 void Graphics::Update(unsigned int dt) {
+  worldStuff->dynamicsWorld->stepSimulation(dt, 60); 
 if(gamePlaying) {
     for(int beeNumber = 0; beeNumber < Bees.size(); beeNumber++) {
        glm::vec4 BeePos = Bees.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
@@ -408,6 +417,9 @@ cam1-=1;
     for(unsigned int i=0; i<Bees.size(); i++) {
         Bees.at(i)->Update(dt);
     }
+    for(unsigned int i=0; i<Lights.size(); i++) {
+        Lights.at(i)->Update(dt);
+    }
     for(unsigned int i=0; i<Glass.size(); i++) {
         Glass.at(i)->Update(dt);
     }
@@ -425,7 +437,10 @@ void Graphics::Fire(float force) {
 }
 bool Graphics::Render() {
     bool rebool = true;
-   
+    float reduce = .6;
+    if(bright) {
+       reduce = 0;
+    }
   
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
@@ -442,8 +457,8 @@ m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
 /** Christina please make the skybox brighter, But i don't want to see any seams **/
- glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),1.1,1.1,1.1,1); 
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1,1,1,1);
+ glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),1.1-reduce,1.1-reduce,1.1-reduce,1); 
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1-reduce,1-reduce,1-reduce,1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
@@ -457,9 +472,9 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
   
  
     
-    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
+    glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
 
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce,.5-reduce,.5-reduce,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),100);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,-4,10,0);//(moves it very far away)
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
@@ -500,7 +515,9 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     digit4 = 0;   
     score = 0;
   }
-  
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
+    
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score.at(digit1)->GetModel()));
   Score.at(digit1)->Render(); 
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)->GetModel()));
@@ -511,6 +528,9 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)-
   Time1.at(digit3)->Render(); 
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
   Time2.at(digit4)->Render(); 
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce,.5-reduce,.5-reduce,.1);
+  
  for(unsigned int x = 1; x < Other.size(); x++) {   
           if(Other.at(x)->physics != 64) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
@@ -528,8 +548,13 @@ glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Bees.at(x)->GetModel()));
           Bees.at(x)->Render();   
   } 
-
 glUniform1f(m_shader->GetUniformLocation("Shininess"),5);
+  glUniform1f(m_shader->GetUniformLocation("opacity"),.6);
+  for(unsigned int x = 0; x < Lights.size(); x++) {   
+          glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Lights.at(x)->GetModel()));
+          Lights.at(x)->Render();   
+  } 
+
   glUniform1f(m_shader->GetUniformLocation("opacity"),.3);
   for(unsigned int x = 0; x < Glass.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
