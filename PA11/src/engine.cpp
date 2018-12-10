@@ -96,8 +96,8 @@ void Engine::Run()
     if(gamePlaying) {
         gameTime += m_DT;
     }
-    if(gameTime/1000.0f >= maxSeconds) {
-          //std::cout << "gameOver";
+    if(gamePlaying && gameTime/1000.0f >= maxSeconds) {
+          std::cout << "game over" << "\n";
           gameTime = 0;
           gamePlaying = false;
     } 

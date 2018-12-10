@@ -57,7 +57,9 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
          //   std::cout << "beeSize: " <<  Bees.size() << '\n';
            //  std::cout << "beeIndex: " <<  obj->beeIndex - beesGone << '\n';
             worldStuff->dynamicsWorld->removeRigidBody(obj->rigidBody);
-            std::cout  << "Score: " << score << '\n';
+            if(gamePlaying) {
+                std::cout  << "Score: " << score << '\n';
+            }
         }
         if(object2->getUserIndex() == 2 && object1->getUserIndex() != 64) {
  
@@ -185,7 +187,7 @@ Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
 
 
 Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
-
+Other.push_back(new Object("wall.obj",2,0,-15,15,99,"tree.png") );
 
 
 for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
@@ -486,7 +488,7 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),100);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,-4,10,0);//(moves it very far away)
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
-glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube*zero,spec_cube*zero,spec_cube*zero,1);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
 glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
 glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
 
@@ -593,7 +595,7 @@ glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Lights.at(x)->GetModel()));
           Lights.at(x)->Render();   
   } 
-//glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube-reduce*9,spec_cube-reduce*9,spec_cube-reduce*9,1);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube-reduce*9,spec_cube-reduce*9,spec_cube-reduce*9,1);
   glUniform1f(m_shader->GetUniformLocation("opacity"),.3);
   for(unsigned int x = 0; x < Glass.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
