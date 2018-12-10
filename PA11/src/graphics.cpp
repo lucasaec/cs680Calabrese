@@ -349,12 +349,13 @@ if(gamePlaying) {
         Bees.at(beeNumber)->rigidBody->applyCentralImpulse(btVector3(0,1,0));
        }// Jar Spot: 9.79652 -22.8617 16.285
        if(BeePos.y < -40) {
-           std::cout << "glitched ball, modify timestep" << "\n";
+           //std::cout << "glitched ball, modify timestep" << "\n";
        }
     } 
 }
    
- 
+ //glm::vec4 LightPos = Lights.at(4)->GetModel() * glm::vec4(0,0,0,1);
+ //std::cout << "LightPos.x: " << LightPos.x << " LightPos.y: " << LightPos.y << " LightPos.z: " << LightPos.z << "\n";
     if(a == 6) {
         amb+=0.005;
     }
@@ -491,14 +492,7 @@ glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
     //glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_sphere,spec_sphere,spec_sphere,1);
    // m_sphere->Render();
 
-if(a==50)
-{
-glUniform1f(m_shader->GetUniformLocation("spot"),1.0);
-glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,50,0,0);
-}
-else if(a==51) {
-    glUniform1f(m_shader->GetUniformLocation("spot"),0.0);
-}
+
 
 glUniform1f(m_shader->GetUniformLocation("opacity"),1);
  
@@ -515,6 +509,14 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     digit4 = 0;   
     score = 0;
   }
+  glm::vec4 LightPos[3];
+  LightPos[0] = glm::vec4(-10,-5,-15,1);
+  LightPos[1] = glm::vec4(0,-20,15,1);
+  LightPos[2] = glm::vec4(0,-20,15,1);
+  glUniform4fv(m_shader->GetUniformLocation("LightPos"), 3, glm::value_ptr(LightPos[0]) ); 
+  glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),amb,amb,amb,1); 
+  glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,.9,.1);
+  glUniform4f(m_shader->GetUniformLocation("LSpecularProduct"),spec_cube,spec_cube,spec_cube,1);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
   glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     

@@ -8,7 +8,7 @@ out vec3 fN;
 out vec3 fE;
 out vec3 fL;
 smooth out vec2 uvs;
-
+out vec3 ipos;
 uniform mat4 projectionMatrix; 
 uniform mat4 viewMatrix; 
 uniform mat4 modelMatrix;
@@ -22,6 +22,7 @@ void main()
 	fE = normalize(campos-pos);
 	fL = (modelMatrix * vPosition).xyz;	
 	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vPosition;
+        ipos = (modelMatrix * vPosition).xyz;
         uvs = v_uvs;
 
 }
