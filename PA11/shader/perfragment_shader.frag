@@ -46,18 +46,19 @@ void main()
 	float Ks = pow(max(dot(N,H), 0.0), Shininess);
 	vec4 specular = Ks*SpecularProduct;
 	
-	if(dot(L,N) < 0.0) {
+     
+	    if(dot(L,N) < 0.0) {
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
-	}
-        if(LightPosition.w!=0.0) {
-            fL = LightPos[0].xyz-ipos; 
-        }
-        L = normalize(fL);
-        float dist = distance(LightPos[0],vec4(ipos,1));
-        Kd = 20/dist;
-      
-            diffuse += Kd*LDiffuseProduct;
-        
+  	    }
+          
+            float dist = distance(LightPos[0],vec4(ipos,1));
+            Kd = 100000/dist/dist/dist/dist/dist/dist/2;
+            Ks = 500/dist/dist/dist/dist/dist/dist;
+            if(dist > 8) {
+                Kd = 0;
+            }
+                diffuse += Kd*LDiffuseProduct;
+                specular += Ks*LSpecularProduct;
         
         
          

@@ -9,6 +9,8 @@ extern float timePulled;
 extern float gameTime;
 extern bool bright;
 extern int maxSeconds;
+int choice = 0;
+bool formation1 = true;
   int digit1 = 0;
   int digit2 = 0;
    int digit3 = 4;
@@ -439,8 +441,13 @@ void Graphics::Fire(float force) {
 bool Graphics::Render() {
     bool rebool = true;
     float reduce = .6;
+    float zero = 1;
     if(bright) {
        reduce = 0;
+       zero = 1;
+    }
+    else {
+       zero = 0;
     }
   
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
@@ -479,7 +486,7 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),100);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,-4,10,0);//(moves it very far away)
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
-glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube*zero,spec_cube*zero,spec_cube*zero,1);
 glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
 glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
 
@@ -509,14 +516,41 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     digit4 = 0;   
     score = 0;
   }
-  glm::vec4 LightPos[3];
-  LightPos[0] = glm::vec4(-10,-5,-15,1);
-  LightPos[1] = glm::vec4(0,-20,15,1);
-  LightPos[2] = glm::vec4(0,-20,15,1);
-  glUniform4fv(m_shader->GetUniformLocation("LightPos"), 3, glm::value_ptr(LightPos[0]) ); 
-  glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),amb,amb,amb,1); 
-  glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,.9,.1);
-  glUniform4f(m_shader->GetUniformLocation("LSpecularProduct"),spec_cube,spec_cube,spec_cube,1);
+  glm::vec4 LightPos[1];
+
+  choice = (int)gameTime/200 % 6;
+   if(choice == 0) {
+      LightPos[0] = glm::vec4(8.5,-9.9,20,1);//-10 to the right, to to the left
+   }
+   if(choice == 4) {
+      LightPos[0] = glm::vec4(-.5,-21,20,1);
+   }
+   if(choice == 2) {
+      LightPos[0] = glm::vec4(-9,-9.9,20,1);
+   }
+   if(choice == 3) {
+      LightPos[0] = glm::vec4(8.5,-17.9,20,1);//-10 to the right, to to the left 
+   }
+   if(choice == 1) {
+      LightPos[0] = glm::vec4(-.5,-11.9,20,1);
+   }
+   if(choice == 5) {
+      LightPos[0] = glm::vec4(-9.4,-18,20,1);
+   }
+  
+     
+      glUniform4fv(m_shader->GetUniformLocation("LightPos"), 3, glm::value_ptr(LightPos[0]) ); 
+  
+  if(gamePlaying) {
+      glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),amb,amb,amb,1); 
+      glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,.9,.1);
+      glUniform4f(m_shader->GetUniformLocation("LSpecularProduct"),spec_cube,spec_cube,spec_cube,1);
+  }
+  else {
+      glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),0,0,0,1); 
+      glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),0,0,0,.1);
+      glUniform4f(m_shader->GetUniformLocation("LSpecularProduct"),0,0,0,1);
+  }
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
   glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     
@@ -546,17 +580,20 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)-
           }
   } 
 glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
   for(unsigned int x = 0; x < Bees.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Bees.at(x)->GetModel()));
           Bees.at(x)->Render();   
   } 
-glUniform1f(m_shader->GetUniformLocation("Shininess"),5);
-  glUniform1f(m_shader->GetUniformLocation("opacity"),.6);
+glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube*zero,spec_cube*zero,spec_cube*zero,1);
+glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
+  glUniform1f(m_shader->GetUniformLocation("opacity"),.7);
+//glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
   for(unsigned int x = 0; x < Lights.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Lights.at(x)->GetModel()));
           Lights.at(x)->Render();   
   } 
-
+//glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube-reduce*9,spec_cube-reduce*9,spec_cube-reduce*9,1);
   glUniform1f(m_shader->GetUniformLocation("opacity"),.3);
   for(unsigned int x = 0; x < Glass.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Glass.at(x)->GetModel()));
