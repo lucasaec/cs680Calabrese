@@ -391,27 +391,27 @@ if(gamePlaying) {
         spot_rad-=0.005;
     }
    
-if(a==16)
+if(a==16 && camera<=11)
 {
 camera+=1;
 }
-if(a==17)
+if(a==17 && cam<=30)
 {
 cam+=1;
 }
-if(a==18)
+if(a==18 && cam >=-35)
 {
 cam-=1;
 }
-if(a==19)
+if(a==19 && camera>=-50)
 {
 camera-=1;
 }
-if(a==20)
+if(a==20&& cam1<=15)
 {
 cam1+=1;
 }
-if(a==21)
+if(a==21&&cam1>=-50)
 {
 cam1-=1;
 }
