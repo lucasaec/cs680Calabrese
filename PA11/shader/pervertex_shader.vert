@@ -21,7 +21,7 @@ uniform vec4 ballposition;
 uniform float spot;
 uniform float spotlight_radius;
 uniform float opacity;
-const float strength = 30;
+uniform float strength;
 
 void main(void)
 {
@@ -52,8 +52,8 @@ vec3 campos=(inverse(viewMatrix)*vec4(0,0,0,1.0f)).xyz;
 
           
             float dist = distance(LightPos[0],vec4(v_position,1));
-            Kd = 100000/dist/dist/dist/dist/dist/dist;
-            Ks = 500/dist/dist/dist/dist/dist/dist;
+            Kd = 100000/pow(dist,strength);
+            Ks = 500/pow(dist,strength);
             if(dist > 8) {
                 Kd = 0;
             }

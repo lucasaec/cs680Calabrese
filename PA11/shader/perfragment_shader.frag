@@ -21,6 +21,7 @@ uniform float Shininess;
 uniform vec4 ballposition;
 uniform float spot;
 uniform float spotlight_radius;
+uniform float strength;
 
 uniform float opacity;
 
@@ -52,8 +53,8 @@ void main()
   	    }
           
             float dist = distance(LightPos[0],vec4(ipos,1));
-            Kd = 100000/dist/dist/dist/dist/dist/dist/2;
-            Ks = 500/dist/dist/dist/dist/dist/dist;
+            Kd = 100000/pow(dist,strength)/2;
+            Ks = 500/pow(dist,strength);
             if(dist > 8) {
                 Kd = 0;
             }

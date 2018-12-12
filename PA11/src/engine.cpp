@@ -241,6 +241,7 @@ void Engine::Keyboard()
         {
 	  a=7;
 	}
+//spotlight
 	else if(m_event.key.keysym.sym == SDLK_1)
         {
 	  a=8;
@@ -249,6 +250,7 @@ void Engine::Keyboard()
         {
 	  a=9;
 	}
+
 	else if(m_event.key.keysym.sym == SDLK_3)
         {
 	  a=10;

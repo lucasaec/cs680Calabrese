@@ -15,6 +15,7 @@ bool formation1 = true;
   int digit2 = 0;
    int digit3 = 4;
   int digit4 = 4;
+float n=6.0;
 bool allowCollision = true;
 BulletUp* worldStuff; 
 std::vector<Object*> Glass;
@@ -366,11 +367,11 @@ if(gamePlaying) {
     if(a == 7) {
        amb-=0.005;
     } 
-    if (a==8) {
-       spec_tab+=0.01;
+    if (a==8 && n<=10) {
+       n+=0.01;
     }
-    if (a==9) {
-       spec_tab-=0.01;
+    if (a==9 && n>=4) {
+      n-=0.01;
     } 
     if (a==10) {// key 3 lol
        spec_cube+=0.01;
@@ -476,6 +477,7 @@ glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),0,0,0,1);
 glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),0);
 glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),0);
 glUniform1f(m_shader->GetUniformLocation("opacity"),1);
+glUniform1f(m_shader->GetUniformLocation("strength"),n);
   //this renders the skybox
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(0)->GetModel()));
           Other.at(0)->Render();  
