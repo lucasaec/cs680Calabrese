@@ -1,5 +1,8 @@
 #include <window.h>
 
+Mix_Music *Window::background_music;
+Mix_Chunk *Window::pointsSound;
+
 Window::Window()
 {
   gWindow = NULL;
@@ -10,6 +13,10 @@ Window::~Window()
   SDL_StopTextInput();
   SDL_DestroyWindow(gWindow);
   gWindow = NULL;
+ 
+  Mix_FreeChunk(Window::pointsSound);
+  Mix_FreeMusic(Window::background_music);
+
   SDL_Quit();
 }
 SDL_Window* Window::GetWindow() {
@@ -22,11 +29,18 @@ SDL_GLContext Window::GetgContext() {
 bool Window::Initialize(const string &name, int* width, int* height)
 {
     // Start SDL
-  if(SDL_Init(SDL_INIT_VIDEO) < 0)
+  if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0)
   {
     printf("SDL failed to initialize: %s\n", SDL_GetError());
     return false;
   }
+  
+  //Sound Initialization
+  Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+  Window::pointsSound = Mix_LoadWAV("../Audio/gamepoint.wav");
+  Window::background_music = Mix_LoadMUS("../Audio/bee.wav");
+  Mix_AllocateChannels(16);
+  Mix_PlayMusic(background_music,-1);
 
   // Start OpenGL for SDL
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -71,9 +85,12 @@ bool Window::Initialize(const string &name, int* width, int* height)
   }
 
   return true;
+ 
+
 }
 
 void Window::Swap()
 {
   SDL_GL_SwapWindow(gWindow);
 }
+
