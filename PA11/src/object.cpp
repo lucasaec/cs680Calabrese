@@ -34,7 +34,7 @@ Object:: Object(std::string objname, float scale, float posx, float posy, float 
     const aiScene *scene = importer.ReadFile(input, aiProcess_Triangulate);
     image = new Magick::Image("../objects/" + textName);
     image->write(&m_blob, "RGBA");
-
+    contactNet = false;
     
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D,texture);
@@ -80,7 +80,7 @@ aiMesh *mesh = scene->mMeshes[0];
         Indices.push_back(mIndices[0]);
         Indices.push_back(mIndices[1]);
         Indices.push_back(mIndices[2]);
-        if(type == 0 || type == 99) {
+        if(type == 0 || type == 99|| type == 54) {
             aiVector3D position = mesh->mVertices[face.mIndices[0]]; 
             triArray[0] = btVector3(position.x, position.y, position.z);
  
@@ -94,7 +94,7 @@ aiMesh *mesh = scene->mMeshes[0];
         }
     }
     
-    if(type == 0 || type == 99) {
+    if(type == 0 || type == 99 || type == 54) {
         shape = new btBvhTriangleMeshShape(objTriMesh, true); 
     }
 
@@ -141,6 +141,21 @@ aiMesh *mesh = scene->mMeshes[0];
        rigidBody->setRestitution(1.0);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }//setRestitution(5.0)
+    if(type == 54) {
+         btDefaultMotionState *shapeMotionState = NULL; 
+      
+        btVector3 inertia(0,0,0);
+        shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx,posy,posz))); 
+        btScalar mass(0);
+        shape->calculateLocalInertia(mass, inertia);
+        btRigidBody::btRigidBodyConstructionInfo shapeRigidBodyCI(mass, shapeMotionState, shape, inertia);
+        rigidBody = new btRigidBody(shapeRigidBodyCI);
+       rigidBody->setRestitution(1.0);
+       rigidBody->setUserIndex(54);
+        worldStuff->dynamicsWorld->addRigidBody(rigidBody);
+        rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE | btCollisionObject::CF_KINEMATIC_OBJECT | btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
+            
+    }
     if(type == 8) { //bumper
         btDefaultMotionState *shapeMotionState = NULL; 
         btCollisionShape* shape=new btCylinderShape(btVector3(.5,2,1));
@@ -211,7 +226,7 @@ return;
   btTransform trans;
   btScalar m[16]; 
   trans.setIdentity();
-  if(physics == 0) {
+  if(physics == 0 || physics == 54) {
    trans = rigidBody->getWorldTransform();
  /*  if(mousex == 0) {
        mousex = 1;

@@ -2,7 +2,6 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 #include <string>
 using namespace std;
 
@@ -17,8 +16,7 @@ class Window
     SDL_GLContext GetgContext();
 
 
-	static Mix_Chunk *pointsSound;
-	static Mix_Music *background_music;
+	
   private:
     SDL_Window* gWindow;
     SDL_GLContext gContext;

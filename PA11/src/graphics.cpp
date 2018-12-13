@@ -1,6 +1,6 @@
 #include "graphics.h"
 #include "BulletUp.h"
-
+#include <SDL2/SDL_mixer.h>
 extern bool lFlipper;
 extern bool rFlipper;
 extern bool pullBack;
@@ -9,6 +9,9 @@ extern float timePulled;
 extern float gameTime;
 extern bool bright;
 extern int maxSeconds;
+extern Mix_Chunk *gudSound;
+extern Mix_Chunk *badSound;
+extern Mix_Chunk *beez2;
 int choice = 0;
 bool formation1 = true;
   int digit1 = 0;
@@ -38,15 +41,30 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
         btPersistentManifold* persistentFold =  worldStuff->dispatcher->getManifoldByIndexInternal(cMfold);
         const btCollisionObject* object1 = (persistentFold->getBody0());
         const btCollisionObject* object2 = (persistentFold->getBody1());
-        /**
-         * I plan on destroy the balls when the are detected in the pot, Need to figure out how to prevent null pointer :1
-         *
-         */
+       
+        if(gamePlaying) {
+            if(object2->getUserIndex() == 54 && object1->getUserIndex() != 2 && object1->getUserIndex() != 45) {
+                 Object* obj = static_cast<Object*>(object1->getUserPointer());
+                 if(!obj->contactNet) {
+                    //std::cout << "collisionDetect" << "\n";
+                    Mix_PlayChannel(-1, beez2, 0 );
+                    obj->contactNet = true;
+                 }
+            }
+        }
         if(object1->getUserIndex() == 64 && object2->getUserIndex() != 2 && object2->getUserIndex() != 45) {
         //std::cout << "Cool"<< '\n';
             Object* obj =  static_cast<Object*>(object2->getUserPointer());
            // std::cout << obj->beePoints << '\n';
             score += obj->beePoints;
+            if(gamePlaying) {
+                if(obj->beePoints > 0) {
+                    Mix_PlayChannel(-1, gudSound, 0 );
+                }
+                else {
+                    Mix_PlayChannel(-1, badSound, 0 );
+                }
+            }
             if(score < 0) { 
                 score = 0;
             }
@@ -133,17 +151,17 @@ void Graphics::reloadBees() {
 	Bees.clear();
 	for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
 	    if(beez < 9) {
-	       Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+	       Bees.push_back( new Object("Bee.obj",2,0,-30,0,4,"RedBee.png") );
 	       Bees.at(beez)->beePoints = -2;
 	       Bees.at(beez)->beeIndex = beez;
 	    }
 	    else if (beez < 29) {
-		Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
+		Bees.push_back( new Object("Bee.obj",2,0,-30,3,4,"Bee.jpg") );
 		Bees.at(beez)->beePoints = 1;
 		Bees.at(beez)->beeIndex = beez;
 	    }
 	    else {
-	       Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+	       Bees.push_back( new Object("Bee.obj",2,0,-30.5,5,4,"GreenBee.png") );
 	       Bees.at(beez)->beePoints = 3;
 	       Bees.at(beez)->beeIndex = beez;
 	    }
@@ -181,7 +199,7 @@ worldStuff->Initialize();
   }
   
  Other.push_back( new Object("skybox.obj",2,0,0,0,67,"Daylight Box UV.png") );
-
+ Other.push_back( new Object("soundDetect.obj",2,0,-4.5,-3.5,54,"Daylight Box UV.png") );
 Other.push_back(new Object("stick.obj",2,0,-4.5,-3.5,0,"Gold.jpeg"));
 
 Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
@@ -193,17 +211,17 @@ Other.push_back(new Object("wall.obj",2,0,-15,15,99,"tree.png") );
 
 for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
     if(beez < 9) {
-       Bees.push_back( new Object("Bee.obj",2,0,-20,0,4,"RedBee.png") );
+       Bees.push_back( new Object("Bee.obj",2,0,-30,0,4,"RedBee.png") );
        Bees.at(beez)->beePoints = -2;
        Bees.at(beez)->beeIndex = beez;
     }
     else if (beez < 29) {
-        Bees.push_back( new Object("Bee.obj",2,0,-20,3,4,"Bee.jpg") );
+        Bees.push_back( new Object("Bee.obj",2,0,-30,3,4,"Bee.jpg") );
         Bees.at(beez)->beePoints = 1;
         Bees.at(beez)->beeIndex = beez;
     }
     else {
-       Bees.push_back( new Object("Bee.obj",2,0,-20.5,5,4,"GreenBee.png") );
+       Bees.push_back( new Object("Bee.obj",2,0,-30.5,5,4,"GreenBee.png") );
        Bees.at(beez)->beePoints = 3;
        Bees.at(beez)->beeIndex = beez;
     }
@@ -348,6 +366,7 @@ void Graphics::keys(unsigned int key) {
 void Graphics::Update(unsigned int dt) {
   worldStuff->dynamicsWorld->stepSimulation(dt, 60); 
 if(gamePlaying) {
+
     for(int beeNumber = 0; beeNumber < Bees.size(); beeNumber++) {
        glm::vec4 BeePos = Bees.at(beeNumber)->GetModel() * glm::vec4(0,0,0,1);
        if(BeePos.y < -25 && BeePos.x <= 2 && BeePos.x >= -4 && BeePos.z > 8.5  && BeePos.z < 14) { //May need to add more boundries later
@@ -355,6 +374,10 @@ if(gamePlaying) {
        }// Jar Spot: 9.79652 -22.8617 16.285
        if(BeePos.y < -40) {
            //std::cout << "glitched ball, modify timestep" << "\n";
+       }
+       if(BeePos.y < -30) {
+           Bees.at(beeNumber)->contactNet = false;
+          // std::cout << "just checking" << "\n";
        }
     } 
 }
@@ -572,7 +595,7 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)-
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce,.5-reduce,.5-reduce,.1);
   
  for(unsigned int x = 1; x < Other.size(); x++) {   
-          if(Other.at(x)->physics != 64) {
+          if(Other.at(x)->physics != 64 && Other.at(x)->physics != 54) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
           Other.at(x)->Render();   
           }

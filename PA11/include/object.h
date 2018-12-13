@@ -29,7 +29,7 @@ class Object
     Magick::Image* image;
     Magick::Blob m_blob;
     GLuint texture;
-
+    bool contactNet;
   private:
     
     std::vector<Vertex> Vertices;

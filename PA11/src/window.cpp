@@ -1,8 +1,5 @@
 #include <window.h>
 
-Mix_Music *Window::background_music;
-Mix_Chunk *Window::pointsSound;
-
 Window::Window()
 {
   gWindow = NULL;
@@ -14,8 +11,6 @@ Window::~Window()
   SDL_DestroyWindow(gWindow);
   gWindow = NULL;
  
-  Mix_FreeChunk(Window::pointsSound);
-  Mix_FreeMusic(Window::background_music);
 
   SDL_Quit();
 }
@@ -34,13 +29,9 @@ bool Window::Initialize(const string &name, int* width, int* height)
     printf("SDL failed to initialize: %s\n", SDL_GetError());
     return false;
   }
+
   
-  //Sound Initialization
-  Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
-  Window::pointsSound = Mix_LoadWAV("../Audio/gamepoint.wav");
-  Window::background_music = Mix_LoadMUS("../Audio/bee.wav");
-  Mix_AllocateChannels(16);
-  Mix_PlayMusic(background_music,-1);
+
 
   // Start OpenGL for SDL
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);

@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
+#include <SDL2/SDL_mixer.h>
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
@@ -11,17 +12,33 @@ float allowClick = true;
 float gameTime = 0;
 int maxSeconds = 0;
 float rotationAmount= 0;
-
-
+Mix_Music *beeMusic;
+Mix_Chunk *gudSound;
+Mix_Chunk *badSound;
+Mix_Chunk *beez;
+Mix_Chunk *beez2;
   int mousex;
   int mousey;
 float timePulled = 0;
+bool mute = false;
+
+int soundVolume = 10;
+int musicVolume = 100;
 Engine::Engine(string name, int width, int height)
 {
+Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2000);
+  Mix_AllocateChannels(10);
   m_WINDOW_NAME = name;
   m_WINDOW_WIDTH = width;
   m_WINDOW_HEIGHT = height;
   m_FULLSCREEN = false;
+Mix_Volume(-1,soundVolume);
+Mix_VolumeMusic(musicVolume);
+beeMusic =Mix_LoadMUS("../Audio/BeeMusic3.wav");
+gudSound =Mix_LoadWAV("../Audio/GudSound.wav");
+badSound =Mix_LoadWAV("../Audio/badSound.wav");
+beez =Mix_LoadWAV("../Audio/bees1.wav");
+beez2 =Mix_LoadWAV("../Audio/bees.wav");
 }
 
 Engine::Engine(string name)
@@ -30,6 +47,7 @@ Engine::Engine(string name)
   m_WINDOW_HEIGHT = 0;
   m_WINDOW_WIDTH = 0;
   m_FULLSCREEN = true;
+
 }
 
 Engine::~Engine()
@@ -38,6 +56,10 @@ Engine::~Engine()
   delete m_graphics;
   m_window = NULL;
   m_graphics = NULL;
+Mix_FreeMusic(beeMusic);
+Mix_FreeChunk(gudSound);
+Mix_FreeChunk(badSound);
+Mix_FreeChunk(beez);
 }
 
 bool Engine::Initialize()
@@ -90,7 +112,11 @@ void Engine::Run()
   while(m_running)
   {
     // Update the DT
+    if(!mute) {
+        Mix_Volume(-1,soundVolume);
+        Mix_VolumeMusic(musicVolume);
 
+    }
     m_DT = getDT();
     if(gamePlaying) {
         gameTime += m_DT;
@@ -99,6 +125,7 @@ void Engine::Run()
           std::cout << "game over" << "\n";
           gameTime = 0;
           gamePlaying = false;
+          Mix_FadeOutMusic(0);
     } 
     SDL_GetMouseState(&mousex,&mousey);
     mousex -= 400;
@@ -137,32 +164,52 @@ ImGui::Begin("Menu");
                 maxSeconds = 30;
                 gamePlaying = true;
                 m_graphics->reloadBees();
-                gameTime = 0;
+                gameTime = 0;             
+                Mix_PlayMusic(beeMusic,-1);
+                Mix_PlayChannel(-1, beez, 0 );
+
             }
             if(ImGui::Button("60 Seconds") && !gamePlaying) {
                 maxSeconds = 60;
                 gamePlaying = true;
                 m_graphics->reloadBees();
                 gameTime = 0;
+                Mix_PlayMusic(beeMusic,-1);
+                Mix_PlayChannel(-1, beez, 0 );
             }
             if(ImGui::Button("90 Seconds")&& !gamePlaying) {
                 maxSeconds = 90;
                 gamePlaying = true;
                 m_graphics->reloadBees();
                 gameTime = 0;
+                Mix_PlayMusic(beeMusic,-1);
+                Mix_PlayChannel(-1, beez, 0 );
             }
-
+              
      ImGui::EndMenu(); 
      }
      if(ImGui::Button("Stop") && gamePlaying) {
          gamePlaying = false;
          maxSeconds = 0;
+         Mix_FadeOutMusic(0);
         // allowClick = false;
      }
-      if(ImGui::Button("Dark/Bright")) {
-         bright = !bright;
-         
+     if(ImGui::Button("Dark/Bright")) {
+         bright = !bright;         
         // allowClick = false;
+     }
+     ImGui::SliderInt("Sound Volume", &soundVolume,0 , 128);
+      ImGui::SliderInt("Music Volume", &musicVolume,0 , 128);
+     if(ImGui::Button("Mute")) {
+         mute = !mute;  
+         if(mute) {  
+             Mix_Volume(-1,0);
+             Mix_VolumeMusic(0);     
+         }
+         else {
+              Mix_Volume(-1,soundVolume);
+              Mix_VolumeMusic(musicVolume);
+         }
      }
 ImGui::End();
 }
