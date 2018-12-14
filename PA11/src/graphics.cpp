@@ -573,7 +573,7 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
   
   if(gamePlaying) {
       glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),amb,amb,amb,1); 
-      glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,.9,.1);
+      glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,0,1);
       glUniform4f(m_shader->GetUniformLocation("LSpecularProduct"),spec_cube,spec_cube,spec_cube,1);
   }
   else {
