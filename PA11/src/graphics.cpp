@@ -208,8 +208,10 @@ Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
 Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
 Other.push_back(new Object("titlePlate.obj",2,0,-15,15,99,"title.png") );
 Other.push_back(new Object("wall.obj",2,0,-15,15,99,"tree.png") );
-
-
+Other.push_back(new Object("Frame3.obj",2,0,-15,15,99,"Gold.jpeg") );
+Other.push_back(new Object("Frame1.obj",2,0,-15,15,99,"Gold.jpeg") );
+Other.push_back(new Object("Frame2.obj",2,0,-15,15,99,"Gold.jpeg") );
+Other.push_back(new Object("thing.obj",2,0,-15,15,99,"gold.png") );
 for(int beez = 0; beez < 40; beez++) { //note to self, figure out how to prevent bees from exiting the box
     if(beez < 9) {
        Bees.push_back( new Object("Bee.obj",2,0,-30,0,4,"RedBee.png") );
