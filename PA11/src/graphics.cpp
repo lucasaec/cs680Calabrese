@@ -206,6 +206,7 @@ Other.push_back( new Object("detector.obj",2,0,-15,15,64,"Gold.jpeg") );
 
 
 Other.push_back(new Object("FunBox.obj",2,0,-15,15,99,"metal.jpg") );
+Other.push_back(new Object("titlePlate.obj",2,0,-15,15,99,"title.png") );
 Other.push_back(new Object("wall.obj",2,0,-15,15,99,"tree.png") );
 
 
