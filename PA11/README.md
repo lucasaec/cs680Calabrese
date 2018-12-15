@@ -50,17 +50,29 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 
 ## Keyboard Controls
 Camera controls- Use Numpad Keys
+
 ‘4’ and ‘6’ - camera to move left and right
+
 ‘1’ and ‘2’ - camera to move up and down
+
 ‘8’ and ‘5’ - camera to move closer and farther
+
 Keyboard Keys Below
+
 ‘N’ key- per fragment shader
+
 ‘B’ key- per vertex shader
+
 ‘A’ key - add ambient light
+
 ‘S’ key - remove ambient light
+
 ‘1’ key - increase bee light radius 
+
 ‘2’ key - decrease bee light radius
+
 ‘3’ key - increase specular
+
 ‘4’ key - decrease specular
 
 
