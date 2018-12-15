@@ -76,6 +76,13 @@ Keyboard Keys Below
 ‘4’ key - decrease specular
 
 
+## Mouse Input
+Cursor to change the position of the net
+
+Left button to rotate the net left
+
+Right button to rotate the net right
+
 # Extra Credit
 
 
