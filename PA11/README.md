@@ -67,9 +67,9 @@ Keyboard Keys Below
 
 ‘S’ key - remove ambient light
 
-‘1’ key - increase bee light radius 
+‘2’ key - increase bee light radius 
 
-‘2’ key - decrease bee light radius
+‘1’ key - decrease bee light radius
 
 ‘3’ key - increase specular
 
