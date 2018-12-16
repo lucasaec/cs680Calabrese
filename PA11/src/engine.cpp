@@ -204,7 +204,12 @@ ImGui::Begin("Menu");
       ImGui::SliderFloat("Diffuse Light", &adjustDiffuse,-10 , 10);
       ImGui::SliderFloat("Specular Light", &m_graphics->spec_cube,0 , 20);
       ImGui::SliderFloat("Bee Light Strength Reduction",&n ,4, 10);
-   
+     if(ImGui::Button("Default Lighting")) { 
+          m_graphics->amb = .9;
+          adjustDiffuse = 0;
+          m_graphics->spec_cube = 10;
+          n = 6.0f;
+     }
      if(ImGui::Button("Per Fragment")) {
               m_graphics->m_shader->Initialize();
 	      m_graphics->m_shader->AddShader(GL_VERTEX_SHADER, 0);
