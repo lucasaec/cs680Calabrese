@@ -30,9 +30,10 @@ float cam1;
     Object *glassL;
     Object *glassR;
     Object *glassF;
+float amb,spec_cube;
   private:
 unsigned int a;
-float amb,spec_tab,spec_cube,spotlight_strength,spot_rad;
+
     std::string ErrorString(GLenum error);
 
     Camera1 *m_camera;

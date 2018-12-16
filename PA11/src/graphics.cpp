@@ -9,17 +9,20 @@ extern float timePulled;
 extern float gameTime;
 extern bool bright;
 extern int maxSeconds;
+extern float purpleStrength;
 extern Mix_Chunk *gudSound;
 extern Mix_Chunk *badSound;
 extern Mix_Chunk *beez2;
+extern float adjustDiffuse;
 int choice = 0;
 bool formation1 = true;
   int digit1 = 0;
   int digit2 = 0;
    int digit3 = 4;
   int digit4 = 4;
-float n=6.0;
+extern float n; //Bee light Strength Reduction
 bool allowCollision = true;
+extern float strengthReduction;
 BulletUp* worldStuff; 
 std::vector<Object*> Glass;
 std::vector<Object*> Bees;
@@ -127,10 +130,7 @@ Graphics::Graphics()
     worldStuff = new BulletUp();
     worldStuff->a = 10;
     amb = 0.9;
-    spec_tab=0.3;
     spec_cube=10;
-   spotlight_strength=0.2;
-    spot_rad= 0.0;
     x=0.0;
 	cam=0.0;
 	camera=0.0;
@@ -387,35 +387,28 @@ if(gamePlaying) {
    
  //glm::vec4 LightPos = Lights.at(4)->GetModel() * glm::vec4(0,0,0,1);
  //std::cout << "LightPos.x: " << LightPos.x << " LightPos.y: " << LightPos.y << " LightPos.z: " << LightPos.z << "\n";
-    if(a == 6) {
+//ambient light  
+  if(a == 6 && amb<=2.5) {
         amb+=0.005;
     }
-    if(a == 7) {
+    if(a == 7&& amb>=-0.5) {
        amb-=0.005;
     } 
+//spotlight
     if (a==8 && n<=10) {
        n+=0.01;
     }
     if (a==9 && n>=4) {
       n-=0.01;
     } 
-    if (a==10) {// key 3 lol
-       spec_cube+=0.01;
+
+    if (a==10 && spec_cube<=20.0) {// key 3 lol
+
+       spec_cube+=0.05;
     }
-    if (a==11) { 
-       spec_cube-=0.01;
-    }
-   if(a==12&&spotlight_strength<0.8) { 
-       spotlight_strength+=0.01;
-     }
-    if(a==13&&spotlight_strength>0.01) {
-        spotlight_strength-=0.01;
-    }
-    if (a==14) {
-        spot_rad+=0.005;
-    }
-    if (a==15) {
-        spot_rad-=0.005;
+    if (a==11 && spec_cube>=0.0) { 
+
+       spec_cube-=0.05;
     }
    
 if(a==16 && camera<=11)
@@ -495,15 +488,14 @@ m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
 
 /** Christina please make the skybox brighter, But i don't want to see any seams **/
  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),1.1-reduce,1.1-reduce,1.1-reduce,1); 
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1-reduce,1-reduce,1-reduce,1);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1-reduce+adjustDiffuse,1-reduce+adjustDiffuse,1-reduce+adjustDiffuse,1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),0,0,0,1);
-glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),0);
-glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),0);
 glUniform1f(m_shader->GetUniformLocation("opacity"),1);
 glUniform1f(m_shader->GetUniformLocation("strength"),n);
+glUniform1f(m_shader->GetUniformLocation("purpleStrength"),purpleStrength);
   //this renders the skybox
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(0)->GetModel()));
           Other.at(0)->Render();  
@@ -512,13 +504,12 @@ glUniform1f(m_shader->GetUniformLocation("strength"),n);
     
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
 
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce,.5-reduce,.5-reduce,.1);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),100);
     glUniform4f(m_shader->GetUniformLocation("LightPosition"),0,-4,10,0);//(moves it very far away)
 glUniform4f(m_shader->GetUniformLocation("ballposition"),0,0,0,0);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
-glUniform1f(m_shader->GetUniformLocation("spotlight_strength"),spotlight_strength);
-glUniform1f(m_shader->GetUniformLocation("spotlight_radius"),spot_rad);
+
 
 
 
@@ -547,30 +538,33 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     score = 0;
   }
   glm::vec4 LightPos[1];
-
+  float probablyZ = 25;
   choice = (int)gameTime/200 % 6;
    if(choice == 0) {
-      LightPos[0] = glm::vec4(8.5,-9.9,20,1);//-10 to the right, to to the left
+      LightPos[0] = glm::vec4(8.5,-9.9,probablyZ,1);//-10 to the right, to to the left
    }
    if(choice == 4) {
-      LightPos[0] = glm::vec4(-.5,-21,20,1);
+      LightPos[0] = glm::vec4(-.5,-23,probablyZ,1);
    }
    if(choice == 2) {
-      LightPos[0] = glm::vec4(-9,-9.9,20,1);
+      LightPos[0] = glm::vec4(-9.4,-10.7,probablyZ,1);
    }
    if(choice == 3) {
-      LightPos[0] = glm::vec4(8.5,-17.9,20,1);//-10 to the right, to to the left 
+      LightPos[0] = glm::vec4(8.5,-18.5,probablyZ,1);//-10 to the right, to to the left 
    }
    if(choice == 1) {
-      LightPos[0] = glm::vec4(-.5,-11.9,20,1);
+      LightPos[0] = glm::vec4(-.5,-12.6,probablyZ,1);
    }
    if(choice == 5) {
-      LightPos[0] = glm::vec4(-9.4,-18,20,1);
+      LightPos[0] = glm::vec4(-9.4,-18,probablyZ,1);
    }
   
      
       glUniform4fv(m_shader->GetUniformLocation("LightPos"), 3, glm::value_ptr(LightPos[0]) ); 
-  
+  glUniform4f(m_shader->GetUniformLocation("PAmbientProduct"),1,0,1,1); 
+  glUniform4f(m_shader->GetUniformLocation("PDiffuseProduct"),1,0,1,1);
+  glUniform4f(m_shader->GetUniformLocation("PSpecularProduct"),1,0,1,1);
+   
   if(gamePlaying) {
       glUniform4f(m_shader->GetUniformLocation("LAmbientProduct"),amb,amb,amb,1); 
       glUniform4f(m_shader->GetUniformLocation("LDiffuseProduct"),.9,.9,0,1);
@@ -595,7 +589,7 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)-
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
   Time2.at(digit4)->Render(); 
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
-    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce,.5-reduce,.5-reduce,.1);
+    glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.1);
   
  for(unsigned int x = 1; x < Other.size(); x++) {   
           if(Other.at(x)->physics != 64 && Other.at(x)->physics != 54) {

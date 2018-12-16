@@ -36,6 +36,7 @@ bool Shader::Initialize()
 // Use this method to add shaders to the program. When finished - call finalize()
 bool Shader::AddShader(GLenum ShaderType, unsigned int pershade)
 {
+  
   shaderLoader m_shaderLoader = shaderLoader();
   std::string s = "";
 

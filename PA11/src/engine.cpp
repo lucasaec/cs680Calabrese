@@ -21,9 +21,11 @@ Mix_Chunk *beez2;
   int mousey;
 float timePulled = 0;
 bool mute = false;
-
-int soundVolume = 10;
+float purpleStrength =0;
+int soundVolume = 40;
 int musicVolume = 100;
+float adjustDiffuse = 0;
+float n= 6.0;
 Engine::Engine(string name, int width, int height)
 {
 Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2000);
@@ -198,9 +200,29 @@ ImGui::Begin("Menu");
          bright = !bright;         
         // allowClick = false;
      }
+      ImGui::SliderFloat("Ambient Light", &m_graphics->amb,0 , 3);
+      ImGui::SliderFloat("Diffuse Light", &adjustDiffuse,-10 , 10);
+      ImGui::SliderFloat("Specular Light", &m_graphics->spec_cube,0 , 20);
+      ImGui::SliderFloat("Bee Light Strength Reduction",&n ,4, 10);
+   
+     if(ImGui::Button("Per Fragment")) {
+              m_graphics->m_shader->Initialize();
+	      m_graphics->m_shader->AddShader(GL_VERTEX_SHADER, 0);
+	      m_graphics->m_shader->AddShader(GL_FRAGMENT_SHADER, 0);
+	      m_graphics->m_shader->Finalize();
+	      m_graphics->m_shader->Enable();       
+     }
+     if(ImGui::Button("Per Vertex")) {
+              m_graphics->m_shader->Initialize();
+	      m_graphics->m_shader->AddShader(GL_VERTEX_SHADER, 1);
+	      m_graphics->m_shader->AddShader(GL_FRAGMENT_SHADER, 1);
+	      m_graphics->m_shader->Finalize();
+	      m_graphics->m_shader->Enable();       
+     }
      ImGui::SliderInt("Sound Volume", &soundVolume,0 , 128);
       ImGui::SliderInt("Music Volume", &musicVolume,0 , 128);
-     if(ImGui::Button("Mute")) {
+  
+     if(ImGui::Button("Mute/Unmute")) {
          mute = !mute;  
          if(mute) {  
              Mix_Volume(-1,0);
@@ -280,6 +302,7 @@ void Engine::Keyboard()
         {
 	  a=5;
 	}
+//ambient light
 	else if(m_event.key.keysym.sym == SDLK_a)
         {
 	  a=6;
@@ -306,22 +329,8 @@ void Engine::Keyboard()
         {
 	  a=11;
 	}
-	else if(m_event.key.keysym.sym == SDLK_5)
-        {
-	  a=12;
-	}
-	else if(m_event.key.keysym.sym == SDLK_6)
-        {
-	  a=13;
-	}
-	else if(m_event.key.keysym.sym == SDLK_7)
-        {
-	  a=14;
-	}
-	else if(m_event.key.keysym.sym == SDLK_8)
-        {
-	  a=15;
-	}
+	
+	
 if (m_event.key.keysym.sym == SDLK_KP_8)
 {
 a=16;

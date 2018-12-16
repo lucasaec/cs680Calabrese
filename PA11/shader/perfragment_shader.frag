@@ -9,20 +9,18 @@ out vec4 frag_color;
 
 uniform vec4 LightPos[3];
 uniform vec4 LAmbientProduct, LDiffuseProduct, LSpecularProduct;
-
+uniform vec4 PAmbientProduct, PDiffuseProduct, PSpecularProduct;
 uniform sampler2D gSampler;
 
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 
 
-uniform float spotlight_strength;
 uniform vec4 LightPosition;
 uniform float Shininess;
 uniform vec4 ballposition;
 uniform float spot;
-uniform float spotlight_radius;
 uniform float strength;
-
+uniform float purpleStrength;
 uniform float opacity;
 
 void main()
@@ -51,15 +49,27 @@ void main()
 	    if(dot(L,N) < 0.0) {
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
   	    }
-          
+            fL =LightPos[0].xyz;
+            
+        
+            L = normalize(fL);
+            H = normalize(L + E);
             float dist = distance(LightPos[0],vec4(ipos,1));
-            Kd = 100000/pow(dist,strength)/2;
-            Ks = 500/pow(dist,strength);
-            if(dist > 8) {
+            Kd = max(dot(L,N), 0.0)*9000/pow(dist,strength);
+            Ks = pow(max(dot(N,H), 0.0), Shininess)*50/pow(dist,strength);
+            if(dist > 30) {
                 Kd = 0;
+                Ks = 0;
             }
+            if(dot(L,N) < 0) {
+               Ks = 0;
+               Kd = 0;  
+            }
+		specular += Ks*LSpecularProduct;
                 diffuse += Kd*LDiffuseProduct;
-                specular += Ks*LSpecularProduct;
+  	    
+                
+                
         
         
          
