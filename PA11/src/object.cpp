@@ -22,14 +22,14 @@ Object::Object() {}
 /**
  * Object
  * The contructor for an object
+ * We set up the physics for each object here
  * @params std::string objname the file name of the object to be loaded
  *         float scale does nothing
  *         float posx, posy, posz where we place the phyics object if they type allows it
- *         type the type of physics object we are using. 0 for the net
- *         99 for most static objects, 2 unused, 54 is a trigger for sounds, 8 is unused, 4 is the bees, 64 is a collider
- *         for detecting scores
- *         
- *         
+ *         int type the type of physics object we are using. 0 for the net
+ *             99 for most static objects, 2 unused, 54 is a trigger for sounds, 8 is unused, 4 is the bees, 64 is a collider
+ *             for detecting scores
+ *         std::string textname the name of the texture file             
  *             
  */
 Object:: Object(std::string objname, float scale, float posx, float posy, float posz ,int type, std::string textName)

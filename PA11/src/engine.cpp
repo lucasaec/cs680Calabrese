@@ -3,31 +3,53 @@
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 #include <SDL2/SDL_mixer.h>
+/** 
+ * engine 
+ * This runs the game
+ */
+//Unused variables
 bool lFlipper = false;
 bool rFlipper = false;
 bool pullBack = false;
-bool bright = true;
-bool gamePlaying = false;
-float allowClick = true;
-float gameTime = 0;
-int maxSeconds = 0;
-float rotationAmount= 0;
-Mix_Music *beeMusic;
+
+
+bool bright = true; //brightness
+bool gamePlaying = false; //is the game playing?
+float allowClick = true; // unused, i wanted to prevent the net from spinnning when clinking menus though
+float gameTime = 0; //game time
+int maxSeconds = 0; // max seconds for the current session
+float rotationAmount= 0; // how much the net will be rotated left or right
+
+//sound stuff
+Mix_Music *beeMusic; 
 Mix_Chunk *gudSound;
 Mix_Chunk *badSound;
 Mix_Chunk *beez;
 Mix_Chunk *beez2;
+
+//x and y pos of mouse
   int mousex;
   int mousey;
-float timePulled = 0;
+
+float timePulled = 0; //unused
 bool mute = false;
-float purpleStrength =0;
-int soundVolume = 40;
+float purpleStrength =0;//unused
+
+//volume
+int soundVolume = 40; 
 int musicVolume = 100;
-float adjustDiffuse = 0;
-float n= 6.0;
+
+float adjustDiffuse = 0; //diffuse adjustmet
+float n= 6.0; // beelight strength adjustment
+
+/** 
+ * Engine
+ * The Constructor for the engine
+ * @param string name - the name of the window, int width - the width of the window, int height of the window
+ */
 Engine::Engine(string name, int width, int height)
 {
+//set up the audio stuff
 Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2000);
   Mix_AllocateChannels(10);
   m_WINDOW_NAME = name;
@@ -43,6 +65,11 @@ beez =Mix_LoadWAV("../Audio/bees1.wav");
 beez2 =Mix_LoadWAV("../Audio/bees.wav");
 }
 
+/** 
+ * Engine
+ * The Constructor for the engine, but with a full screen
+ * @param string name - the name of the window
+ */
 Engine::Engine(string name)
 {
   m_WINDOW_NAME = name;
@@ -52,6 +79,11 @@ Engine::Engine(string name)
 
 }
 
+/** 
+ * ~Engine
+ * The destructor of the engine
+ * also removes sound stuff
+ */
 Engine::~Engine()
 {
   delete m_window;
@@ -64,6 +96,12 @@ Mix_FreeChunk(badSound);
 Mix_FreeChunk(beez);
 }
 
+/** 
+ * Initialize
+ * Initialize everything and run the program
+ * This is where we add menus and detect interaction
+ * @return bool if it was successful
+ */
 bool Engine::Initialize()
 {
   // Start a window
@@ -114,22 +152,22 @@ void Engine::Run()
   while(m_running)
   {
     // Update the DT
-    if(!mute) {
+    if(!mute) { //mute/unmute sound
         Mix_Volume(-1,soundVolume);
         Mix_VolumeMusic(musicVolume);
 
     }
     m_DT = getDT();
-    if(gamePlaying) {
+    if(gamePlaying) { //calculate amount of time played
         gameTime += m_DT;
     }
-    if(gamePlaying && gameTime/1000.0f >= maxSeconds) {
+    if(gamePlaying && gameTime/1000.0f >= maxSeconds) { //check if gameover
           std::cout << "game over" << "\n";
           gameTime = 0;
           gamePlaying = false;
           Mix_FadeOutMusic(0);
     } 
-    SDL_GetMouseState(&mousex,&mousey);
+    SDL_GetMouseState(&mousex,&mousey); //used for rotation of net
     mousex -= 400;
     mousey += 150;
     mousey *= -1;
@@ -145,7 +183,7 @@ void Engine::Run()
     }
   //  allowClick = true;
     if(rotateLeft) {
-    rotationAmount -= .1; //cinsider multiplying by DT if it's not 0.
+    rotationAmount -= .1; //consider multiplying by DT if it's not 0.
 }
 if(rotateRight) {
  rotationAmount += .1;
@@ -159,7 +197,7 @@ if(rotateRight) {
 	m_graphics->Update(m_DT);
 	m_running = m_running && m_graphics->Render();
 {
-ImGui::Begin("Menu");
+ImGui::Begin("Menu");//menu stuff
      if (ImGui::BeginMenu("Start")) {
           //  allowClick = false;
             if(ImGui::Button("30 Seconds") && !gamePlaying) {
@@ -252,6 +290,10 @@ ImGui_ImplOpenGL3_Shutdown();
 }
 unsigned int a;
 
+/** 
+ * Keyboard
+ * Detect Keys and mouse buttons Pressed
+ */
 void Engine::Keyboard()
 {
  
@@ -396,7 +438,11 @@ m_graphics->keys(a);
 
 
 }
-
+/**
+ * getDT
+ * get the time since the previous frame
+ * @return unsigned int the time spent since the previous frame in milliseconds
+ */
 unsigned int Engine::getDT()
 {
   long long TimeNowMillis = GetCurrentTimeMillis();
@@ -405,7 +451,11 @@ unsigned int Engine::getDT()
   m_currentTimeMillis = TimeNowMillis;
   return DeltaTimeMillis;
 }
-
+/**
+ * GetCurrentTimeMillis
+ * get the current time in milliseconds
+ * @return long long the current time in milliseconds
+ */
 long long Engine::GetCurrentTimeMillis()
 {
   timeval t;
