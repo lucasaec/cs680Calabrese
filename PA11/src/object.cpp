@@ -277,7 +277,7 @@ return;
        speedy = velocity[1];
        speedz = velocity[2];
        
-       if(velocity[0] > max) {
+       if(velocity[0] > max) {//clamp velocity
            speedx = max;
        }
        else if(velocity[0] < -max) {
@@ -301,13 +301,13 @@ return;
         rigidBody->setLinearVelocity(btVector3(speedx,speedy,speedz) );
       
        btVector3 avelocity = rigidBody->getAngularVelocity();
-     //rigidBody->setRollingFriction(10.0f);
+     
        max = 5;
        speedx = avelocity[0];
        speedy = avelocity[1];
        speedz = avelocity[2];
        
-       if(velocity[0] > max) {
+       if(velocity[0] > max) {//clamp the angular velocity
            speedx = max;
        }
        else if(velocity[0] < -max) {

@@ -64,7 +64,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
         const btCollisionObject* object2 = (persistentFold->getBody1());
        
         if(gamePlaying) {
-            if(object2->getUserIndex() == 54 && object1->getUserIndex() != 2 && object1->getUserIndex() != 45) {
+            if(object2->getUserIndex() == 54 && object1->getUserIndex() != 2 && object1->getUserIndex() != 45) {//collision between inside net and bee
                  Object* obj = static_cast<Object*>(object1->getUserPointer());
                  if(!obj->contactNet) {
                     //std::cout << "collisionDetect" << "\n";
@@ -73,7 +73,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
                  }
             }
         }
-        if(object1->getUserIndex() == 64 && object2->getUserIndex() != 2 && object2->getUserIndex() != 45) {
+        if(object1->getUserIndex() == 64 && object2->getUserIndex() != 2 && object2->getUserIndex() != 45) { //collision between score detector and bee
         //std::cout << "Cool"<< '\n';
             Object* obj =  static_cast<Object*>(object2->getUserPointer());
            // std::cout << obj->beePoints << '\n';
@@ -90,18 +90,18 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
                 score = 0;
             }
            
-            Bees.erase(Bees.begin() + (obj->beeIndex - beesGone ) );
+            Bees.erase(Bees.begin() + (obj->beeIndex - beesGone ) );//reset indices
             for(int beez = 0; beez < Bees.size(); beez++) {
                 Bees.at(beez)->beeIndex = beez;
             }
          //   std::cout << "beeSize: " <<  Bees.size() << '\n';
            //  std::cout << "beeIndex: " <<  obj->beeIndex - beesGone << '\n';
-            worldStuff->dynamicsWorld->removeRigidBody(obj->rigidBody);
+            worldStuff->dynamicsWorld->removeRigidBody(obj->rigidBody); //remove bee
             if(gamePlaying) {
                 std::cout  << "Score: " << score << '\n';
             }
         }
-        if(object2->getUserIndex() == 2 && object1->getUserIndex() != 64) {
+        if(object2->getUserIndex() == 2 && object1->getUserIndex() != 64) {//collision between bee and net
  
            btRigidBody * bod =  (static_cast<Object*>(object1->getUserPointer()) )->rigidBody;
        //    std::cout << bod;
@@ -112,7 +112,7 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
        speedy = velocity[1];
        speedz = velocity[2];
        
-       if(velocity[0] > max) {
+       if(velocity[0] > max) {//clamp the velocity of the bees
            speedx = max;
        }
        else if(velocity[0] < -max) {
