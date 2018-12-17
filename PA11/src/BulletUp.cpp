@@ -1,8 +1,20 @@
 #include "BulletUp.h"
+/** 
+ * Sets up the physics world
+ *
+ */
+
+/** 
+ * BulletUp 
+ * Empty Constructor
+ */
 BulletUp::BulletUp() {
 
 }
-
+/** 
+ * ~BulletUp destroys everything
+ *
+ */
 BulletUp::~BulletUp()
 {
     delete broadphase;
@@ -17,6 +29,10 @@ BulletUp::~BulletUp()
     dynamicsWorld = NULL;
    
 }
+/** 
+ * Initialize
+ * Sets up the physics world and also the gravity
+ */
 void BulletUp::Initialize() {
     broadphase = new btDbvtBroadphase();
     collisionConfiguration = new btDefaultCollisionConfiguration();

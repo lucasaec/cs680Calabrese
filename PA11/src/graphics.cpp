@@ -1,29 +1,39 @@
 #include "graphics.h"
 #include "BulletUp.h"
 #include <SDL2/SDL_mixer.h>
+
+/**
+ * Where we handle the objects
+ *
+ */
+// Unused variables 
 extern bool lFlipper;
 extern bool rFlipper;
 extern bool pullBack;
-extern bool gamePlaying;
-extern float timePulled;
-extern float gameTime;
-extern bool bright;
-extern int maxSeconds;
-extern float purpleStrength;
-extern Mix_Chunk *gudSound;
-extern Mix_Chunk *badSound;
-extern Mix_Chunk *beez2;
-extern float adjustDiffuse;
+
+
+extern bool gamePlaying;//check when game is playing
+extern float timePulled;//Not used
+extern float gameTime;//gameTime
+extern bool bright;//switch between bright and dark
+extern int maxSeconds;//max seconds of game
+extern float purpleStrength;// unsused
+extern Mix_Chunk *gudSound;//postitve points sound
+extern Mix_Chunk *badSound;//negative points sound
+extern Mix_Chunk *beez2; //bee in bowl/net sound
+extern float adjustDiffuse; // adjust diffuse
 int choice = 0;
 bool formation1 = true;
-  int digit1 = 0;
-  int digit2 = 0;
-   int digit3 = 4;
-  int digit4 = 4;
+  int digit1 = 0;  //score
+  int digit2 = 0;  //score
+   int digit3 = 4; // time
+  int digit4 = 4; // time
 extern float n; //Bee light Strength Reduction
-bool allowCollision = true;
-extern float strengthReduction;
-BulletUp* worldStuff; 
+bool allowCollision = true; //unsused
+extern float strengthReduction; //affect bee light
+BulletUp* worldStuff; //world
+
+//store the objects
 std::vector<Object*> Glass;
 std::vector<Object*> Bees;
 std::vector<Object*> Other;
@@ -32,10 +42,18 @@ std::vector<Object*> Score2;
 std::vector<Object*> Time1;
 std::vector<Object*> Time2;
 std::vector<Object*> Lights;
-int balls = 0;
-int score = 0;
-int beesGone = 0;
-bool farLeft = false;
+int balls = 0;//number of balls (probably unused
+int score = 0;//score
+int beesGone = 0;//removed balls
+bool farLeft = false;//unused
+
+/**
+ * afunction
+ * The call back function that handles what to do when certain objects collide
+ * This is where we check when someone scores
+ * @params btDynamicsWorld *world, btScalar timeStep, physics info
+ *
+ */
 static void afunction(btDynamicsWorld *world, btScalar timeStep) {
     int nMfolds = world->getDispatcher()->getNumManifolds();
     bool collideOnce = false;
@@ -124,6 +142,11 @@ static void afunction(btDynamicsWorld *world, btScalar timeStep) {
          std::cout << "CoolBeans!!!" << '\n';
      }*/
 }
+/**
+ * Graphics
+ * Constructor for graphics
+ *
+ */
 Graphics::Graphics() 
 {
     allowCollision = true;
@@ -136,11 +159,19 @@ Graphics::Graphics()
 	camera=0.0;
 cam1=0.0;
 }
-
+/**
+ * ~Graphics
+ * Destructor for graphics
+ *
+ */
 Graphics::~Graphics() {
 }
 
-
+/**
+ * reloadBees
+ * Loads all 40 Bee objects again, but only if it needs to
+ * Does not reload bees weh we have 40 bees
+ */
 void Graphics::reloadBees() {
         if(Bees.size() == 40) {
             return;
@@ -167,7 +198,13 @@ void Graphics::reloadBees() {
 	    }
 	}
 }
-
+/**
+ * Initialize
+ * Initialize graphics
+ * We load our objects here, as well as setting up opengl settings and hooking up our mvp matrices
+ * @params width the width of the screen, height the hight of the screen
+ * @return bool if the initialization was successful
+ */
 bool Graphics::Initialize(int width, int height)
 {
 worldStuff->Initialize();
@@ -360,12 +397,22 @@ glEnable(GL_BLEND);
 
   return true;
 }
-
+/**
+ * keys
+ * Used for keyboard interaction
+ * @params unsigned int key, the key pressed
+ */
 void Graphics::keys(unsigned int key) {
     a = key;
 }
 
-
+/**
+ * Update
+ * Update the objects
+ * Also, we check the position of the Bees here and apply forces or change variables based on their poisition.
+ * it's mostly just for the wind and the sound when the bee is in the net
+ * @params unsigned int dt the time that has passed since the last call to update
+ */
 void Graphics::Update(unsigned int dt) {
   worldStuff->dynamicsWorld->stepSimulation(dt, 60); 
 if(gamePlaying) {
@@ -394,7 +441,7 @@ if(gamePlaying) {
     if(a == 7&& amb>=-0.5) {
        amb-=0.005;
     } 
-//spotlight
+//beelight
     if (a==8 && n<=10) {
        n+=0.01;
     }
@@ -402,7 +449,7 @@ if(gamePlaying) {
       n-=0.01;
     } 
 
-    if (a==10 && spec_cube<=20.0) {// key 3 lol
+    if (a==10 && spec_cube<=20.0) {// specular light
 
        spec_cube+=0.05;
     }
@@ -411,7 +458,7 @@ if(gamePlaying) {
        spec_cube-=0.05;
     }
    
-if(a==16 && camera<=11)
+if(a==16 && camera<=11) //camera controls
 {
 camera+=1;
 }
@@ -435,7 +482,7 @@ if(a==21&&cam1>=-50)
 {
 cam1-=1;
 }
-  
+    //update the objects
     for(unsigned int i=0; i<Other.size(); i++) {
         Other.at(i)->Update(dt);
     }
@@ -449,17 +496,28 @@ cam1-=1;
         Glass.at(i)->Update(dt);
     }
  
-  
+  //update the score board based on the correct value at each digit
   Score.at(digit1)->Update(dt);
   Score2.at(digit2)->Update(dt);
   Time1.at(digit3)->Update(dt);
   Time2.at(digit4)->Update(dt);
 }
+
+/**
+ * Unused function
+ */
 void Graphics::Fire(float force) {
     if(farLeft) {
         //launcher->rigidBody->applyCentralImpulse(btVector3(0,0,force));
     }
 }
+/**
+ * Render
+ * Render the objects
+ * We also adjust the camera here
+ * Where we set our uniforms for the objects
+ * @return bool whether or not it was successful
+ */
 bool Graphics::Render() {
     bool rebool = true;
     float reduce = .6;
@@ -475,6 +533,7 @@ bool Graphics::Render() {
   m_camera->view = glm::lookAt( glm::vec3(0.0+cam, 0.0+35+cam1,0.0-30+camera), //Eye Position
                       glm::vec3(0, 0, 0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0));
+//mvp
 m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
 m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
  m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
@@ -486,7 +545,7 @@ m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
     glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
-/** Christina please make the skybox brighter, But i don't want to see any seams **/
+//skybox related
  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),1.1-reduce,1.1-reduce,1.1-reduce,1); 
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),1-reduce+adjustDiffuse,1-reduce+adjustDiffuse,1-reduce+adjustDiffuse,1);
     glUniform1f(m_shader->GetUniformLocation("Shininess"),1);
@@ -501,7 +560,7 @@ glUniform1f(m_shader->GetUniformLocation("purpleStrength"),purpleStrength);
           Other.at(0)->Render();  
   
  
-    
+    //used for "other" category of objects
     glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
 
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.1);
@@ -526,6 +585,7 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
  
 //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(glassT->GetModel() ) );
   //        glassT->Render();
+  //calculate scoreboard stuff
   if(gamePlaying) {
       digit1 = score/10 + 1;
       digit2 = score % 10 + 1;
@@ -537,9 +597,11 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
     digit4 = 0;   
     score = 0;
   }
+
+  //Bee Lights
   glm::vec4 LightPos[1];
   float probablyZ = 25;
-  choice = (int)gameTime/200 % 6;
+  choice = (int)gameTime/200 % 6; //determine which light to light up
    if(choice == 0) {
       LightPos[0] = glm::vec4(8.5,-9.9,probablyZ,1);//-10 to the right, to to the left
    }
@@ -578,19 +640,22 @@ glUniform1f(m_shader->GetUniformLocation("opacity"),1);
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb,amb,amb,1); 
   glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5,.5,.5,.1);
     
+  //render the score
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score.at(digit1)->GetModel()));
   Score.at(digit1)->Render(); 
 glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)->GetModel()));
   Score2.at(digit2)->Render();
 
-  
+  //render the time
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time1.at(digit3)->GetModel()));
   Time1.at(digit3)->Render(); 
  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Time2.at(digit4)->GetModel()));
   Time2.at(digit4)->Render(); 
+  //Lights properties for the Bees
   glUniform4f(m_shader->GetUniformLocation("AmbientProduct"),amb-reduce,amb-reduce,amb-reduce,1); 
     glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"),.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.5-reduce+adjustDiffuse,.1);
   
+ //Render All other objects, except for the skybox
  for(unsigned int x = 1; x < Other.size(); x++) {   
           if(Other.at(x)->physics != 64 && Other.at(x)->physics != 54) {
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Other.at(x)->GetModel()));
@@ -603,12 +668,15 @@ glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Score2.at(digit2)-
              glUniform1f(m_shader->GetUniformLocation("Shininess"),150);
           }
   } 
+//Bees
 glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube,spec_cube,spec_cube,1);
   for(unsigned int x = 0; x < Bees.size(); x++) {   
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Bees.at(x)->GetModel()));
           Bees.at(x)->Render();   
   } 
+
+//Light Models
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube*zero,spec_cube*zero,spec_cube*zero,1);
 glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
   glUniform1f(m_shader->GetUniformLocation("opacity"),.7);
@@ -617,6 +685,7 @@ glUniform1f(m_shader->GetUniformLocation("Shininess"),10);
           glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(Lights.at(x)->GetModel()));
           Lights.at(x)->Render();   
   } 
+//Glass
 glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube-reduce*9,spec_cube-reduce*9,spec_cube-reduce*9,1);
   glUniform1f(m_shader->GetUniformLocation("opacity"),.3);
   for(unsigned int x = 0; x < Glass.size(); x++) {   
@@ -633,7 +702,12 @@ glUniform4f(m_shader->GetUniformLocation("SpecularProduct"),spec_cube-reduce*9,s
   }
   return true;
 }
-
+/**
+ * ErrorString
+ * returns an error string based on the error
+ * @params GLenum error the error
+ * @return string the error as a string
+ */
 std::string Graphics::ErrorString(GLenum error)
 {
   if(error == GL_INVALID_ENUM)

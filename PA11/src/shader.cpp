@@ -1,11 +1,20 @@
 #include "shader.h"
 #include "shaderLoader.h"
-
+/**
+ *the shader class
+ */
+/**
+ * Shader 
+ * the shader constructor
+ */
 Shader::Shader()
 {
   m_shaderProg = 0;
 }
-
+/**
+ * ~Shader 
+ * the shader destructor
+ */
 Shader::~Shader()
 {
   for (std::vector<GLuint>::iterator it = m_shaderObjList.begin() ; it != m_shaderObjList.end() ; it++)
@@ -19,7 +28,11 @@ Shader::~Shader()
     m_shaderProg = 0;
   }
 }
-
+/**
+ * Initialize
+ * It sets up the shaders
+ * @retun bool whether or not it was sucessful
+ */
 bool Shader::Initialize()
 {
   m_shaderProg = glCreateProgram();

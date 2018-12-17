@@ -1,8 +1,16 @@
 #include <iostream>
 
 #include "engine.h"
-
-
+/**
+ * main.cpp
+ *
+ */
+/**
+ * main
+ * the main method
+ * @params int argc the number of arguments
+ * @argv the arguments
+ */
 int main(int argc, char **argv)
 {
   // Start an engine and run it then cleanup after

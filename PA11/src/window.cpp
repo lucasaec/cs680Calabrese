@@ -1,10 +1,21 @@
 #include <window.h>
+/**
+ * Where we handle functions related to the window
+ */
 
+/**
+ * Window
+ * Constructor for the window class
+ */
 Window::Window()
 {
   gWindow = NULL;
 }
 
+/**
+ * ~Window
+ * Destructor for the window class
+ */
 Window::~Window()
 {
   SDL_StopTextInput();
@@ -14,13 +25,30 @@ Window::~Window()
 
   SDL_Quit();
 }
+/**
+ * GetWindow
+ * Returns the window
+ * @return SDL_Window* gWindow -pointer to the window
+ */
 SDL_Window* Window::GetWindow() {
     return (gWindow);
 }
-
+/**
+ * GetgContext
+ * Returns the window
+ * @return SDL_GLContext gContext -pointer to the gContext
+ */
 SDL_GLContext Window::GetgContext() {
     return (gContext);
 }
+/**
+ * Initialize
+ * Initialize the window
+ * @params const string &name the title of the window
+ *         int* width the width of the window
+ *         int* height the height of the window
+ * @return SDL_GLContext gContext -pointer to the gContext
+ */
 bool Window::Initialize(const string &name, int* width, int* height)
 {
     // Start SDL
@@ -79,7 +107,10 @@ bool Window::Initialize(const string &name, int* width, int* height)
  
 
 }
-
+/**
+ * Swap
+ * Swaps the window
+ */
 void Window::Swap()
 {
   SDL_GL_SwapWindow(gWindow);

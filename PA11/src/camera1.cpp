@@ -1,15 +1,31 @@
 #include "camera1.h"
+/**
+ * The camera
+ *
+ */
 
+/**
+ * Empty Constructor
+ *
+ */
 Camera1::Camera1()
 {
 
 }
-
+/**
+ * Empty Destructor
+ *
+ */
 Camera1::~Camera1()
 {
 
 }
-
+/**
+ * Initialize
+ * Initialize the camera
+ * @pramas int w, the width of the screen, int h the height of the screen
+ * @return bool, the whether or not it was successful
+ */
 bool Camera1::Initialize(int w, int h)
 {
   //--Init the view and projection matrices
@@ -26,12 +42,20 @@ bool Camera1::Initialize(int w, int h)
                                  1000.0f); //Distance to the far plane, 
   return true;
 }
-
+/**
+ * GetProjection
+ * @pramas None
+ * @return projection - the projection matrix
+ */
 glm::mat4 Camera1::GetProjection()
 {
   return projection;
 }
-
+/**
+ * GetView
+ * @pramas None
+ * @return view - the view matrix
+ */
 glm::mat4 Camera1::GetView()
 {
   return view;

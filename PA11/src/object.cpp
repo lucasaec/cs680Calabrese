@@ -7,6 +7,10 @@
 #include <stdlib.h> 
 #include <btBulletDynamicsCommon.h>
 #include "BulletUp.h"
+/**
+ * Where we create and update objects
+ *
+ */
 extern BulletUp* worldStuff;
 extern int mousex;
 extern int mousey;
@@ -16,8 +20,17 @@ btTransform table4Frame;
 Object::Object() {}
 
 /**
- *
- *
+ * Object
+ * The contructor for an object
+ * @params std::string objname the file name of the object to be loaded
+ *         float scale does nothing
+ *         float posx, posy, posz where we place the phyics object if they type allows it
+ *         type the type of physics object we are using. 0 for the net
+ *         99 for most static objects, 2 unused, 54 is a trigger for sounds, 8 is unused, 4 is the bees, 64 is a collider
+ *         for detecting scores
+ *         
+ *         
+ *             
  */
 Object:: Object(std::string objname, float scale, float posx, float posy, float posz ,int type, std::string textName)
 {
@@ -101,7 +114,7 @@ aiMesh *mesh = scene->mMeshes[0];
     angle = 0.0f;
     
 /*Motion state stuff*/
-    if(type == 0) {
+    if(type == 0) { //net
         btDefaultMotionState *shapeMotionState = NULL; 
         shapeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(posx, posy, posz))); 
         btScalar mass(0);
@@ -129,7 +142,7 @@ aiMesh *mesh = scene->mMeshes[0];
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
        // rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
     }
-    if(type == 2) {
+    if(type == 2) {//unused box
         btDefaultMotionState *shapeMotionState = NULL; 
         btCollisionShape* shape=new btBoxShape(btVector3(1,1,1));
         btVector3 inertia(0,0,0);
@@ -141,7 +154,7 @@ aiMesh *mesh = scene->mMeshes[0];
        rigidBody->setRestitution(1.0);
         worldStuff->dynamicsWorld->addRigidBody(rigidBody);
     }//setRestitution(5.0)
-    if(type == 54) {
+    if(type == 54) {//used for detecting spheres
          btDefaultMotionState *shapeMotionState = NULL; 
       
         btVector3 inertia(0,0,0);
@@ -217,6 +230,11 @@ Object::~Object()
 }
  
 float x = 0;
+/**
+ * Update
+ * Updates the objects based on their type that we call physics
+ * @params unsigned int dt the time that has passed since the last call to update
+ */
 void Object::Update(unsigned int dt) { 
 if(physics == 67) {
 model = glm::mat4(1.0f);
@@ -334,11 +352,12 @@ glm::mat4 Object::GetModel() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
 */
 
+/**
+ * Render
+ * The Render Function
+ */
 void Object::Render()
 {
-    
-    
-
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
   glEnableVertexAttribArray(2);
